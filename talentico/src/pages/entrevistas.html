@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>JobConnect - Entrevistas y Notas</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <h1>Notas de Entrevistas</h1>
+
+  <!-- Formulario para CREAR / EDITAR -->
+  <form id="form-entrevista">
+    <input type="hidden" id="entrevista-id">
+    <textarea id="entrevista-body" placeholder="Escribe la nota..." required></textarea>
+    <button type="submit">Guardar</button>
+  </form>
+
+  <!-- Contenedor para LISTAR -->
+  <div id="lista-entrevistas"></div>
+
+  <!-- Scripts -->
+  <script src="../js/services/api.js"></script>
+  <script src="../js/entrevistas.js"></script>
+</body>
+</html>

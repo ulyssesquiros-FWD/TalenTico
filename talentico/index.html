@@ -1,13 +1,42 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="es">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>talentico</title>
+    <meta name="description" content="Inicio de sesión de TALENTICO CR" />
+    <title>TALENTICO CR | Inicio de sesión</title>
+    <link rel="stylesheet" href="css/login.css" />
   </head>
   <body>
-    <div id="app"></div>
-    <script type="module" src="/src/main.js"></script>
+    <main class="login-page">
+      <section class="login-card" aria-labelledby="login-title">
+        <div class="brand">
+          <span class="brand-mark" aria-hidden="true">T</span>
+          <p>TALENTICO CR</p>
+        </div>
+
+        <div class="login-heading">
+          <h1 id="login-title">Inicio de sesión</h1>
+          <p>Ingresa tus credenciales para continuar.</p>
+        </div>
+
+        <form id="login-form" novalidate>
+          <div class="form-group">
+            <label for="username">Usuario</label>
+            <input id="username" name="username" type="text" autocomplete="username" placeholder="Ingresa tu usuario" required />
+          </div>
+
+          <div class="form-group">
+            <label for="password">Contraseña</label>
+            <input id="password" name="password" type="password" autocomplete="current-password" placeholder="Ingresa tu contraseña" required />
+          </div>
+
+          <p id="login-message" class="message" role="alert" aria-live="polite"></p>
+          <button id="login-button" type="submit">Iniciar sesión</button>
+        </form>
+      </section>
+    </main>
+
+    <script type="module" src="js/auth.js"></script>
   </body>
 </html>

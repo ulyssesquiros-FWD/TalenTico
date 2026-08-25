@@ -34,11 +34,6 @@ button:hover:not(:disabled) { background: #f4a012; box-shadow: 0 .75rem 1.3rem r
 button:active:not(:disabled) { transform: translateY(0); }
 button:focus-visible, input:focus-visible { outline: 3px solid rgb(29 59 43 / .35); outline-offset: 3px; }
 button:disabled { cursor: wait; opacity: .7; }
-.login-divider { display: flex; align-items: center; gap: .8rem; margin: 1.45rem 0; color: var(--green-600); font-size: .76rem; font-weight: 650; letter-spacing: .03em; }
-.login-divider::before, .login-divider::after { height: 1px; flex: 1; background: var(--border); content: ""; }
-.google-button { display: flex; align-items: center; justify-content: center; gap: .75rem; border: 1px solid var(--border); background: var(--white); color: var(--green-900); font-size: .9rem; font-weight: 750; letter-spacing: 0; text-transform: none; }
-.google-icon { width: 1.2rem; height: 1.2rem; flex: 0 0 auto; }
-.google-button:hover:not(:disabled) { border-color: #b6c3bc; background: #f7faf8; box-shadow: 0 .55rem 1rem rgb(29 59 43 / .1); }
 .login-visual { display: grid; min-height: 100%; place-items: center; isolation: isolate; overflow: hidden; padding: clamp(2rem, 7vw, 6rem); position: relative; background: radial-gradient(circle at 85% 14%, rgb(255 255 255 / .7) 0 4%, transparent 4.3%), radial-gradient(circle at 10% 88%, rgb(249 166 32 / .22) 0 13%, transparent 13.3%), var(--sky-100); }
 .login-visual::before, .login-visual::after { position: absolute; z-index: -1; border-radius: 50%; content: ""; filter: blur(1px); opacity: .8; }
 .login-visual::before { width: clamp(16rem, 35vw, 30rem); height: clamp(16rem, 35vw, 30rem); top: -11rem; right: -12rem; background: rgb(255 255 255 / .65); animation: drift-one 12s ease-in-out infinite alternate; }

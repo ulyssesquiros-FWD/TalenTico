@@ -1,0 +1,392 @@
+/* ===================================================
+   JobConnect - Módulo de Empresas Clientes (C3)
+   Paleta UI/UX basada en la identidad de marca
+   =================================================== */
+
+:root {
+  --color-primario: #f9a620;        /* Naranja Vibrante (Acciones principales, botones CTA) */
+  --color-primario-hover: #e09219;  /* Naranja intermedio para hover */
+  --texto-principal: #1d3b2b;       /* Verde Oscuro Intenso (Títulos, encabezados de tabla) */
+  --texto-secundario: #566b5e;      /* Verde Grisáceo Suave (Etiquetas, textos descriptivos) */
+  --fondo-seccion: #e0f2f7;         /* Azul Cielo Claro (Fondo general del panel / contenedor) */
+  --fondo-formulario: #ffffff;      /* Blanco Puro (Tarjetas, formularios y contenedor de tablas) */
+  --detalles-bordes: #cfd7d4;       /* Gris Claro (Bordes de inputs, filas y separadores) */
+  --estado-error: #d9534f;
+  --estado-exito: #2e7d32;
+}
+
+body {
+  margin: 0;
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  background-color: var(--fondo-seccion);
+  color: var(--texto-principal);
+}
+
+header {
+  background-color: var(--fondo-formulario);
+  border-bottom: 1px solid var(--detalles-bordes);
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+header h1 {
+  color: var(--texto-principal);
+  font-size: 1.5rem;
+  margin: 0;
+}
+
+header a {
+  color: var(--texto-secundario);
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.2s ease;
+}
+
+header a:hover {
+  color: var(--texto-principal);
+}
+
+.container {
+  max-width: 1100px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+/* Mensajes de Feedback (RF-09) */
+.feedback {
+  padding: 0.8rem 1.2rem;
+  border-radius: 6px;
+  margin-bottom: 1.5rem;
+  font-weight: 600;
+}
+
+.feedback.success {
+  background-color: #e8f5e9;
+  color: var(--estado-exito);
+  border: 1px solid var(--estado-exito);
+}
+
+.feedback.error {
+  background-color: #ffebee;
+  color: var(--estado-error);
+  border: 1px solid var(--estado-error);
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* Secciones y Formulario */
+.form-section, .table-section {
+  background-color: var(--fondo-formulario);
+  border: 1px solid var(--detalles-bordes);
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 2px 8px rgba(29, 59, 43, 0.05);
+}
+
+h2 {
+  color: var(--texto-principal);
+  margin-top: 0;
+  margin-bottom: 1.2rem;
+  font-size: 1.25rem;
+}
+
+label {
+  display: block;
+  color: var(--texto-secundario);
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-bottom: 0.4rem;
+}
+
+input[type="text"],
+input[type="number"] {
+  width: 100%;
+  padding: 0.6rem 0.8rem;
+  border: 1px solid var(--detalles-bordes);
+  border-radius: 6px;
+  background-color: #fafafa;
+  color: var(--texto-principal);
+  box-sizing: border-box;
+  margin-bottom: 1rem;
+}
+
+input:focus {
+  outline: none;
+  border-color: var(--color-primario);
+  background-color: var(--fondo-formulario);
+}
+
+button[type="submit"] {
+  background-color: var(--color-primario);
+  color: var(--texto-principal);
+  border: none;
+  padding: 0.7rem 1.4rem;
+  border-radius: 6px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+button[type="submit"]:hover {
+  background-color: var(--color-primario-hover);
+}
+
+#btn-cancel {
+  background-color: transparent;
+  color: var(--texto-secundario);
+  border: 1px solid var(--detalles-bordes);
+  padding: 0.7rem 1.2rem;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-left: 0.5rem;
+}
+
+/* Tabla de Empresas */
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th {
+  background-color: #f4f8f9;
+  color: var(--texto-principal);
+  text-align: left;
+  padding: 0.8rem;
+  font-size: 0.85rem;
+  border-bottom: 2px solid var(--detalles-bordes);
+  text-transform: uppercase;
+}
+
+td {
+  padding: 0.8rem;
+  border-bottom: 1px solid var(--detalles-bordes);
+  color: var(--texto-secundario);
+  font-size: 0.95rem;
+}
+
+tr:hover {
+  background-color: #f9fbfb;
+}
+
+td button {
+  background-color: transparent;
+  border: 1px solid var(--detalles-bordes);
+  color: var(--texto-principal);
+  padding: 0.3rem 0.6rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.8rem;
+}
+
+td button:hover {
+  border-color: var(--color-primario);
+  color: var(--color-primario-hover);
+}
+
+/* Ventana Modal Personalizada */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(29, 59, 43, 0.4); /* Fondo verdoso semitransparente */
+    backdrop-filter: blur(4px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background-color: var(--fondo-formulario, #ffffff);
+    border: 1px solid var(--detalles-bordes, #cfd7d4);
+    padding: 2rem;
+    border-radius: 12px;
+    max-width: 400px;
+    width: 90%;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    text-align: center;
+}
+
+.modal-content h3 {
+    color: var(--texto-principal, #1d3b2b);
+    margin-top: 0;
+    margin-bottom: 0.8rem;
+    font-size: 1.3rem;
+}
+
+.modal-content p {
+    color: var(--texto-secundario, #566b5e);
+    font-size: 0.95rem;
+    margin-bottom: 1.5rem;
+    line-height: 1.4;
+}
+
+.modal-actions {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.btn-secondary {
+    background-color: transparent;
+    border: 1px solid var(--detalles-bordes, #cfd7d4);
+    color: var(--texto-secundario, #566b5e);
+    padding: 0.6rem 1.2rem;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.btn-secondary:hover {
+    background-color: #f4f8f9;
+}
+
+.btn-danger {
+    background-color: #d9534f;
+    border: none;
+    color: #ffffff;
+    padding: 0.6rem 1.2rem;
+    border-radius: 6px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.btn-danger:hover {
+    background-color: #c9302c;
+}
+
+:root {
+    --sidebar-bg: #1d3b2b;          /* Verde oscuro corporativo */
+    --sidebar-active: #2a523c;      /* Verde de selección */
+    --text-light: #ffffff;
+    --text-muted: #a3b899;
+    --main-bg: #f4f8f6;             /* Fondo gris/verde suave de la app */
+    --border-color: #e1e8e4;
+}
+
+body {
+    margin: 0;
+    font-family: system-ui, -apple-system, sans-serif;
+    background-color: var(--main-bg);
+}
+
+/* Layout General */
+.app-layout {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* Sidebar Estilos */
+.sidebar {
+    width: 260px;
+    background-color: var(--sidebar-bg);
+    color: var(--text-light);
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+}
+
+.sidebar-brand {
+    padding: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.sidebar-brand h2 {
+    margin: 0;
+    font-size: 1.3rem;
+    font-weight: 700;
+}
+
+.sidebar-nav {
+    padding: 1rem 0;
+}
+
+.sidebar-nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar-nav li a {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.85rem 1.5rem;
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.sidebar-nav li:hover a {
+    color: var(--text-light);
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.sidebar-nav li.active a {
+    color: var(--text-light);
+    background-color: var(--sidebar-active);
+    border-left: 4px solid #4caf50;
+    font-weight: 600;
+}
+
+.nav-icon {
+    font-size: 1.1rem;
+}
+
+/* Área de Contenido Principal */
+.main-content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+}
+
+.top-header {
+    background-color: #ffffff;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.top-header h2 {
+    margin: 0;
+    color: var(--sidebar-bg);
+    font-size: 1.4rem;
+}
+
+.user-profile {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    font-weight: 600;
+    color: var(--sidebar-bg);
+}
+
+.avatar {
+    width: 35px;
+    height: 35px;
+    background-color: var(--sidebar-bg);
+    color: var(--text-light);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.content-body {
+    padding: 2rem;
+}

@@ -1,5 +1,3 @@
-import { apiFetch } from '../../js/api.js';
-
 const loginForm = document.querySelector('#login-form');
 const usernameInput = document.querySelector('#username');
 const passwordInput = document.querySelector('#password');

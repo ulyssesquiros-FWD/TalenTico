@@ -8,6 +8,27 @@
 /* ── Reset ── */
 * { box-sizing: border-box; }
 body { margin: 0; min-width: 320px; min-height: 100vh; background: var(--background); }
+:root {
+  --orange: #f9a620;
+  --green-900: #1d3b2b;
+  --green-600: #566b5e;
+  --sky-100: #e0f2f7;
+  --white: #ffffff;
+  --border: #cfd7d4;
+  color: var(--green-900);
+  font-family: Inter, "Segoe UI", Roboto, Arial, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  min-width: 320px;
+  min-height: 100vh;
+  margin: 0;
+  background: var(--white);
+}
 
 /* ── Split Layout ── */
 .login-page {
@@ -46,6 +67,11 @@ body { margin: 0; min-width: 320px; min-height: 100vh; background: var(--backgro
 }
 
 .brand p { margin: 0; }
+.brand p,
+.login-heading p,
+.visual-content p {
+  margin: 0;
+}
 
 .brand-mark {
   display: grid;
@@ -235,6 +261,71 @@ button:disabled { cursor: wait; opacity: 0.7; }
 }
 
 /* ── Visual Panel ── */
+  background: #f4a012;
+  box-shadow: 0 0.75rem 1.3rem rgb(249 166 32 / 0.28);
+  transform: translateY(-2px);
+}
+
+button:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+button:focus-visible,
+input:focus-visible {
+  outline: 3px solid rgb(29 59 43 / 0.35);
+  outline-offset: 3px;
+}
+
+button:disabled {
+  cursor: wait;
+  opacity: 0.7;
+}
+
+.login-divider {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin: 1.45rem 0;
+  color: var(--green-600);
+  font-size: 0.76rem;
+  font-weight: 650;
+  letter-spacing: 0.03em;
+}
+
+.login-divider::before,
+.login-divider::after {
+  height: 1px;
+  flex: 1;
+  background: var(--border);
+  content: "";
+}
+
+.google-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  border: 1px solid var(--border);
+  background: var(--white);
+  color: var(--green-900);
+  font-size: 0.9rem;
+  font-weight: 750;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.google-icon {
+  width: 1.2rem;
+  height: 1.2rem;
+  flex: 0 0 auto;
+}
+
+.google-button:hover:not(:disabled) {
+  border-color: #b6c3bc;
+  background: #f7faf8;
+  box-shadow: 0 0.55rem 1rem rgb(29 59 43 / 0.1);
+}
+
 .login-visual {
   display: grid;
   min-height: 100%;

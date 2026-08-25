@@ -1,0 +1,276 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="TalenTico - Gestión de Candidatos" />
+  <title>TalenTico | Candidatos</title>
+  <link rel="stylesheet" href="./style.css" />
+  <link rel="stylesheet" href="../src/css/candidatos.css" />
+</head>
+
+<body>
+  <div id="app">
+    <div class="app-shell">
+
+      <!-- SIDEBAR -->
+      <aside class="sidebar">
+
+        <div class="brand">
+          <div class="brand-icon">T</div>
+          <div class="brand-info">
+            <span class="brand-name">TalenTico</span>
+            <span class="brand-subtitle">Gestión de Talento</span>
+          </div>
+        </div>
+
+        <nav class="sidebar-nav">
+          <p class="nav-title">MENÚ PRINCIPAL</p>
+
+          <button class="nav-item" data-section="dashboard">
+            <span class="nav-icon">⌂</span>
+            <span>Dashboard</span>
+          </button>
+
+          <button class="nav-item active" data-section="candidatos">
+            <span class="nav-icon">♙</span>
+            <span>Candidatos</span>
+          </button>
+
+          <button class="nav-item" data-section="vacantes">
+            <span class="nav-icon">▣</span>
+            <span>Vacantes</span>
+          </button>
+
+          <button class="nav-item" data-section="empresas">
+            <span class="nav-icon">▤</span>
+            <span>Empresas</span>
+          </button>
+
+          <button class="nav-item" data-section="postulaciones">
+            <span class="nav-icon">□</span>
+            <span>Postulaciones</span>
+          </button>
+
+          <button class="nav-item" data-section="entrevistas">
+            <span class="nav-icon">◷</span>
+            <span>Entrevistas</span>
+          </button>
+
+          <button class="nav-item" data-section="tareas">
+            <span class="nav-icon">✓</span>
+            <span>Tareas</span>
+          </button>
+        </nav>
+
+        <div class="sidebar-footer">
+          <button class="nav-item logout">
+            <span class="nav-icon">&#x21AA;&#xFE0E;</span>
+            <span>Cerrar sesión</span>
+          </button>
+        </div>
+
+      </aside>
+
+      <!-- CONTENIDO PRINCIPAL -->
+      <main class="main-content">
+
+        <!-- TOPBAR -->
+        <header class="topbar">
+          <button class="menu-toggle" id="menu-toggle">
+            ☰
+          </button>
+
+          <div class="breadcrumb">
+            <span>TalenTico</span>
+            <span>/</span>
+            <strong>Candidatos</strong>
+          </div>
+
+          <div class="user-area">
+            <div class="user-info">
+              <span class="user-name">Usuario</span>
+              <span class="user-role">Administrador</span>
+            </div>
+            <div class="avatar">
+              U
+            </div>
+          </div>
+        </header>
+
+        <!-- SECCIÓN CANDIDATOS -->
+        <section class="content">
+
+          <!-- ENCABEZADO DE PÁGINA -->
+          <div class="page-header">
+            <div>
+              <span class="page-eyebrow">MÓDULO DE RECLUTAMIENTO</span>
+              <h1>Gestión de Candidatos</h1>
+              <p>
+                Consumo de la API DummyJSON (/users). Visualización, creación, edición y eliminación de candidatos.
+              </p>
+            </div>
+          </div>
+
+          <!-- CONTENEDOR PRINCIPAL DOS COLUMNAS -->
+          <div class="dashboard-grid">
+
+            <!-- LISTADO DE CANDIDATOS (TARJETAS GET) -->
+            <section class="panel" style="background: transparent; border: none; box-shadow: none;">
+              <div class="panel-header" style="background: transparent; border: none; padding-left: 0;">
+                <div>
+                  <h2>Listado de Candidatos (GET)</h2>
+                  <p>Registros obtenidos de /users</p>
+                </div>
+              </div>
+
+              <div class="candidates-cards-grid">
+                
+                <!-- Tarjeta Candidato 1 -->
+                <article class="candidate-card">
+                  <header class="candidate-card-header">
+                    <div class="candidate-profile-info">
+                      <img class="candidate-avatar-img" src="https://dummyjson.com/icon/emilyj/128" alt="Emily Johnson" />
+                      <div>
+                        <h3 class="candidate-name">Emily<br>Johnson</h3>
+                        <span class="candidate-role">SALES MANAGER</span>
+                      </div>
+                    </div>
+                    <div class="candidate-actions">
+                      <button type="button" class="btn-icon" title="Editar">✏️</button>
+                      <button type="button" class="btn-icon danger" title="Eliminar">🗑️</button>
+                    </div>
+                  </header>
+
+                  <div class="candidate-card-body">
+                    <p class="candidate-detail"><span class="icon">✉</span> emily.johnson@x.dummyjson.com</p>
+                    <p class="candidate-detail"><span class="icon">📈</span> 5 years experience</p>
+                  </div>
+
+                  <footer class="candidate-card-footer">
+                    <span class="badge badge-success">ACTIVE</span>
+                    <span class="badge badge-info">REMOTE</span>
+                  </footer>
+                </article>
+
+                <!-- Tarjeta Candidato 2 -->
+                <article class="candidate-card">
+                  <header class="candidate-card-header">
+                    <div class="candidate-profile-info">
+                      <img class="candidate-avatar-img" src="https://dummyjson.com/icon/michaelw/128" alt="Michael Williams" />
+                      <div>
+                        <h3 class="candidate-name">Michael<br>Williams</h3>
+                        <span class="candidate-role">DEVELOPER</span>
+                      </div>
+                    </div>
+                    <div class="candidate-actions">
+                      <button type="button" class="btn-icon" title="Editar">✏️</button>
+                      <button type="button" class="btn-icon danger" title="Eliminar">🗑️</button>
+                    </div>
+                  </header>
+
+                  <div class="candidate-card-body">
+                    <p class="candidate-detail"><span class="icon">✉</span> michael.williams@x.dummyjson.com</p>
+                    <p class="candidate-detail"><span class="icon">📈</span> 12 years experience</p>
+                  </div>
+
+                  <footer class="candidate-card-footer">
+                    <span class="badge badge-danger">REJECTED</span>
+                    <span class="badge badge-info">HYBRID</span>
+                  </footer>
+                </article>
+
+              </div>
+            </section>
+
+            <!-- COLUMNA LATERAL CON FORMULARIOS (POST / PUT / PATCH / DELETE) -->
+            <div style="display: flex; flex-direction: column; gap: 22px;">
+
+              <!-- FORMULARIO CREAR (POST) -->
+              <section class="panel">
+                <div class="panel-header">
+                  <div>
+                    <h2>Registrar Candidato (POST)</h2>
+                    <p>Agregar nuevo usuario a /users</p>
+                  </div>
+                </div>
+
+                <form style="padding: 20px;" action="#" method="dialog">
+                  <div class="form-group">
+                    <label for="nombre">Nombre</label>
+                    <input type="text" id="nombre" placeholder="Ej. Alex" required />
+                  </div>
+
+                  <div class="form-group">
+                    <label for="apellido">Apellido</label>
+                    <input type="text" id="apellido" placeholder="Ej. Cubero" required />
+                  </div>
+
+                  <div class="form-group">
+                    <label for="email">Correo electrónico</label>
+                    <input type="email" id="email" placeholder="ejemplo@correo.com" required />
+                  </div>
+
+                  <div class="form-group">
+                    <label for="puesto">Puesto de interés</label>
+                    <input type="text" id="puesto" placeholder="Ej. Frontend Developer" />
+                  </div>
+
+                  <button type="button" class="primary-button" style="width: 100%; margin-top: 8px;">
+                    Guardar Candidato
+                  </button>
+                </form>
+              </section>
+
+              <!-- FORMULARIO EDICIÓN PARCIAL (PATCH) -->
+              <section class="panel">
+                <div class="panel-header">
+                  <div>
+                    <h2>Actualización Rápida (PATCH)</h2>
+                    <p>Actualizar solo correo/teléfono</p>
+                  </div>
+                </div>
+
+                <form style="padding: 20px;" action="#" method="dialog">
+                  <div class="form-group">
+                    <label for="patch-id">ID Candidato</label>
+                    <input type="number" id="patch-id" value="1" readonly />
+                  </div>
+
+                  <div class="form-group">
+                    <label for="patch-email">Nuevo Correo</label>
+                    <input type="email" id="patch-email" placeholder="nuevo@correo.com" />
+                  </div>
+
+                  <button type="button" class="primary-button" style="width: 100%; margin-top: 8px; background: var(--warning);">
+                    Actualizar Datos
+                  </button>
+                </form>
+              </section>
+
+            </div>
+
+          </div>
+
+        </section>
+
+      </main>
+
+    </div>
+  </div>
+
+  <script>
+    // Toggle del menú en pantallas móviles
+    const menuToggle = document.querySelector('#menu-toggle');
+    const sidebar = document.querySelector('.sidebar');
+
+    if (menuToggle && sidebar) {
+      menuToggle.addEventListener('click', () => {
+        sidebar.classList.toggle('open');
+      });
+    }
+  </script>
+</body>
+
+</html>

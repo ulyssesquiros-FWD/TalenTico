@@ -13,6 +13,7 @@ function showMessage(message, type) {
 
 loginForm.addEventListener('submit', async (event) => {
   event.preventDefault();
+
   const username = usernameInput.value.trim();
   const password = passwordInput.value;
 

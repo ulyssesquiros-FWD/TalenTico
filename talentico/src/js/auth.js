@@ -1,3 +1,5 @@
+import { apiFetch } from '../../js/api.js';
+
 const loginForm = document.querySelector('#login-form');
 const usernameInput = document.querySelector('#username');
 const passwordInput = document.querySelector('#password');
@@ -25,18 +27,18 @@ loginForm.addEventListener('submit', async (event) => {
   showMessage('', '');
 
   try {
-    const response = await fetch('https://dummyjson.com/auth/login', {
+    const data = await apiFetch('/auth/login', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ username, password, expiresInMins: 60 }),
+      body: JSON.stringify({ username, password }),
     });
-    const data = await response.json();
-
-    if (!response.ok) {
-      throw new Error(data.message || 'Usuario o contraseña incorrectos.');
-    }
 
     localStorage.setItem('token', data.accessToken);
+    localStorage.setItem('user', JSON.stringify({
+      id: data.id,
+      username: data.username,
+      name: `${data.firstName} ${data.lastName}`,
+    }));
     showMessage('Login exitoso. El token fue guardado correctamente.', 'success');
     passwordInput.value = '';
   } catch (error) {

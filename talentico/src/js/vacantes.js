@@ -1,3 +1,7 @@
+import { initializeProtectedPage } from './page-shell.js';
+
+initializeProtectedPage();
+
 const API_URL = 'http://localhost:3000/vacantes';
 
 // Estado global local

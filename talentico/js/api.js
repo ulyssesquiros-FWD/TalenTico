@@ -1,9 +1,10 @@
 // Servicio centralizado para las peticiones HTTP a DummyJSON.
 // auth.js inicia sesion y guarda el token; este archivo solo realiza peticiones.
 export const API_URL = "http://localhost:3000";
+export const DUMMY_JSON_API_URL = "https://dummyjson.com";
 const HTTP_METHODS = ["GET", "POST", "PUT", "PATCH", "DELETE"];
 
-export async function apiFetch(endpoint, options = {}) {
+export async function apiFetch(endpoint, options = {}, baseUrl = API_URL) {
   if (typeof endpoint !== "string" || !endpoint.startsWith("/")) {
     throw new Error('El endpoint debe ser una ruta que inicie con "/".');
   }
@@ -27,7 +28,7 @@ export async function apiFetch(endpoint, options = {}) {
       headers.set("Authorization", `Bearer ${token}`);
     }
 
-    const response = await fetch(`${API_URL}${endpoint}`, {
+    const response = await fetch(`${baseUrl}${endpoint}`, {
       ...options,
       method,
       headers,

@@ -1,9 +1,12 @@
-import { apiFetch } from '../../js/api.js';
+import { apiFetch, DUMMY_JSON_API_URL } from '../../js/api.js';
+import { initializeProtectedPage } from './page-shell.js';
+
+initializeProtectedPage();
 
 async function obtenerEntrevistas() {
   try {
-    const datos = await apiFetch('/comments');
-    renderizarEntrevistas(datos);
+    const datos = await apiFetch('/comments', {}, DUMMY_JSON_API_URL);
+    renderizarEntrevistas(datos.comments || []);
   } catch (error) {
     console.error('Error:', error);
     document.getElementById('lista-entrevistas').innerHTML = `
@@ -81,13 +84,13 @@ document.getElementById('form-entrevista').addEventListener('submit', async (e) 
       await apiFetch(`/comments/${id}`, {
         method: 'PATCH',
         body: JSON.stringify({ body }),
-      });
+      }, DUMMY_JSON_API_URL);
       alert(`Nota ID ${id} actualizada con éxito`);
     } else {
-      await apiFetch('/comments', {
+      await apiFetch('/comments/add', {
         method: 'POST',
         body: JSON.stringify({ body, postId: 1, userId: 1 }),
-      });
+      }, DUMMY_JSON_API_URL);
       alert('Nota creada con éxito');
     }
 
@@ -104,7 +107,7 @@ async function eliminarEntrevista(id) {
   if (!confirm(`¿Deseas eliminar la nota ID ${id}?`)) return;
 
   try {
-    await apiFetch(`/comments/${id}`, { method: 'DELETE' });
+    await apiFetch(`/comments/${id}`, { method: 'DELETE' }, DUMMY_JSON_API_URL);
     alert(`Nota ID ${id} eliminada con éxito`);
     obtenerEntrevistas();
   } catch (error) {

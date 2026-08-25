@@ -1,4 +1,5 @@
 import './style.css'
+import { initializeProtectedPage } from './js/page-shell.js'
 
 // ============================================================
 // AUTENTICACIÓN
@@ -440,30 +441,14 @@ if (!token) {
       </div>
     `
 
+    initializeProtectedPage()
+
     // ============================================================
     // NAVEGACIÓN
     // ============================================================
 
-    const navItems = document.querySelectorAll(
-      '.nav-item[data-section]'
-    )
-
-    navItems.forEach((item) => {
-
-      item.addEventListener('click', () => {
-
-        navItems.forEach((nav) => {
-          nav.classList.remove('active')
-        })
-
-        item.classList.add('active')
-
-        const section = item.dataset.section
-
-        console.log(`Sección seleccionada: ${section}`)
-      })
-
-    })
+    // La navegación se inicializa en page-shell.js para reutilizar las rutas
+    // y la protección de sesión en todas las páginas.
 
 
     // ============================================================

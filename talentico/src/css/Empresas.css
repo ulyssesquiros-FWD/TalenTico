@@ -261,3 +261,132 @@ td button:hover {
 .btn-danger:hover {
     background-color: #c9302c;
 }
+
+:root {
+    --sidebar-bg: #1d3b2b;          /* Verde oscuro corporativo */
+    --sidebar-active: #2a523c;      /* Verde de selección */
+    --text-light: #ffffff;
+    --text-muted: #a3b899;
+    --main-bg: #f4f8f6;             /* Fondo gris/verde suave de la app */
+    --border-color: #e1e8e4;
+}
+
+body {
+    margin: 0;
+    font-family: system-ui, -apple-system, sans-serif;
+    background-color: var(--main-bg);
+}
+
+/* Layout General */
+.app-layout {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* Sidebar Estilos */
+.sidebar {
+    width: 260px;
+    background-color: var(--sidebar-bg);
+    color: var(--text-light);
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+}
+
+.sidebar-brand {
+    padding: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.sidebar-brand h2 {
+    margin: 0;
+    font-size: 1.3rem;
+    font-weight: 700;
+}
+
+.sidebar-nav {
+    padding: 1rem 0;
+}
+
+.sidebar-nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar-nav li a {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.85rem 1.5rem;
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.sidebar-nav li:hover a {
+    color: var(--text-light);
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.sidebar-nav li.active a {
+    color: var(--text-light);
+    background-color: var(--sidebar-active);
+    border-left: 4px solid #4caf50;
+    font-weight: 600;
+}
+
+.nav-icon {
+    font-size: 1.1rem;
+}
+
+/* Área de Contenido Principal */
+.main-content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+}
+
+.top-header {
+    background-color: #ffffff;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.top-header h2 {
+    margin: 0;
+    color: var(--sidebar-bg);
+    font-size: 1.4rem;
+}
+
+.user-profile {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    font-weight: 600;
+    color: var(--sidebar-bg);
+}
+
+.avatar {
+    width: 35px;
+    height: 35px;
+    background-color: var(--sidebar-bg);
+    color: var(--text-light);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.content-body {
+    padding: 2rem;
+}

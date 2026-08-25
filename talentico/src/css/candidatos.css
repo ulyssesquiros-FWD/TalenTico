@@ -1120,3 +1120,119 @@ select:focus-visible {
     animation-iteration-count: 1 !important;
   }
 }
+
+/* =========================================================
+   CANDIDATE CARDS GRID
+   ========================================================= */
+
+.candidates-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.candidate-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 24px;
+  background: var(--surface);
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-sm);
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+
+.candidate-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.candidate-card-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+margin-bottom: 20px;
+}
+
+.candidate-profile-info {
+display: flex;
+align-items: center;
+gap: 14px;
+}
+
+.candidate-avatar-img {
+width: 48px;
+height: 48px;
+border-radius: var(--radius-md);
+object-fit: cover;
+background: var(--surface-soft);
+}
+
+.candidate-name {
+margin: 0;
+font-size: 16px;
+font-weight: 800;
+color: var(--text-primary);
+line-height: 1.2;
+}
+
+.candidate-role {
+display: block;
+margin-top: 4px;
+font-size: 10px;
+font-weight: 700;
+color: var(--text-muted);
+letter-spacing: 0.05em;
+text-transform: uppercase;
+}
+
+.candidate-actions {
+display: flex;
+gap: 6px;
+}
+
+.btn-icon {
+background: transparent;
+padding: 4px;
+font-size: 14px;
+color: var(--text-muted);
+border-radius: var(--radius-sm);
+}
+
+.btn-icon:hover {
+background: var(--surface-soft);
+color: var(--text-primary);
+}
+
+.btn-icon.danger:hover {
+background: var(--danger-light);
+color: var(--danger);
+}
+
+.candidate-card-body {
+display: flex;
+flex-direction: column;
+gap: 8px;
+margin-bottom: 20px;
+}
+
+.candidate-detail {
+margin: 0;
+display: flex;
+align-items: center;
+gap: 8px;
+font-size: 13px;
+color: var(--text-secondary);
+}
+
+.candidate-detail .icon {
+font-size: 14px;
+color: var(--text-muted);
+}
+
+.candidate-card-footer {
+display: flex;
+align-items: center;
+gap: 8px;
+}

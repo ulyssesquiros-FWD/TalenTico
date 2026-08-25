@@ -1,7 +1,6 @@
 // Servicio centralizado para las peticiones HTTP a DummyJSON.
 // auth.js inicia sesion y guarda el token; este archivo solo realiza peticiones.
-
-export const API_URL = "https://dummyjson.com";
+export const API_URL = "http://localhost:3000";
 const HTTP_METHODS = ["GET", "POST", "PUT", "PATCH", "DELETE"];
 
 /**

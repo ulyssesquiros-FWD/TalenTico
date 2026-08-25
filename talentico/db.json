@@ -3,8 +3,21 @@
     {
       "provider": "google",
       "name": "Usuario de Google",
-      "email": "usuario.google@talentico.demo",
-      "token": "google-demo-token-talentico"
+      "email": "[EMAIL_ADDRESS]",
+      "token": "google-demo-token-talentico",
+      "id": "bPgWS5XCHAQ"
     }
-  ]
+  ],
+  "candidatos": [
+    {
+      "nombre": "Alex",
+      "apellido": "Duarte",
+      "email": "alexcubero@test.com",
+      "puesto": "Frontend Developer",
+      "experiencia": "2 años",
+      "modalidad": "ONSITE",
+      "id": "qux0Ir2oyjQ"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
 }

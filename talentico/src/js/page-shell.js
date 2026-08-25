@@ -1,12 +1,13 @@
 const isDashboard = window.location.pathname.endsWith('/index.html') || window.location.pathname.endsWith('/');
+const pagePrefix = isDashboard ? './pages/' : './';
 const routes = {
   dashboard: isDashboard ? './index.html' : '../index.html',
-  candidatos: './candidatos.html',
-  vacantes: './vacantes.html',
-  empresas: './Empresas.html',
-  postulaciones: './Postulaciones.html',
-  entrevistas: './entrevistas.html',
-  tareas: './tareas.html',
+  candidatos: `${pagePrefix}candidatos.html`,
+  vacantes: `${pagePrefix}vacantes.html`,
+  empresas: `${pagePrefix}Empresas.html`,
+  postulaciones: `${pagePrefix}Postulaciones.html`,
+  entrevistas: `${pagePrefix}entrevistas.html`,
+  tareas: `${pagePrefix}tareas.html`,
 };
 
 export function requireSession() {

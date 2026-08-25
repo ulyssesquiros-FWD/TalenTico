@@ -1,0 +1,257 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="TalenTico - Gestión de Candidatos" />
+  <title>TalenTico | Candidatos</title>
+  <link rel="stylesheet" href="./style.css" />
+  <link rel="stylesheet" href="../src/css/candidatos.css" />
+</head>
+
+<body>
+  <div id="app">
+    <div class="app-shell">
+
+      <!-- SIDEBAR (DUPLICADO TAL CUAL EL BASE) -->
+      <aside class="sidebar">
+
+        <div class="brand">
+          <div class="brand-icon">T</div>
+          <div class="brand-info">
+            <span class="brand-name">TalenTico</span>
+            <span class="brand-subtitle">Gestión de Talento</span>
+          </div>
+        </div>
+
+        <nav class="sidebar-nav">
+          <p class="nav-title">MENÚ PRINCIPAL</p>
+
+          <button class="nav-item" data-section="dashboard">
+            <span class="nav-icon">⌂</span>
+            <span>Dashboard</span>
+          </button>
+
+          <button class="nav-item active" data-section="candidatos">
+            <span class="nav-icon">♙</span>
+            <span>Candidatos</span>
+          </button>
+
+          <button class="nav-item" data-section="vacantes">
+            <span class="nav-icon">▣</span>
+            <span>Vacantes</span>
+          </button>
+
+          <button class="nav-item" data-section="empresas">
+            <span class="nav-icon">▤</span>
+            <span>Empresas</span>
+          </button>
+
+          <button class="nav-item" data-section="postulaciones">
+            <span class="nav-icon">□</span>
+            <span>Postulaciones</span>
+          </button>
+
+          <button class="nav-item" data-section="entrevistas">
+            <span class="nav-icon">◷</span>
+            <span>Entrevistas</span>
+          </button>
+
+          <button class="nav-item" data-section="tareas">
+            <span class="nav-icon">✓</span>
+            <span>Tareas</span>
+          </button>
+        </nav>
+
+        <div class="sidebar-footer">
+          <button class="nav-item logout">
+            <span class="nav-icon">↪️</span>
+            <span>Cerrar sesión</span>
+          </button>
+        </div>
+
+      </aside>
+
+      <!-- CONTENIDO PRINCIPAL -->
+      <main class="main-content">
+
+        <!-- TOPBAR -->
+        <header class="topbar">
+          <button class="menu-toggle" id="menu-toggle">
+            ☰
+          </button>
+
+          <div class="breadcrumb">
+            <span>TalenTico</span>
+            <span>/</span>
+            <strong>Candidatos</strong>
+          </div>
+
+          <div class="user-area">
+            <div class="user-info">
+              <span class="user-name">Usuario</span>
+              <span class="user-role">Administrador</span>
+            </div>
+            <div class="avatar">
+              U
+            </div>
+          </div>
+        </header>
+
+        <!-- SECCIÓN CANDIDATOS -->
+        <section class="content">
+
+          <!-- ENCABEZADO DE PÁGINA -->
+          <div class="page-header">
+            <div>
+              <span class="page-eyebrow">MÓDULO DE RECLUTAMIENTO</span>
+              <h1>Gestión de Candidatos</h1>
+              <p>
+                Consumo de la API DummyJSON (/users). Visualización, creación, edición y eliminación de candidatos.
+              </p>
+            </div>
+          </div>
+
+          <!-- CONTENEDOR PRINCIPAL DOS COLUMNAS -->
+          <div class="dashboard-grid">
+
+            <!-- TABLA DE CANDIDATOS (GET) -->
+            <section class="panel">
+              <div class="panel-header">
+                <div>
+                  <h2>Listado de Candidatos (GET)</h2>
+                  <p>Registros obtenidos de /users</p>
+                </div>
+              </div>
+
+              <div class="table-container">
+                <table class="data-table">
+                  <thead>
+                    <tr>
+                      <th>ID</th>
+                      <th>Candidato</th>
+                      <th>Correo</th>
+                      <th>Teléfono</th>
+                      <th>Puesto / Empresa</th>
+                      <th>Acciones</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><strong>1</strong></td>
+                      <td>Emily Johnson</td>
+                      <td>emily.johnson@x.dummyjson.com</td>
+                      <td>+81 965-431-3024</td>
+                      <td>Sales Manager (Dooley Inc)</td>
+                      <td>
+                        <button class="text-button" type="button">Editar</button> |
+                        <button class="text-button" type="button" style="color: var(--danger);">Eliminar</button>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><strong>2</strong></td>
+                      <td>Michael Williams</td>
+                      <td>michael.williams@x.dummyjson.com</td>
+                      <td>+49 258-627-6644</td>
+                      <td>Developer (Kuhn LLC)</td>
+                      <td>
+                        <button class="text-button" type="button">Editar</button> |
+                        <button class="text-button" type="button" style="color: var(--danger);">Eliminar</button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </section>
+
+            <!-- COLUMNA LATERAL CON FORMULARIOS (POST / PUT / PATCH / DELETE) -->
+            <div style="display: flex; flex-direction: column; gap: 22px;">
+
+              <!-- FORMULARIO CREAR (POST) -->
+              <section class="panel">
+                <div class="panel-header">
+                  <div>
+                    <h2>Registrar Candidato (POST)</h2>
+                    <p>Agregar nuevo usuario a /users</p>
+                  </div>
+                </div>
+
+                <form style="padding: 20px;" action="#" method="dialog">
+                  <div class="form-group">
+                    <label for="nombre">Nombre</label>
+                    <input type="text" id="nombre" placeholder="Ej. Alex" required />
+                  </div>
+
+                  <div class="form-group">
+                    <label for="apellido">Apellido</label>
+                    <input type="text" id="apellido" placeholder="Ej. Cubero" required />
+                  </div>
+
+                  <div class="form-group">
+                    <label for="email">Correo electrónico</label>
+                    <input type="email" id="email" placeholder="ejemplo@correo.com" required />
+                  </div>
+
+                  <div class="form-group">
+                    <label for="puesto">Puesto de interés</label>
+                    <input type="text" id="puesto" placeholder="Ej. Frontend Developer" />
+                  </div>
+
+                  <button type="button" class="primary-button" style="width: 100%; margin-top: 8px;">
+                    Guardar Candidato
+                  </button>
+                </form>
+              </section>
+
+              <!-- FORMULARIO EDICIÓN PARCIAL (PATCH) -->
+              <section class="panel">
+                <div class="panel-header">
+                  <div>
+                    <h2>Actualización Rápida (PATCH)</h2>
+                    <p>Actualizar solo correo/teléfono</p>
+                  </div>
+                </div>
+
+                <form style="padding: 20px;" action="#" method="dialog">
+                  <div class="form-group">
+                    <label for="patch-id">ID Candidato</label>
+                    <input type="number" id="patch-id" value="1" readonly />
+                  </div>
+
+                  <div class="form-group">
+                    <label for="patch-email">Nuevo Correo</label>
+                    <input type="email" id="patch-email" placeholder="nuevo@correo.com" />
+                  </div>
+
+                  <button type="button" class="primary-button" style="width: 100%; margin-top: 8px; background: var(--warning);">
+                    Actualizar Datos
+                  </button>
+                </form>
+              </section>
+
+            </div>
+
+          </div>
+
+        </section>
+
+      </main>
+
+    </div>
+  </div>
+
+  <script>
+    // Toggle del menú en pantallas móviles
+    const menuToggle = document.querySelector('#menu-toggle');
+    const sidebar = document.querySelector('.sidebar');
+
+    if (menuToggle && sidebar) {
+      menuToggle.addEventListener('click', () => {
+        sidebar.classList.toggle('open');
+      });
+    }
+  </script>
+</body>
+
+</html>

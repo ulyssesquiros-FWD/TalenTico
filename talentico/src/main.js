@@ -20,37 +20,37 @@ document.querySelector('#app').innerHTML = `
         <p class="nav-title">MENÚ PRINCIPAL</p>
 
         <button class="nav-item active" data-section="dashboard">
-          <span class="nav-icon">⌂</span>
+          <span class="nav-icon">Ã¢Å’â€š</span>
           <span>Dashboard</span>
         </button>
 
         <button class="nav-item" data-section="candidatos">
-          <span class="nav-icon">♙</span>
+          <span class="nav-icon">Ã¢â„¢â„¢</span>
           <span>Candidatos</span>
         </button>
 
         <button class="nav-item" data-section="vacantes">
-          <span class="nav-icon">▣</span>
+          <span class="nav-icon">Ã¢â€“Â£</span>
           <span>Vacantes</span>
         </button>
 
         <button class="nav-item" data-section="empresas">
-          <span class="nav-icon">▤</span>
+          <span class="nav-icon">Ã¢â€“Â¤</span>
           <span>Empresas</span>
         </button>
 
         <button class="nav-item" data-section="postulaciones">
-          <span class="nav-icon">□</span>
+          <span class="nav-icon">Ã¢â€“Â¡</span>
           <span>Postulaciones</span>
         </button>
 
         <button class="nav-item" data-section="entrevistas">
-          <span class="nav-icon">◷</span>
+          <span class="nav-icon">Ã¢â€”Â·</span>
           <span>Entrevistas</span>
         </button>
 
         <button class="nav-item" data-section="tareas">
-          <span class="nav-icon">✓</span>
+          <span class="nav-icon">Ã¢Å“â€œ</span>
           <span>Tareas</span>
         </button>
 
@@ -58,7 +58,7 @@ document.querySelector('#app').innerHTML = `
 
       <div class="sidebar-footer">
         <button class="nav-item logout">
-          <span class="nav-icon">↪</span>
+          <span class="nav-icon">Ã¢â€ Âª</span>
           <span>Cerrar sesión</span>
         </button>
       </div>
@@ -73,7 +73,7 @@ document.querySelector('#app').innerHTML = `
       <header class="topbar">
 
         <button class="menu-toggle" id="menu-toggle">
-          ☰
+          Ã¢ËœÂ°
         </button>
 
         <div class="breadcrumb">
@@ -123,13 +123,13 @@ document.querySelector('#app').innerHTML = `
         </div>
 
 
-        <!-- ESTADÍSTICAS -->
+        <!-- ESTADÃƒÂSTICAS -->
         <div class="stats-grid">
 
           <article class="stat-card">
 
             <div class="stat-icon candidates">
-              ♙
+              Ã¢â„¢â„¢
             </div>
 
             <div>
@@ -152,7 +152,7 @@ document.querySelector('#app').innerHTML = `
           <article class="stat-card">
 
             <div class="stat-icon vacancies">
-              ▣
+              Ã¢â€“Â£
             </div>
 
             <div>
@@ -175,7 +175,7 @@ document.querySelector('#app').innerHTML = `
           <article class="stat-card">
 
             <div class="stat-icon companies">
-              ▤
+              Ã¢â€“Â¤
             </div>
 
             <div>
@@ -198,7 +198,7 @@ document.querySelector('#app').innerHTML = `
           <article class="stat-card">
 
             <div class="stat-icon applications">
-              □
+              Ã¢â€“Â¡
             </div>
 
             <div>
@@ -244,7 +244,7 @@ document.querySelector('#app').innerHTML = `
             <div class="empty-state">
 
               <div class="empty-icon">
-                ◷
+                Ã¢â€”Â·
               </div>
 
               <h3>Sin actividad todavía</h3>
@@ -313,7 +313,7 @@ document.querySelector('#app').innerHTML = `
 `
 
 // Navegación visual temporal.
-// Los módulos reales serán conectados durante la integración.
+// Los mÃƒÂ³dulos reales serÃƒÂ¡n conectados durante la integraciÃƒÂ³n.
 
 const navItems = document.querySelectorAll('.nav-item[data-section]')
 

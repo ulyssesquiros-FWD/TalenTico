@@ -1,0 +1,63 @@
+/* =========================================================
+   TALENTICO — Design Tokens
+   Paleta unificada para toda la aplicación
+   ========================================================= */
+
+:root {
+  /* ── Brand ── */
+  --primary: #f9a620;
+  --primary-dark: #e8951a;
+  --primary-light: #fdf0d9;
+
+  /* ── Text ── */
+  --text-primary: #1d3b2b;
+  --text-secondary: #566b5e;
+  --text-muted: #8a9a8f;
+
+  /* ── Surfaces ── */
+  --background: #f5f7f6;
+  --surface: #ffffff;
+  --surface-soft: #f8fafc;
+
+  /* ── Borders ── */
+  --border: #cfd7d4;
+
+  /* ── Semantic ── */
+  --success: #2d7a4f;
+  --success-light: #dcfce7;
+  --danger: #c0392b;
+  --danger-light: #fee2e2;
+  --warning: #d97706;
+  --warning-light: #fef3c7;
+  --info: #2563eb;
+  --info-light: #dbeafe;
+
+  /* ── Auth Visual Panel ── */
+  --visual-bg: #e0f2f7;
+
+  /* ── Layout ── */
+  --sidebar-width: 260px;
+
+  /* ── Shape ── */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 20px;
+
+  /* ── Shadow ── */
+  --shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.05);
+  --shadow-md: 0 8px 24px rgba(15, 23, 42, 0.07);
+  --shadow-lg: 0 15px 40px rgba(15, 23, 42, 0.10);
+
+  /* ── Motion ── */
+  --transition: 0.2s ease;
+
+  /* ── Typography ── */
+  font-family: Inter, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  color: var(--text-primary);
+  background: var(--background);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}

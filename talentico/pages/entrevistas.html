@@ -1,25 +1,115 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>JobConnect - Entrevistas y Notas</title>
-  <link rel="stylesheet" href="../css/style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TALENTICO CR | Entrevistas</title>
+  <link rel="stylesheet" href="../src/style.css" />
 </head>
 <body>
-  <h1>Notas de Entrevistas</h1>
+  <div id="app">
+    <div class="app-shell">
 
-  <!-- Formulario para CREAR / EDITAR -->
-  <form id="form-entrevista">
-    <input type="hidden" id="entrevista-id">
-    <textarea id="entrevista-body" placeholder="Escribe la nota..." required></textarea>
-    <button type="submit">Guardar</button>
-  </form>
+      <!-- Sidebar -->
+      <aside class="sidebar" id="sidebar">
+        <div class="brand">
+          <span class="brand-icon" aria-hidden="true">T</span>
+          <div class="brand-info">
+            <span class="brand-name">TALENTICO</span>
+            <span class="brand-subtitle">Gestión de Talento</span>
+          </div>
+        </div>
 
-  <!-- Contenedor para LISTAR -->
-  <div id="lista-entrevistas"></div>
+        <nav class="sidebar-nav">
+          <p class="nav-title">Menú</p>
+          <a href="login.html" class="nav-item">
+            <span class="nav-icon">🏠</span>
+            Inicio
+          </a>
+          <a href="tareas.html" class="nav-item">
+            <span class="nav-icon">📋</span>
+            Tareas
+          </a>
+          <a href="entrevistas.html" class="nav-item active">
+            <span class="nav-icon">💬</span>
+            Entrevistas
+          </a>
+        </nav>
 
-  <!-- Scripts -->
-  <script src="../js/services/api.js"></script>
-  <script src="../js/entrevistas.js"></script>
+        <div class="sidebar-footer">
+          <a href="login.html" class="nav-item logout">
+            <span class="nav-icon">🚪</span>
+            Cerrar sesión
+          </a>
+        </div>
+      </aside>
+
+      <!-- Main -->
+      <div class="main-content">
+
+        <!-- Topbar -->
+        <header class="topbar">
+          <button class="menu-toggle" id="menu-toggle" aria-label="Abrir menú">☰</button>
+          <div class="breadcrumb">
+            <span>TALENTICO</span>
+            <span>/</span>
+            <strong>Entrevistas</strong>
+          </div>
+          <div class="user-area">
+            <div class="user-info">
+              <span class="user-name">Reclutador</span>
+              <span class="user-role">Administrador</span>
+            </div>
+            <div class="avatar">R</div>
+          </div>
+        </header>
+
+        <!-- Content -->
+        <div class="content">
+
+          <!-- Page Header -->
+          <div class="page-header">
+            <div>
+              <span class="page-eyebrow">Panel de control</span>
+              <h1>Notas de Entrevistas</h1>
+              <p>Registra y gestiona las notas de cada entrevista de tus candidatos.</p>
+            </div>
+          </div>
+
+          <!-- Form Card -->
+          <div class="card" style="margin-bottom: 22px;">
+            <form id="form-entrevista">
+              <input type="hidden" id="entrevista-id" />
+              <div class="form-group">
+                <label for="entrevista-body">Nota de la entrevista</label>
+                <textarea id="entrevista-body" placeholder="Escribe la nota de la entrevista..." rows="4" required style="resize: vertical;"></textarea>
+              </div>
+              <button type="submit" class="primary-button">Guardar Nota</button>
+            </form>
+          </div>
+
+          <!-- Notes List -->
+          <div class="panel">
+            <div class="panel-header">
+              <div>
+                <h2>Notas Registradas</h2>
+                <p>Notas de entrevistas en el sistema</p>
+              </div>
+            </div>
+            <div id="lista-entrevistas">
+              <div class="empty-state">
+                <div class="empty-icon">💬</div>
+                <h3>Cargando notas...</h3>
+                <p>Las notas de entrevistas aparecerán aquí una vez que se carguen.</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="../src/js/entrevistas.js"></script>
 </body>
 </html>

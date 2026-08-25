@@ -1,39 +1,53 @@
-const API_URL = 'https://dummyjson.com/comments';
+import { apiFetch } from '../../js/api.js';
 
-// 1. Obtener y listar notas (GET)
 async function obtenerEntrevistas() {
   try {
-    const respuesta = await fetch(API_URL);
-    if (!respuesta.ok) throw new Error('Error al obtener datos');
-    
-    const datos = await respuesta.json();
-    renderizarEntrevistas(datos.comments);
+    const datos = await apiFetch('/comments');
+    renderizarEntrevistas(datos);
   } catch (error) {
     console.error('Error:', error);
-    alert('No se pudieron cargar las entrevistas');
+    document.getElementById('lista-entrevistas').innerHTML = `
+      <div class="empty-state">
+        <div class="empty-icon">⚠️</div>
+        <h3>Error al cargar</h3>
+        <p>${error.message}</p>
+      </div>`;
   }
 }
 
-// 2. Renderizar lista en HTML
 function renderizarEntrevistas(lista) {
   const contenedor = document.getElementById('lista-entrevistas');
-  contenedor.innerHTML = '';
 
+  if (!lista.length) {
+    contenedor.innerHTML = `
+      <div class="empty-state">
+        <div class="empty-icon">💬</div>
+        <h3>Sin notas</h3>
+        <p>Registra tu primera nota usando el formulario de arriba.</p>
+      </div>`;
+    return;
+  }
+
+  let html = '<div style="padding: 4px 0;">';
   lista.forEach(item => {
-    const card = document.createElement('div');
-    card.classList.add('card-entrevista');
-    
-    card.innerHTML = `
-      <p><strong>ID:</strong> ${item.id}</p>
-      <p id="texto-${item.id}">${item.body}</p>
-      <button class="btn-editar" data-id="${item.id}">Editar</button>
-      <button class="btn-eliminar" data-id="${item.id}">Eliminar</button>
-    `;
-    
-    contenedor.appendChild(card);
+    html += `
+      <div style="padding: 14px 18px; border-bottom: 1px solid var(--border);">
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <span style="color: var(--text-muted); font-size: 12px; font-weight: 700;">#${item.id}</span>
+            <span class="badge badge-info">Post #${item.postId}</span>
+          </div>
+          <div style="display: flex; gap: 6px;">
+            <button class="text-button btn-editar" data-id="${item.id}" style="padding: 6px 10px; font-size: 11px;">Editar</button>
+            <button class="text-button btn-eliminar" data-id="${item.id}" style="padding: 6px 10px; font-size: 11px; color: var(--danger);">Eliminar</button>
+          </div>
+        </div>
+        <p id="texto-${item.id}" style="margin: 0; color: var(--text-secondary); font-size: 13px; line-height: 1.5;">${item.body}</p>
+      </div>`;
   });
+  html += '</div>';
+  contenedor.innerHTML = html;
 
-  // Asignar eventos de editar
   document.querySelectorAll('.btn-editar').forEach(boton => {
     boton.addEventListener('click', (e) => {
       const id = e.target.getAttribute('data-id');
@@ -42,7 +56,6 @@ function renderizarEntrevistas(lista) {
     });
   });
 
-  // Asignar eventos de eliminar
   document.querySelectorAll('.btn-eliminar').forEach(boton => {
     boton.addEventListener('click', (e) => {
       const id = e.target.getAttribute('data-id');
@@ -51,67 +64,48 @@ function renderizarEntrevistas(lista) {
   });
 }
 
-// 3. Cargar datos en el formulario para editar
 function prepararEdicion(id, body) {
   document.getElementById('entrevista-id').value = id;
   document.getElementById('entrevista-body').value = body;
   document.getElementById('entrevista-body').focus();
 }
 
-// 4. Crear (POST) o Editar (PATCH)
 document.getElementById('form-entrevista').addEventListener('submit', async (e) => {
   e.preventDefault();
-  
+
   const id = document.getElementById('entrevista-id').value;
   const body = document.getElementById('entrevista-body').value;
 
   try {
     if (id) {
-      // Editar con PATCH
-      const respuesta = await fetch(`${API_URL}/${id}`, {
+      await apiFetch(`/comments/${id}`, {
         method: 'PATCH',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ body: body })
+        body: JSON.stringify({ body }),
       });
-      if (!respuesta.ok) throw new Error('Error al actualizar');
-      alert(`Nota ID ${id} actualizada con éxito (PATCH simulado)`);
+      alert(`Nota ID ${id} actualizada con éxito`);
     } else {
-      // Crear con POST
-      const respuesta = await fetch(`${API_URL}/add`, {
+      await apiFetch('/comments', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          body: body,
-          postId: 3,
-          userId: 5
-        })
+        body: JSON.stringify({ body, postId: 1, userId: 1 }),
       });
-      if (!respuesta.ok) throw new Error('Error al crear');
-      alert('Nota creada con éxito (POST simulado)');
+      alert('Nota creada con éxito');
     }
 
-    // Limpiar formulario
     document.getElementById('form-entrevista').reset();
     document.getElementById('entrevista-id').value = '';
     obtenerEntrevistas();
-
   } catch (error) {
     console.error('Error:', error);
     alert('Ocurrió un error al procesar la solicitud');
   }
 });
 
-// 5. Eliminar (DELETE)
 async function eliminarEntrevista(id) {
   if (!confirm(`¿Deseas eliminar la nota ID ${id}?`)) return;
 
   try {
-    const respuesta = await fetch(`${API_URL}/${id}`, {
-      method: 'DELETE'
-    });
-    if (!respuesta.ok) throw new Error('Error al eliminar');
-    
-    alert(`Nota con ID ${id} eliminada con éxito (DELETE simulado)`);
+    await apiFetch(`/comments/${id}`, { method: 'DELETE' });
+    alert(`Nota ID ${id} eliminada con éxito`);
     obtenerEntrevistas();
   } catch (error) {
     console.error('Error:', error);
@@ -119,5 +113,4 @@ async function eliminarEntrevista(id) {
   }
 }
 
-// Ejecutar al cargar la página
 document.addEventListener('DOMContentLoaded', obtenerEntrevistas);

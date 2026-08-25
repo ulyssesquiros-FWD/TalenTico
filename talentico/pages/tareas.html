@@ -1,28 +1,121 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>JobConnect - Tareas del Reclutador</title>
-  <link rel="stylesheet" href="../css/style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TALENTICO CR | Tareas</title>
+  <link rel="stylesheet" href="../src/style.css" />
 </head>
 <body>
-  <h1>Tareas del Reclutador</h1>
+  <div id="app">
+    <div class="app-shell">
 
-  <!-- Formulario para CREAR / EDITAR Tarea -->
-  <form id="form-tarea">
-    <input type="hidden" id="tarea-id">
-    <input type="text" id="tarea-titulo" placeholder="Descripción de la tarea..." required>
-    <label>
-      <input type="checkbox" id="tarea-completada"> Completada
-    </label>
-    <button type="submit">Guardar Tarea</button>
-  </form>
+      <!-- Sidebar -->
+      <aside class="sidebar" id="sidebar">
+        <div class="brand">
+          <span class="brand-icon" aria-hidden="true">T</span>
+          <div class="brand-info">
+            <span class="brand-name">TALENTICO</span>
+            <span class="brand-subtitle">Gestión de Talento</span>
+          </div>
+        </div>
 
-  <!-- Contenedor para LISTAR Tareas -->
-  <div id="lista-tareas"></div>
+        <nav class="sidebar-nav">
+          <p class="nav-title">Menú</p>
+          <a href="login.html" class="nav-item">
+            <span class="nav-icon">🏠</span>
+            Inicio
+          </a>
+          <a href="tareas.html" class="nav-item active">
+            <span class="nav-icon">📋</span>
+            Tareas
+          </a>
+          <a href="entrevistas.html" class="nav-item">
+            <span class="nav-icon">💬</span>
+            Entrevistas
+          </a>
+        </nav>
 
-  <!-- Scripts -->
-  <script src="../js/services/api.js"></script>
-  <script src="../js/tareas.js"></script>
+        <div class="sidebar-footer">
+          <a href="login.html" class="nav-item logout">
+            <span class="nav-icon">🚪</span>
+            Cerrar sesión
+          </a>
+        </div>
+      </aside>
+
+      <!-- Main -->
+      <div class="main-content">
+
+        <!-- Topbar -->
+        <header class="topbar">
+          <button class="menu-toggle" id="menu-toggle" aria-label="Abrir menú">☰</button>
+          <div class="breadcrumb">
+            <span>TALENTICO</span>
+            <span>/</span>
+            <strong>Tareas</strong>
+          </div>
+          <div class="user-area">
+            <div class="user-info">
+              <span class="user-name">Reclutador</span>
+              <span class="user-role">Administrador</span>
+            </div>
+            <div class="avatar">R</div>
+          </div>
+        </header>
+
+        <!-- Content -->
+        <div class="content">
+
+          <!-- Page Header -->
+          <div class="page-header">
+            <div>
+              <span class="page-eyebrow">Panel de control</span>
+              <h1>Tareas del Reclutador</h1>
+              <p>Organiza y gestiona las tareas de tus procesos de selección.</p>
+            </div>
+          </div>
+
+          <!-- Form Card -->
+          <div class="card" style="margin-bottom: 22px;">
+            <form id="form-tarea" style="display: flex; gap: 12px; align-items: flex-end; flex-wrap: wrap;">
+              <input type="hidden" id="tarea-id" />
+              <div class="form-group" style="flex: 1; min-width: 200px; margin-bottom: 0;">
+                <label for="tarea-titulo">Descripción de la tarea</label>
+                <input type="text" id="tarea-titulo" placeholder="Escribe una tarea..." required />
+              </div>
+              <div class="form-group" style="margin-bottom: 0;">
+                <label for="tarea-completada" style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                  <input type="checkbox" id="tarea-completada" style="width: 18px; height: 18px; accent-color: var(--primary);" />
+                  Completada
+                </label>
+              </div>
+              <button type="submit" class="primary-button">Guardar Tarea</button>
+            </form>
+          </div>
+
+          <!-- Tasks List -->
+          <div class="panel">
+            <div class="panel-header">
+              <div>
+                <h2>Mis Tareas</h2>
+                <p>Tareas registradas en el sistema</p>
+              </div>
+            </div>
+            <div id="lista-tareas">
+              <div class="empty-state">
+                <div class="empty-icon">📋</div>
+                <h3>Cargando tareas...</h3>
+                <p>Las tareas aparecerán aquí una vez que se carguen.</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="../src/js/tareas.js"></script>
 </body>
 </html>

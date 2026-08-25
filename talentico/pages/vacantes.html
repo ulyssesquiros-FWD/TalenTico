@@ -1,0 +1,306 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="TalenTico - Gestión de Vacantes" />
+  <title>TalenTico | Vacantes</title>
+  
+  <!-- Estilos Globales/Base -->
+  <link rel="stylesheet" href="./style.css" />
+  
+  <!-- Estilos Exclusivos del Módulo Vacantes -->
+  <link rel="stylesheet" href="../src/css/vacantes.css" />
+</head>
+
+<body>
+  <div id="app">
+    <div class="app-shell">
+
+      <!-- SIDEBAR BASE TALENTICO -->
+      <aside class="sidebar">
+
+        <div class="brand">
+          <div class="brand-icon">T</div>
+          <div class="brand-info">
+            <span class="brand-name">TalenTico</span>
+            <span class="brand-subtitle">Gestión de Talento</span>
+          </div>
+        </div>
+
+        <nav class="sidebar-nav">
+          <p class="nav-title">MENÚ PRINCIPAL</p>
+
+          <button class="nav-item" data-section="dashboard">
+            <span class="nav-icon">⌂</span>
+            <span>Dashboard</span>
+          </button>
+
+          <button class="nav-item" data-section="candidatos">
+            <span class="nav-icon">♙</span>
+            <span>Candidatos</span>
+          </button>
+
+          <button class="nav-item active" data-section="vacantes">
+            <span class="nav-icon">▣</span>
+            <span>Vacantes</span>
+          </button>
+
+          <button class="nav-item" data-section="empresas">
+            <span class="nav-icon">▤</span>
+            <span>Empresas</span>
+          </button>
+
+          <button class="nav-item" data-section="postulaciones">
+            <span class="nav-icon">□</span>
+            <span>Postulaciones</span>
+          </button>
+
+          <button class="nav-item" data-section="entrevistas">
+            <span class="nav-icon">◷</span>
+            <span>Entrevistas</span>
+          </button>
+
+          <button class="nav-item" data-section="tareas">
+            <span class="nav-icon">✓</span>
+            <span>Tareas</span>
+          </button>
+        </nav>
+
+        <div class="sidebar-footer">
+          <button class="nav-item logout">
+            <span class="nav-icon">&#x21AA;&#xFE0E;</span>
+            <span>Cerrar sesión</span>
+          </button>
+        </div>
+
+      </aside>
+
+      <!-- CONTENIDO PRINCIPAL -->
+      <main class="main-content">
+
+        <!-- TOPBAR -->
+        <header class="topbar">
+          <button class="menu-toggle" id="menu-toggle">
+            ☰
+          </button>
+
+          <div class="breadcrumb">
+            <span>TalenTico</span>
+            <span>/</span>
+            <strong>Vacantes</strong>
+          </div>
+
+          <div class="user-area">
+            <div class="user-info">
+              <span class="user-name">Usuario</span>
+              <span class="user-role">Administrador</span>
+            </div>
+            <div class="avatar">
+              U
+            </div>
+          </div>
+        </header>
+
+        <!-- SECCIÓN VACANTES -->
+        <section class="content">
+
+          <!-- ENCABEZADO DE PÁGINA -->
+          <div class="page-header">
+            <div>
+              <span class="page-eyebrow">MÓDULO DE RECLUTAMIENTO</span>
+              <h1>Gestión de Vacantes</h1>
+              <p>
+                Gestione y monitorice las ofertas de trabajo activas de la plataforma.
+              </p>
+            </div>
+          </div>
+
+          <!-- CONTENEDOR PRINCIPAL DOS COLUMNAS -->
+          <div class="dashboard-grid">
+
+            <!-- LISTADO DE VACANTES (TARJETAS GET ESTILO REFERENCIA) -->
+            <section class="panel" style="background: transparent; border: none; box-shadow: none;">
+              <div class="panel-header" style="background: transparent; border: none; padding-left: 0;">
+                <div>
+                  <h2>Listado de Vacantes (GET)</h2>
+                  <p>Registros obtenidos de la API</p>
+                </div>
+              </div>
+
+              <div class="vacancies-cards-grid">
+                
+                <!-- Tarjeta 1: Activa -->
+                <article class="vacancy-card">
+                  <header class="vacancy-card-header">
+                    <div class="vacancy-icon-wrapper" style="background: #e0f2fe; color: #0284c7;">
+                      &lt;/&gt;
+                    </div>
+                    <span class="badge badge-success" style="background: #14532d; color: #ffffff;">ACTIVA</span>
+                  </header>
+
+                  <div class="vacancy-card-body">
+                    <h3 class="vacancy-title">Senior Frontend...</h3>
+                    <p class="vacancy-company">🏢 TechFlow Inc.</p>
+                    <div class="vacancy-tags">
+                      <span class="badge badge-info">Remote</span>
+                      <span class="badge badge-success">Full-time</span>
+                    </div>
+                  </div>
+
+                  <footer class="vacancy-card-footer">
+                    <span class="vacancy-location">📍 Global</span>
+                    <span class="vacancy-applicants"><strong>12</strong> Postulantes</span>
+                  </footer>
+                </article>
+
+                <!-- Tarjeta 2: Pendiente -->
+                <article class="vacancy-card">
+                  <header class="vacancy-card-header">
+                    <div class="vacancy-icon-wrapper" style="background: #fef3c7; color: #d97706;">
+                      ✏️
+                    </div>
+                    <span class="badge badge-warning" style="background: #f59e0b; color: #ffffff;">PENDIENTE</span>
+                  </header>
+
+                  <div class="vacancy-card-body">
+                    <h3 class="vacancy-title">UX/UI Product...</h3>
+                    <p class="vacancy-company">🏢 Creativa Studio</p>
+                    <div class="vacancy-tags">
+                      <span class="badge badge-info">Hybrid</span>
+                      <span class="badge badge-success">Contract</span>
+                    </div>
+                  </div>
+
+                  <footer class="vacancy-card-footer">
+                    <span class="vacancy-location">📍 CDMX</span>
+                    <span class="vacancy-applicants"><strong>3</strong> Postulantes</span>
+                  </footer>
+                </article>
+
+                <!-- Tarjeta 3: Cerrada -->
+                <article class="vacancy-card">
+                  <header class="vacancy-card-header">
+                    <div class="vacancy-icon-wrapper" style="background: #f1f5f9; color: #64748b;">
+                      🗄️
+                    </div>
+                    <span class="badge" style="background: #cbd5e1; color: #475569;">CERRADA</span>
+                  </header>
+
+                  <div class="vacancy-card-body">
+                    <h3 class="vacancy-title">Data Scientist</h3>
+                    <p class="vacancy-company">🏢 DataMind</p>
+                    <div class="vacancy-tags">
+                      <span class="badge badge-info">On-site</span>
+                      <span class="badge badge-success">Full-time</span>
+                    </div>
+                  </div>
+
+                  <footer class="vacancy-card-footer">
+                    <span class="vacancy-location">📍 Monterrey</span>
+                    <span class="vacancy-applicants"><strong>28</strong> Postulantes</span>
+                  </footer>
+                </article>
+
+              </div>
+            </section>
+
+            <!-- COLUMNA LATERAL CON FORMULARIOS (POST / PATCH) -->
+            <div style="display: flex; flex-direction: column; gap: 22px;">
+
+              <!-- FORMULARIO CREAR VACANTE (POST) -->
+              <section class="panel">
+                <div class="panel-header">
+                  <div>
+                    <h2>Registrar Vacante (POST)</h2>
+                    <p>Agregar nueva oferta de trabajo</p>
+                  </div>
+                </div>
+
+                <form style="padding: 20px;" action="#" method="dialog">
+                  <div class="form-group">
+                    <label for="titulo-vacante">Título de la Vacante</label>
+                    <input type="text" id="titulo-vacante" placeholder="Ej. Senior Frontend Dev" required />
+                  </div>
+
+                  <div class="form-group">
+                    <label for="empresa-vacante">Empresa</label>
+                    <input type="text" id="empresa-vacante" placeholder="Ej. TechFlow Inc." required />
+                  </div>
+
+                  <div class="form-group">
+                    <label for="ubicacion-vacante">Ubicación</label>
+                    <input type="text" id="ubicacion-vacante" placeholder="Ej. Remote / CDMX" required />
+                  </div>
+
+                  <div class="form-group">
+                    <label for="modalidad-vacante">Modalidad</label>
+                    <select id="modalidad-vacante">
+                      <option value="Remote">Remote</option>
+                      <option value="Hybrid">Hybrid</option>
+                      <option value="On-site">On-site</option>
+                    </select>
+                  </div>
+
+                  <button type="button" class="primary-button" style="width: 100%; margin-top: 8px;">
+                    Publicar Vacante
+                  </button>
+                </form>
+              </section>
+
+              <!-- FORMULARIO EDICIÓN PARCIAL (PATCH) -->
+              <section class="panel">
+                <div class="panel-header">
+                  <div>
+                    <h2>Actualizar Estado (PATCH)</h2>
+                    <p>Cambiar estado de la vacante</p>
+                  </div>
+                </div>
+
+                <form style="padding: 20px;" action="#" method="dialog">
+                  <div class="form-group">
+                    <label for="patch-vacante-id">ID Vacante</label>
+                    <input type="number" id="patch-vacante-id" value="1" readonly />
+                  </div>
+
+                  <div class="form-group">
+                    <label for="patch-estado">Nuevo Estado</label>
+                    <select id="patch-estado">
+                      <option value="ACTIVA">ACTIVA</option>
+                      <option value="PENDIENTE">PENDIENTE</option>
+                      <option value="CERRADA">CERRADA</option>
+                    </select>
+                  </div>
+
+                  <button type="button" class="primary-button" style="width: 100%; margin-top: 8px; background: var(--warning);">
+                    Actualizar Estado
+                  </button>
+                </form>
+              </section>
+
+            </div>
+
+          </div>
+
+        </section>
+
+      </main>
+
+    </div>
+  </div>
+
+  <script>
+    // Toggle del menú en pantallas móviles
+    const menuToggle = document.querySelector('#menu-toggle');
+    const sidebar = document.querySelector('.sidebar');
+
+    if (menuToggle && sidebar) {
+      menuToggle.addEventListener('click', () => {
+        sidebar.classList.toggle('open');
+      });
+    }
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,98 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "firstName": "Ana",
+      "lastName": "Morales",
+      "email": "ana@ejemplo.com",
+      "username": "ana",
+      "password": "12345678",
+      "gender": "female",
+      "image": "https://dummyjson.com/icon/ana/128"
+    },
+    {
+      "id": 2,
+      "firstName": "Carlos",
+      "lastName": "Rodriguez",
+      "email": "carlos@ejemplo.com",
+      "username": "carlos",
+      "password": "12345678",
+      "gender": "male",
+      "image": "https://dummyjson.com/icon/carlos/128"
+    },
+    {
+      "id": 3,
+      "firstName": "Maria",
+      "lastName": "Fernandez",
+      "email": "maria@ejemplo.com",
+      "username": "maria",
+      "password": "12345678",
+      "gender": "female",
+      "image": "https://dummyjson.com/icon/maria/128"
+    }
+  ],
+  "todos": [
+    {
+      "id": 1,
+      "todo": "Revisar currículums pendientes",
+      "completed": false,
+      "userId": 1
+    },
+    {
+      "id": 2,
+      "todo": "Agendar entrevista con candidato Senior",
+      "completed": true,
+      "userId": 1
+    },
+    {
+      "id": 3,
+      "todo": "Publicar vacante de desarrollador frontend",
+      "completed": false,
+      "userId": 2
+    },
+    {
+      "id": 4,
+      "todo": "Enviar propuesta al cliente ABC",
+      "completed": false,
+      "userId": 2
+    },
+    {
+      "id": 5,
+      "todo": "Actualizar base de candidatos",
+      "completed": true,
+      "userId": 3
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "postId": 1,
+      "body": "Candidato con 5 años de experiencia en React. Excelente perfil técnico y buena comunicación.",
+      "userId": 1
+    },
+    {
+      "id": 2,
+      "postId": 1,
+      "body": "Segunda ronda de entrevista completada. Referencias positivas del empleador anterior.",
+      "userId": 2
+    },
+    {
+      "id": 3,
+      "postId": 2,
+      "body": "Perfil junior con ganas de aprender. Se recomienda para posiciones de entrada.",
+      "userId": 3
+    },
+    {
+      "id": 4,
+      "postId": 2,
+      "body": "Candidato negociando salario. Pendiente respuesta del cliente.",
+      "userId": 1
+    },
+    {
+      "id": 5,
+      "postId": 3,
+      "body": "Entrevista técnica aprobada. Pendiente evaluación de fit cultural.",
+      "userId": 2
+    }
+  ]
+}

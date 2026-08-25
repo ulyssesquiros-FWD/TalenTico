@@ -30,7 +30,22 @@
           </div>
           <p id="login-message" class="message" role="alert" aria-live="polite"></p>
           <button id="login-button" type="submit">Iniciar sesión</button>
+          <nav class="auth-links" aria-label="Opciones de acceso">
+            <a href="recuperar-contrasena.html">¿Olvidaste tu contraseña?</a>
+            <a href="registro.html">Crear una cuenta</a>
+          </nav>
         </form>
+
+        <div class="social-divider" aria-hidden="true">
+          <span>o</span>
+        </div>
+
+        <button id="facebook-login-btn" class="facebook-btn" type="button">
+          <svg class="facebook-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          Continuar con Facebook
+        </button>
+
+        <p id="facebook-message" class="message" role="alert" aria-live="polite"></p>
       </section>
 
       <aside class="login-visual" aria-label="TALENTICO CR conecta talento y oportunidades">
@@ -42,6 +57,25 @@
         </div>
       </aside>
     </main>
+    <script>
+      window.fbAsyncInit = function () {
+        FB.init({
+          appId: 'TU_APP_ID_DE_FACEBOOK',
+          cookie: true,
+          xfbml: true,
+          version: 'v19.0',
+        });
+      };
+
+      (function (d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s);
+        js.id = id;
+        js.src = 'https://connect.facebook.net/es_LA/sdk.js';
+        fjs.parentNode.insertBefore(js, fjs);
+      })(document, 'script', 'facebook-jssdk');
+    </script>
     <script type="module" src="../src/js/auth.js"></script>
   </body>
 </html>

@@ -1,9 +1,12 @@
-import { apiFetch } from '../../js/api.js';
+import { apiFetch, DUMMY_JSON_API_URL } from '../../js/api.js';
+import { initializeProtectedPage } from './page-shell.js';
+
+initializeProtectedPage();
 
 async function obtenerTareas() {
   try {
-    const datos = await apiFetch('/todos');
-    renderizarTareas(datos);
+    const datos = await apiFetch('/todos', {}, DUMMY_JSON_API_URL);
+    renderizarTareas(datos.todos || []);
   } catch (error) {
     console.error('Error:', error);
     document.getElementById('lista-tareas').innerHTML = `
@@ -86,13 +89,13 @@ document.getElementById('form-tarea').addEventListener('submit', async (e) => {
       await apiFetch(`/todos/${id}`, {
         method: 'PATCH',
         body: JSON.stringify({ todo: titulo, completed: completada }),
-      });
+      }, DUMMY_JSON_API_URL);
       alert(`Tarea ID ${id} actualizada con éxito`);
     } else {
-      await apiFetch('/todos', {
+      await apiFetch('/todos/add', {
         method: 'POST',
         body: JSON.stringify({ todo: titulo, completed: completada, userId: 1 }),
-      });
+      }, DUMMY_JSON_API_URL);
       alert('Tarea creada con éxito');
     }
 
@@ -109,7 +112,7 @@ async function eliminarTarea(id) {
   if (!confirm(`¿Deseas eliminar la tarea ID ${id}?`)) return;
 
   try {
-    await apiFetch(`/todos/${id}`, { method: 'DELETE' });
+    await apiFetch(`/todos/${id}`, { method: 'DELETE' }, DUMMY_JSON_API_URL);
     alert(`Tarea ID ${id} eliminada con éxito`);
     obtenerTareas();
   } catch (error) {

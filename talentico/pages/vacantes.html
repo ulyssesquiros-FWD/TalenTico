@@ -7,7 +7,6 @@
   <meta name="description" content="TalenTico - Gestión de Vacantes" />
   <title>TalenTico | Vacantes</title>
   
-  
   <!-- Estilos Exclusivos del Módulo Vacantes -->
   <link rel="stylesheet" href="../src/css/vacantes.css" />
 </head>
@@ -92,11 +91,11 @@
 
           <div class="user-area">
             <div class="user-info">
-              <span class="user-name">Usuario</span>
+              <span class="user-name">Alex Cubero</span>
               <span class="user-role">Administrador</span>
             </div>
             <div class="avatar">
-              U
+              A
             </div>
           </div>
         </header>
@@ -105,7 +104,7 @@
         <section class="content">
 
           <!-- ENCABEZADO DE PÁGINA -->
-          <div class="page-header">
+          <div class="page-header" style="display: flex; justify-content: space-between; align-items: center;">
             <div>
               <span class="page-eyebrow">MÓDULO DE RECLUTAMIENTO</span>
               <h1>Gestión de Vacantes</h1>
@@ -113,179 +112,100 @@
                 Gestione y monitorice las ofertas de trabajo activas de la plataforma.
               </p>
             </div>
+            <button type="button" id="btn-nueva-vacante" class="primary-button">
+              + Nueva Vacante
+            </button>
           </div>
 
-          <!-- CONTENEDOR PRINCIPAL DOS COLUMNAS -->
-          <div class="dashboard-grid">
-
-            <!-- LISTADO DE VACANTES (TARJETAS GET ESTILO REFERENCIA) -->
-            <section class="panel" style="background: transparent; border: none; box-shadow: none;">
-              <div class="panel-header" style="background: transparent; border: none; padding-left: 0;">
-                <div>
-                  <h2>Listado de Vacantes (GET)</h2>
-                  <p>Registros obtenidos de la API</p>
-                </div>
+          <!-- LISTADO DE VACANTES EN TARJETAS -->
+          <section class="panel" style="background: transparent; border: none; box-shadow: none;">
+            <div class="panel-header" style="background: transparent; border: none; padding-left: 0;">
+              <div>
+                <h2>Listado de Vacantes</h2>
+                <p>Registros sincronizados con JSON Server</p>
               </div>
-
-              <div class="vacancies-cards-grid">
-                
-                <!-- Tarjeta 1: Activa -->
-                <article class="vacancy-card">
-                  <header class="vacancy-card-header">
-                    <div class="vacancy-icon-wrapper" style="background: #e0f2fe; color: #0284c7;">
-                      &lt;/&gt;
-                    </div>
-                    <span class="badge badge-success" style="background: #14532d; color: #ffffff;">ACTIVA</span>
-                  </header>
-
-                  <div class="vacancy-card-body">
-                    <h3 class="vacancy-title">Senior Frontend...</h3>
-                    <p class="vacancy-company">🏢 TechFlow Inc.</p>
-                    <div class="vacancy-tags">
-                      <span class="badge badge-info">Remote</span>
-                      <span class="badge badge-success">Full-time</span>
-                    </div>
-                  </div>
-
-                  <footer class="vacancy-card-footer">
-                    <span class="vacancy-location">📍 Global</span>
-                    <span class="vacancy-applicants"><strong>12</strong> Postulantes</span>
-                  </footer>
-                </article>
-
-                <!-- Tarjeta 2: Pendiente -->
-                <article class="vacancy-card">
-                  <header class="vacancy-card-header">
-                    <div class="vacancy-icon-wrapper" style="background: #fef3c7; color: #d97706;">
-                      ✏️
-                    </div>
-                    <span class="badge badge-warning" style="background: #f59e0b; color: #ffffff;">PENDIENTE</span>
-                  </header>
-
-                  <div class="vacancy-card-body">
-                    <h3 class="vacancy-title">UX/UI Product...</h3>
-                    <p class="vacancy-company">🏢 Creativa Studio</p>
-                    <div class="vacancy-tags">
-                      <span class="badge badge-info">Hybrid</span>
-                      <span class="badge badge-success">Contract</span>
-                    </div>
-                  </div>
-
-                  <footer class="vacancy-card-footer">
-                    <span class="vacancy-location">📍 CDMX</span>
-                    <span class="vacancy-applicants"><strong>3</strong> Postulantes</span>
-                  </footer>
-                </article>
-
-                <!-- Tarjeta 3: Cerrada -->
-                <article class="vacancy-card">
-                  <header class="vacancy-card-header">
-                    <div class="vacancy-icon-wrapper" style="background: #f1f5f9; color: #64748b;">
-                      🗄️
-                    </div>
-                    <span class="badge" style="background: #cbd5e1; color: #475569;">CERRADA</span>
-                  </header>
-
-                  <div class="vacancy-card-body">
-                    <h3 class="vacancy-title">Data Scientist</h3>
-                    <p class="vacancy-company">🏢 DataMind</p>
-                    <div class="vacancy-tags">
-                      <span class="badge badge-info">On-site</span>
-                      <span class="badge badge-success">Full-time</span>
-                    </div>
-                  </div>
-
-                  <footer class="vacancy-card-footer">
-                    <span class="vacancy-location">📍 Monterrey</span>
-                    <span class="vacancy-applicants"><strong>28</strong> Postulantes</span>
-                  </footer>
-                </article>
-
-              </div>
-            </section>
-
-            <!-- COLUMNA LATERAL CON FORMULARIOS (POST / PATCH) -->
-            <div style="display: flex; flex-direction: column; gap: 22px;">
-
-              <!-- FORMULARIO CREAR VACANTE (POST) -->
-              <section class="panel">
-                <div class="panel-header">
-                  <div>
-                    <h2>Registrar Vacante (POST)</h2>
-                    <p>Agregar nueva oferta de trabajo</p>
-                  </div>
-                </div>
-
-                <form style="padding: 20px;" action="#" method="dialog">
-                  <div class="form-group">
-                    <label for="titulo-vacante">Título de la Vacante</label>
-                    <input type="text" id="titulo-vacante" placeholder="Ej. Senior Frontend Dev" required />
-                  </div>
-
-                  <div class="form-group">
-                    <label for="empresa-vacante">Empresa</label>
-                    <input type="text" id="empresa-vacante" placeholder="Ej. TechFlow Inc." required />
-                  </div>
-
-                  <div class="form-group">
-                    <label for="ubicacion-vacante">Ubicación</label>
-                    <input type="text" id="ubicacion-vacante" placeholder="Ej. Remote / CDMX" required />
-                  </div>
-
-                  <div class="form-group">
-                    <label for="modalidad-vacante">Modalidad</label>
-                    <select id="modalidad-vacante">
-                      <option value="Remote">Remote</option>
-                      <option value="Hybrid">Hybrid</option>
-                      <option value="On-site">On-site</option>
-                    </select>
-                  </div>
-
-                  <button type="button" class="primary-button" style="width: 100%; margin-top: 8px;">
-                    Publicar Vacante
-                  </button>
-                </form>
-              </section>
-
-              <!-- FORMULARIO EDICIÓN PARCIAL (PATCH) -->
-              <section class="panel">
-                <div class="panel-header">
-                  <div>
-                    <h2>Actualizar Estado (PATCH)</h2>
-                    <p>Cambiar estado de la vacante</p>
-                  </div>
-                </div>
-
-                <form style="padding: 20px;" action="#" method="dialog">
-                  <div class="form-group">
-                    <label for="patch-vacante-id">ID Vacante</label>
-                    <input type="number" id="patch-vacante-id" value="1" readonly />
-                  </div>
-
-                  <div class="form-group">
-                    <label for="patch-estado">Nuevo Estado</label>
-                    <select id="patch-estado">
-                      <option value="ACTIVA">ACTIVA</option>
-                      <option value="PENDIENTE">PENDIENTE</option>
-                      <option value="CERRADA">CERRADA</option>
-                    </select>
-                  </div>
-
-                  <button type="button" class="primary-button" style="width: 100%; margin-top: 8px; background: var(--warning);">
-                    Actualizar Estado
-                  </button>
-                </form>
-              </section>
-
             </div>
 
-          </div>
+            <div class="vacancies-cards-grid">
+              <!-- Carga dinámica vía GET -->
+            </div>
+          </section>
 
         </section>
 
       </main>
 
     </div>
+  </div>
+
+  <!-- PANEL LATERAL DERECHO (DRAWER CON ANIMACIÓN) -->
+  <div id="drawer-overlay" class="drawer-overlay">
+    <aside id="drawer-container" class="drawer-container">
+      <div class="drawer-header">
+        <div>
+          <h2 id="drawer-title">Registrar Vacante</h2>
+          <p id="drawer-subtitle" style="font-size: 0.85rem; color: #64748b; margin-top: 2px;">Complete la información del formulario</p>
+        </div>
+        <button type="button" id="btn-close-drawer" class="btn-icon-close" title="Cerrar panel">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+
+      <form id="form-vacante" class="drawer-body">
+        <input type="hidden" id="vacante-id" value="" />
+
+        <div class="form-group">
+          <label for="titulo-vacante">Título de la Vacante</label>
+          <input type="text" id="titulo-vacante" placeholder="Ej. Senior Frontend Dev" required />
+        </div>
+
+        <div class="form-group">
+          <label for="empresa-vacante">Empresa</label>
+          <input type="text" id="empresa-vacante" placeholder="Ej. TechFlow Inc." required />
+        </div>
+
+        <div class="form-group">
+          <label for="ubicacion-vacante">Ubicación</label>
+          <input type="text" id="ubicacion-vacante" placeholder="Ej. Remote / San José" required />
+        </div>
+
+        <div class="form-group">
+          <label for="modalidad-vacante">Modalidad</label>
+          <select id="modalidad-vacante">
+            <option value="Remote">Remote</option>
+            <option value="Hybrid">Hybrid</option>
+            <option value="On-site">On-site</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="tipo-vacante">Tipo de Contrato</label>
+          <select id="tipo-vacante">
+            <option value="Full-time">Full-time</option>
+            <option value="Part-time">Part-time</option>
+            <option value="Contract">Contract</option>
+            <option value="Temporary">Temporary</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="estado-vacante">Estado</label>
+          <select id="estado-vacante">
+            <option value="ACTIVA">ACTIVA</option>
+            <option value="PENDIENTE">PENDIENTE</option>
+            <option value="CERRADA">CERRADA</option>
+          </select>
+        </div>
+
+        <div class="drawer-footer">
+          <button type="button" id="btn-cancel-drawer" class="secondary-button">Cancelar</button>
+          <button type="submit" class="primary-button">Guardar Vacante</button>
+        </div>
+      </form>
+    </aside>
   </div>
 
   <script>
@@ -299,6 +219,9 @@
       });
     }
   </script>
+
+  <!-- Script de Vacantes -->
+  <script src="../src/js/vacantes.js"></script>
 </body>
 
 </html>

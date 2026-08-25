@@ -1,8 +1,6 @@
 /* =========================================================
-   TALENTICO - MÓDULO DE VACANTES (100% INDEPENDIENTE)
-   C5 - UI / QA
+   TALENTICO - MÓDULO DE CANDIDATOS
    ========================================================= */
-
 
 /* =========================================================
    VARIABLES GLOBALES
@@ -61,7 +59,6 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-
 /* =========================================================
    RESET
    ========================================================= */
@@ -103,7 +100,6 @@ button:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-
 .app-shell {
   display: flex;
 }
-
 
 /* =========================================================
    SIDEBAR & BRAND
@@ -226,7 +222,6 @@ button:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-
   color: var(--danger);
 }
 
-
 /* =========================================================
    MAIN CONTENT & TOPBAR
    ========================================================= */
@@ -344,7 +339,6 @@ button:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-
   line-height: 1.6;
 }
 
-
 /* =========================================================
    DASHBOARD GRID & PANELS
    ========================================================= */
@@ -384,7 +378,6 @@ button:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-
   color: var(--text-muted);
   font-size: 11px;
 }
-
 
 /* =========================================================
    FORMULARIOS Y BOTONES
@@ -439,19 +432,19 @@ button:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-
 }
 
 .secondary-button {
-  background: #e2e8f0;
-  color: var(--text-primary);
-  border: none;
-  padding: 10px 18px;
+  padding: 11px 17px;
   border-radius: var(--radius-sm);
-  font-weight: 600;
+  background: var(--surface-soft);
+  color: var(--text-secondary);
+  border: 1px solid var(--border);
   font-size: 13px;
-  cursor: pointer;
-  transition: background var(--transition);
+  font-weight: 600;
+  transition: background var(--transition), color var(--transition);
 }
 
 .secondary-button:hover {
-  background: #cbd5e1;
+  background: var(--border);
+  color: var(--text-primary);
 }
 
 .badge {
@@ -468,22 +461,21 @@ button:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-
 .badge-danger { background: var(--danger-light); color: var(--danger); }
 .badge-info { background: var(--info-light); color: var(--info); }
 
-
 /* =========================================================
-   VACANCIES CARDS GRID (ESPECÍFICO MÓDULO VACANTES)
+   CANDIDATES CARDS GRID
    ========================================================= */
 
-.vacancies-cards-grid {
+.candidates-cards-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: 20px;
 }
 
-.vacancy-card {
+.candidate-card {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 22px;
+  padding: 20px;
   background: var(--surface);
   border-radius: var(--radius-xl);
   border: 1px solid var(--border);
@@ -491,202 +483,193 @@ button:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-
   transition: transform var(--transition), box-shadow var(--transition);
 }
 
-.vacancy-card:hover {
+.candidate-card:hover {
   transform: translateY(-2px);
   box-shadow: var(--shadow-md);
 }
 
-.vacancy-card-header {
+.candidate-card-header {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
+  gap: 12px;
   margin-bottom: 16px;
 }
 
-.vacancy-icon-wrapper {
-  width: 42px;
-  height: 42px;
+.candidate-profile-info {
   display: flex;
   align-items: center;
-  justify-content: center;
-  border-radius: var(--radius-md);
-  font-size: 16px;
-  font-weight: 800;
+  gap: 12px;
 }
 
-.vacancy-actions {
+.candidate-avatar-img {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--primary-light);
+}
+
+.candidate-name {
+  margin: 0;
+  color: var(--text-primary);
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.candidate-role {
+  display: inline-block;
+  margin-top: 4px;
+  color: var(--primary);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+
+/* ACCIONES DE TARJETA & ICONOS SVG */
+
+.candidate-actions {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 4px;
 }
 
-.action-btn {
-  background: transparent;
-  border: none;
-  border-radius: var(--radius-sm);
-  padding: 6px;
-  cursor: pointer;
+.btn-icon {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  transition: background-color var(--transition), color var(--transition);
+  width: 32px;
+  height: 32px;
+  padding: 6px;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--text-secondary);
+  transition: background var(--transition), color var(--transition), transform var(--transition);
 }
 
-.action-btn.btn-edit {
+.action-icon {
+  width: 18px;
+  height: 18px;
+  pointer-events: none;
+}
+
+.btn-icon.btn-edit:hover {
+  background: var(--primary-light);
   color: var(--primary);
 }
 
-.action-btn.btn-edit:hover {
-  background-color: var(--primary-light);
-}
-
-.action-btn.btn-delete {
+.btn-icon.btn-delete.danger:hover {
+  background: var(--danger-light);
   color: var(--danger);
 }
 
-.action-btn.btn-delete:hover {
-  background-color: var(--danger-light);
-}
-
-.vacancy-card-body {
+.candidate-card-body {
   display: flex;
   flex-direction: column;
+  gap: 8px;
+  margin-bottom: 16px;
 }
 
-.vacancy-title {
-  margin: 0 0 6px 0;
-  color: var(--text-primary);
-  font-size: 17px;
-  font-weight: 800;
-  line-height: 1.25;
-}
-
-.vacancy-company {
-  margin: 0 0 14px 0;
+.candidate-detail {
+  margin: 0;
   color: var(--text-secondary);
   font-size: 13px;
-  font-weight: 500;
-}
-
-.vacancy-tags {
   display: flex;
   align-items: center;
-  gap: 6px;
-  margin-bottom: 20px;
+  gap: 8px;
+  word-break: break-all;
 }
 
-.vacancy-card-footer {
+.candidate-detail .icon {
+  color: var(--text-muted);
+}
+
+.candidate-card-footer {
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding-top: 14px;
   border-top: 1px dashed var(--border);
-  color: var(--text-muted);
-  font-size: 12px;
 }
-
-.vacancy-location {
-  font-weight: 500;
-}
-
-.vacancy-applicants strong {
-  color: var(--text-primary);
-  font-weight: 700;
-}
-
 
 /* =========================================================
-   DRAWER LATERAL DERECHO Y ANIMACIONES
+   MODAL ESTILIZADO DE EDICIÓN
    ========================================================= */
 
-.drawer-overlay {
+.modal-overlay {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: rgba(15, 23, 42, 0.4);
-  backdrop-filter: blur(4px);
-  z-index: 1000;
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.drawer-overlay.active {
-  opacity: 1;
-  visibility: visible;
-}
-
-.drawer-container {
-  position: absolute;
-  top: 0;
-  right: 0;
   width: 100%;
-  max-width: 440px;
-  height: 100%;
-  background: var(--surface);
-  box-shadow: -10px 0 25px -5px rgba(0, 0, 0, 0.1);
-  display: flex;
-  flex-direction: column;
-  transform: translateX(100%);
-  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.drawer-overlay.active .drawer-container {
-  transform: translateX(0);
-}
-
-.drawer-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 20px 24px;
-  border-bottom: 1px solid var(--border);
-}
-
-.drawer-header h2 {
-  font-size: 1.25rem;
-  font-weight: 700;
-  color: var(--text-primary);
-  margin: 0;
-}
-
-.btn-icon-close {
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  color: var(--text-muted);
-  border-radius: var(--radius-sm);
-  padding: 6px;
+  height: 100vh;
+  background: rgba(15, 23, 42, 0.45);
+  backdrop-filter: blur(6px);
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: background-color var(--transition), color var(--transition);
+  z-index: 200;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--transition);
 }
 
-.btn-icon-close:hover {
-  background-color: var(--surface-soft);
+.modal-overlay.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.modal-container {
+  background: var(--surface);
+  width: 100%;
+  max-width: 480px;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-lg);
+  padding: 24px;
+  transform: translateY(12px);
+  transition: transform var(--transition);
+}
+
+.modal-overlay.open .modal-container {
+  transform: translateY(0);
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border);
+}
+
+.modal-header h2 {
+  margin: 0;
+  font-size: 18px;
   color: var(--text-primary);
 }
 
-.drawer-body {
-  padding: 24px;
-  overflow-y: auto;
-  flex: 1;
-  display: flex;
-  flex-direction: column;
+.btn-close {
+  background: transparent;
+  font-size: 22px;
+  color: var(--text-muted);
+  line-height: 1;
 }
 
-.drawer-footer {
+.btn-close:hover {
+  color: var(--text-primary);
+}
+
+.modal-actions {
   display: flex;
-  gap: 12px;
+  align-items: center;
   justify-content: flex-end;
+  gap: 12px;
+  margin-top: 24px;
   padding-top: 16px;
   border-top: 1px solid var(--border);
-  margin-top: auto;
 }
-
 
 /* =========================================================
    RESPONSIVE
@@ -709,4 +692,5 @@ button:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-
 @media (max-width: 600px) {
   .user-info { display: none; }
   .content { padding: 20px 14px; }
+  .modal-container { margin: 16px; }
 }

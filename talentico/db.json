@@ -1,0 +1,10 @@
+{
+  "users": [
+    {
+      "provider": "google",
+      "name": "Usuario de Google",
+      "email": "usuario.google@talentico.demo",
+      "token": "google-demo-token-talentico"
+    }
+  ]
+}

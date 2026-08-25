@@ -19,5 +19,20 @@
       "id": "qux0Ir2oyjQ"
     }
   ],
+  "vacantes": [
+    {
+      "titulo": "Senior Front End Dev",
+      "empresa": "Oscorp Inc",
+      "ubicacion": "San José",
+      "modalidad": "Remote",
+      "tipo": "Full-time",
+      "estado": "ACTIVA",
+      "postulantes": 0,
+      "icono": "💼",
+      "colorBg": "#e0f2fe",
+      "colorText": "#0284c7",
+      "id": "bfCXhLc1iE8"
+    }
+  ],
   "$schema": "./node_modules/json-server/schema.json"
 }

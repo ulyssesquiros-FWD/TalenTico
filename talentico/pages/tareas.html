@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>JobConnect - Tareas del Reclutador</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <h1>Tareas del Reclutador</h1>
+
+  <!-- Formulario para CREAR / EDITAR Tarea -->
+  <form id="form-tarea">
+    <input type="hidden" id="tarea-id">
+    <input type="text" id="tarea-titulo" placeholder="Descripción de la tarea..." required>
+    <label>
+      <input type="checkbox" id="tarea-completada"> Completada
+    </label>
+    <button type="submit">Guardar Tarea</button>
+  </form>
+
+  <!-- Contenedor para LISTAR Tareas -->
+  <div id="lista-tareas"></div>
+
+  <!-- Scripts -->
+  <script src="../js/services/api.js"></script>
+  <script src="../js/tareas.js"></script>
+</body>
+</html>

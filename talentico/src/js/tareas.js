@@ -1,52 +1,64 @@
-const API_URL = 'https://dummyjson.com/todos';
+import { apiFetch } from '../../js/api.js';
 
-// 1. Obtener y listar tareas (GET)
 async function obtenerTareas() {
   try {
-    const respuesta = await fetch(API_URL);
-    if (!respuesta.ok) throw new Error('Error al obtener datos');
-    
-    const datos = await respuesta.json();
-    renderizarTareas(datos.todos);
+    const datos = await apiFetch('/todos');
+    renderizarTareas(datos);
   } catch (error) {
     console.error('Error:', error);
-    alert('No se pudieron cargar las tareas');
+    document.getElementById('lista-tareas').innerHTML = `
+      <div class="empty-state">
+        <div class="empty-icon">⚠️</div>
+        <h3>Error al cargar</h3>
+        <p>${error.message}</p>
+      </div>`;
   }
 }
 
-// 2. Renderizar lista en HTML
 function renderizarTareas(lista) {
   const contenedor = document.getElementById('lista-tareas');
-  contenedor.innerHTML = '';
 
+  if (!lista.length) {
+    contenedor.innerHTML = `
+      <div class="empty-state">
+        <div class="empty-icon">📋</div>
+        <h3>Sin tareas</h3>
+        <p>Crea tu primera tarea usando el formulario de arriba.</p>
+      </div>`;
+    return;
+  }
+
+  let html = '<div style="padding: 4px 0;">';
   lista.forEach(item => {
-    const card = document.createElement('div');
-    card.classList.add('card-tarea');
-    
-    const estadoTexto = item.completed ? '✅ Completada' : '⏳ Pendiente';
+    const estadoBadge = item.completed
+      ? '<span class="badge badge-success">Completada</span>'
+      : '<span class="badge badge-warning">Pendiente</span>';
 
-    card.innerHTML = `
-      <p><strong>ID:</strong> ${item.id}</p>
-      <p id="titulo-${item.id}"><strong>Tarea:</strong> ${item.todo}</p>
-      <p><strong>Estado:</strong> ${estadoTexto}</p>
-      <button class="btn-editar-tarea" data-id="${item.id}" data-completed="${item.completed}">Editar</button>
-      <button class="btn-eliminar-tarea" data-id="${item.id}">Eliminar</button>
-    `;
-    
-    contenedor.appendChild(card);
+    html += `
+      <div style="display: flex; align-items: center; justify-content: space-between; padding: 14px 18px; border-bottom: 1px solid var(--border);">
+        <div style="display: flex; align-items: center; gap: 14px; flex: 1; min-width: 0;">
+          <span style="color: var(--text-muted); font-size: 12px; font-weight: 700; flex-shrink: 0;">#${item.id}</span>
+          <span id="titulo-${item.id}" style="color: var(--text-primary); font-size: 13px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${item.todo}</span>
+        </div>
+        <div style="display: flex; align-items: center; gap: 10px; flex-shrink: 0;">
+          ${estadoBadge}
+          <button class="text-button btn-editar-tarea" data-id="${item.id}" data-completed="${item.completed}" style="padding: 6px 10px; font-size: 11px;">Editar</button>
+          <button class="text-button btn-eliminar-tarea" data-id="${item.id}" style="padding: 6px 10px; font-size: 11px; color: var(--danger);">Eliminar</button>
+        </div>
+      </div>`;
   });
+  html += '</div>';
+  contenedor.innerHTML = html;
 
-  // Eventos de Editar
   document.querySelectorAll('.btn-editar-tarea').forEach(boton => {
     boton.addEventListener('click', (e) => {
       const id = e.target.getAttribute('data-id');
       const completed = e.target.getAttribute('data-completed') === 'true';
-      const titulo = document.getElementById(`titulo-${id}`).innerText.replace('Tarea: ', '');
+      const titulo = document.getElementById(`titulo-${id}`).innerText;
       prepararEdicion(id, titulo, completed);
     });
   });
 
-  // Eventos de Eliminar
   document.querySelectorAll('.btn-eliminar-tarea').forEach(boton => {
     boton.addEventListener('click', (e) => {
       const id = e.target.getAttribute('data-id');
@@ -55,7 +67,6 @@ function renderizarTareas(lista) {
   });
 }
 
-// 3. Preparar datos para edición
 function prepararEdicion(id, titulo, completed) {
   document.getElementById('tarea-id').value = id;
   document.getElementById('tarea-titulo').value = titulo;
@@ -63,64 +74,43 @@ function prepararEdicion(id, titulo, completed) {
   document.getElementById('tarea-titulo').focus();
 }
 
-// 4. Crear (POST) o Editar (PATCH)
 document.getElementById('form-tarea').addEventListener('submit', async (e) => {
   e.preventDefault();
-  
+
   const id = document.getElementById('tarea-id').value;
   const titulo = document.getElementById('tarea-titulo').value;
   const completada = document.getElementById('tarea-completada').checked;
 
   try {
     if (id) {
-      // Editar con PATCH
-      const respuesta = await fetch(`${API_URL}/${id}`, {
+      await apiFetch(`/todos/${id}`, {
         method: 'PATCH',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          todo: titulo,
-          completed: completada
-        })
+        body: JSON.stringify({ todo: titulo, completed: completada }),
       });
-      if (!respuesta.ok) throw new Error('Error al actualizar');
-      alert(`Tarea ID ${id} actualizada con éxito (PATCH simulado)`);
+      alert(`Tarea ID ${id} actualizada con éxito`);
     } else {
-      // Crear con POST
-      const respuesta = await fetch(`${API_URL}/add`, {
+      await apiFetch('/todos', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          todo: titulo,
-          completed: completada,
-          userId: 5
-        })
+        body: JSON.stringify({ todo: titulo, completed: completada, userId: 1 }),
       });
-      if (!respuesta.ok) throw new Error('Error al crear');
-      alert('Tarea creada con éxito (POST simulado)');
+      alert('Tarea creada con éxito');
     }
 
-    // Limpiar formulario
     document.getElementById('form-tarea').reset();
     document.getElementById('tarea-id').value = '';
     obtenerTareas();
-
   } catch (error) {
     console.error('Error:', error);
     alert('Ocurrió un error al procesar la solicitud');
   }
 });
 
-// 5. Eliminar (DELETE)
 async function eliminarTarea(id) {
   if (!confirm(`¿Deseas eliminar la tarea ID ${id}?`)) return;
 
   try {
-    const respuesta = await fetch(`${API_URL}/${id}`, {
-      method: 'DELETE'
-    });
-    if (!respuesta.ok) throw new Error('Error al eliminar');
-    
-    alert(`Tarea ID ${id} eliminada con éxito (DELETE simulado)`);
+    await apiFetch(`/todos/${id}`, { method: 'DELETE' });
+    alert(`Tarea ID ${id} eliminada con éxito`);
     obtenerTareas();
   } catch (error) {
     console.error('Error:', error);
@@ -128,5 +118,4 @@ async function eliminarTarea(id) {
   }
 }
 
-// Ejecutar al cargar la página
 document.addEventListener('DOMContentLoaded', obtenerTareas);

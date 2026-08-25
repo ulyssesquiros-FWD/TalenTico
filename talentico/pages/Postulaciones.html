@@ -4,8 +4,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JobConnect - Gestión de Postulaciones</title>
     <!-- Hojas de estilo del sidebar y postulaciones -->
-    <link rel="stylesheet" href="../css/sidebar.css">
-    <link rel="stylesheet" href="../css/Postulaciones.css">
+    <link rel="stylesheet" href="../src/css/Postulaciones.css">
 </head>
 <body>
 
@@ -19,7 +18,7 @@
             <nav class="sidebar-nav">
                 <ul>
                     <li>
-                        <a href="dashboard.html">
+                        <a href="../index.html">
                             <span class="nav-icon">📊</span> Dashboard
                         </a>
                     </li>
@@ -40,13 +39,18 @@
                     </li>
                     <!-- Marcado como 'active' por estar en la sección Postulaciones -->
                     <li class="active">
-                        <a href="postulaciones.html">
+                        <a href="Postulaciones.html">
                             <span class="nav-icon">📝</span> Postulaciones
                         </a>
                     </li>
                     <li>
                         <a href="entrevistas.html">
                             <span class="nav-icon">💬</span> Entrevistas
+                        </a>
+                    </li>
+                    <li>
+                        <a href="tareas.html">
+                            <span class="nav-icon">✓</span> Tareas
                         </a>
                     </li>
                 </ul>
@@ -120,6 +124,6 @@
         </div>
     </div>
 
-    <script src="../js/Postulaciones.js"></script>
+    <script type="module" src="../src/js/postulaciones.js"></script>
 </body>
 </html>

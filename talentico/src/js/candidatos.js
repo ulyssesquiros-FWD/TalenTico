@@ -1,4 +1,7 @@
 import { apiFetch } from '../../js/api.js';
+import { initializeProtectedPage } from './page-shell.js';
+
+initializeProtectedPage();
 
 const candidatesContainer = document.querySelector('#candidates-container');
 const candidateForm = document.querySelector('#candidate-form');

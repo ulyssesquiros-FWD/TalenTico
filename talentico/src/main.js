@@ -564,7 +564,7 @@ if (!token) {
         localStorage.removeItem('user')
 
         // Regresar al login
-        window.location.href = '/pages/login.html'
+        window.location.href = '../index.html'
 
       })
 

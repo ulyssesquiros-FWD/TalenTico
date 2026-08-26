@@ -44,6 +44,50 @@
       line-height: 1.5;
     }
 
+    /* Animated background blobs */
+    .animated-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+    .bg-blob {
+      position: absolute;
+      width: clamp(300px, 45vw, 600px);
+      height: clamp(300px, 45vw, 600px);
+      border-radius: 50%;
+      filter: blur(130px);
+      opacity: 0.12;
+      animation: drift 25s infinite alternate ease-in-out;
+    }
+    .blob-1 {
+      background: var(--primary);
+      top: -10%;
+      right: -10%;
+      animation-duration: 22s;
+    }
+    .blob-2 {
+      background: var(--brand-green);
+      bottom: -15%;
+      left: -10%;
+      animation-duration: 30s;
+    }
+    .blob-3 {
+      background: #38bdf8;
+      top: 40%;
+      left: 30%;
+      animation-duration: 18s;
+    }
+    @keyframes drift {
+      0% { transform: translate(0, 0) scale(1); }
+      50% { transform: translate(80px, 60px) scale(1.15); }
+      100% { transform: translate(-40px, 120px) scale(0.95); }
+    }
+
     h1, h2, h3 {
       font-family: 'Outfit', sans-serif;
       font-weight: 800;
@@ -127,15 +171,23 @@
 
     .hero-eyebrow {
       display: inline-block;
-      padding: 8px 16px;
+      padding: 12px 24px;
       border-radius: 30px;
-      background: rgba(10, 77, 34, 0.08);
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.15) 0%, rgba(10, 77, 34, 0.12) 100%);
       color: var(--brand-green);
-      font-size: 12px;
-      font-weight: 800;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      margin-bottom: 24px;
+      border: 2px solid var(--primary);
+      font-size: 16px;
+      font-weight: 850;
+      letter-spacing: 0.5px;
+      margin-bottom: 28px;
+      box-shadow: 0 4px 15px rgba(245, 158, 11, 0.15);
+      animation: floatSlogan 3s ease-in-out infinite;
+    }
+
+    @keyframes floatSlogan {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-4px); }
+      100% { transform: translateY(0); }
     }
 
     .hero h1 {
@@ -433,11 +485,17 @@
 </head>
 <body>
 
+  <!-- BACKGROUND ANIMATIONS -->
+  <div class="animated-bg">
+    <div class="bg-blob blob-1"></div>
+    <div class="bg-blob blob-2"></div>
+    <div class="bg-blob blob-3"></div>
+  </div>
+
   <!-- NAVBAR -->
   <header class="navbar">
     <div class="logo-container">
-      <div class="logo-mark">T</div>
-      <span class="logo-text">TalenTico</span>
+      <img src="./logo-completo.png" alt="TalenTico Logo" style="height: 56px; object-fit: contain; position: relative; z-index: 5;" />
     </div>
     <a href="./pages/login.html" class="nav-btn">Iniciar sesión</a>
   </header>
@@ -529,8 +587,7 @@
   <!-- FOOTER -->
   <footer class="footer">
     <div class="footer-logo">
-      <div class="footer-logo-mark">T</div>
-      <strong style="font-family: 'Outfit', sans-serif; font-size: 18px;">TalenTico</strong>
+      <img src="./logo-completo.png" alt="TalenTico Logo" style="height: 46px; object-fit: contain; filter: brightness(0) invert(1);" />
     </div>
     <p>&copy; 2026 TalenTico. Todos los derechos reservados.</p>
   </footer>

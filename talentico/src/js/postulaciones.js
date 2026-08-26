@@ -81,10 +81,25 @@ function render() {
 async function loadApplications() {
   try {
     const data = await apiFetch('/posts');
-    applications = Array.isArray(data) ? data : [];
+    console.log('Datos recibidos de /posts:', data);
+    
+    // Manejar caso donde DummyJSON devuelve { posts: [...] } o json-server devuelve [...]
+    if (Array.isArray(data)) {
+      applications = data;
+    } else if (data && Array.isArray(data.posts)) {
+      applications = data.posts;
+    } else if (data && Array.isArray(data.data)) {
+      applications = data.data;
+    } else {
+      applications = [];
+    }
+    
     render();
   } catch (error) {
+    console.error('Error al cargar:', error);
     showFeedback(`Error al cargar postulaciones: ${error.message}`, 'error');
+    // Asegurar que render se llame incluso si falla para mostrar el mensaje de vacío
+    render();
   }
 }
 

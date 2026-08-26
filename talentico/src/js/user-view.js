@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   // Si no hay userId en la URL, se exige login
   if (!userId) {
-    window.location.replace('login.html');
+    window.location.replace('../index.html');
     return;
   }
 
@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   try {
     currentUser = await apiFetch(`/users/${userId}`);
   } catch (error) {
-    window.location.replace('login.html');
+    window.location.replace('../index.html');
     return;
   }
 
@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   if (logoutButton) {
     logoutButton.addEventListener('click', () => {
-      window.location.replace('login.html');
+      window.location.replace('../index.html');
     });
   }
 

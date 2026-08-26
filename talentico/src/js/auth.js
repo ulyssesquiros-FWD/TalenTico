@@ -16,8 +16,8 @@ function showMessage(message, type = '') {
 // Redirección condicionada por Rol
 function goToPortal(user) {
   if (user.role === 'admin' || user.username === 'google.demo') {
-    // Si es admin o demo, va al dashboard principal (index.html en la raíz)
-    window.location.href = `../index.html?userId=${encodeURIComponent(user.id)}`;
+    // Si es admin o demo, va al dashboard principal
+    window.location.href = `dashboard.html?userId=${encodeURIComponent(user.id)}`;
   } else {
     // Si es candidato/usuario estándar, va a la vista de portal de empleos
     window.location.href = `user-view.html?userId=${encodeURIComponent(user.id)}`;
@@ -68,7 +68,7 @@ if (loginForm) {
       const user = await loginWithCredentials(username, password);
 
       // Guardar token y usuario
-      localStorage.setItem('token', user.token || 'demo-token-active'); 
+      localStorage.setItem('token', user.token || 'demo-token-active');
       localStorage.setItem('user', JSON.stringify(user));
 
       showMessage('Login exitoso. Redirigiendo...', 'success');

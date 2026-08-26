@@ -12,7 +12,7 @@ function showMessage(message, type = '') {
 }
 
 function goToDashboard() {
-  window.location.replace('../index.html');
+  window.location.replace('./dashboard.html');
 }
 
 async function loginWithCredentials(username, password) {

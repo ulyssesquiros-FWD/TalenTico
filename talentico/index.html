@@ -1,27 +1,539 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
-
 <head>
   <meta charset="UTF-8" />
-
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="JobConnect - Sistema web de gestión de talento y reclutamiento" />
+  <title>JobConnect | Conectando Talento de Forma Inteligente</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Plus+Jakarta+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    /* =========================================================
+       LANDING PAGE STYLES — premium & visual
+       ========================================================= */
+    :root {
+      --brand-green: #0A4D22;
+      --brand-green-dark: #083b1b;
+      --brand-green-light: #e8f5e9;
+      --primary: #F59E0B;
+      --primary-dark: #D97706;
+      --primary-light: #FEF3C7;
+      --background: #f3f6f5;
+      --text-primary: #0D3019;
+      --text-secondary: #4A6B53;
+      --text-muted: #8BA393;
+      --surface: #ffffff;
+      --border: #d1dcd6;
+      --radius-lg: 20px;
+      --radius-md: 12px;
+      --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
 
-  <meta name="description" content="TalenTico - Sistema web de gestión de talento y reclutamiento" />
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-  <title>TalenTico | Gestión de Talento</title>
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: var(--background);
+      color: var(--text-primary);
+      overflow-x: hidden;
+      line-height: 1.5;
+    }
 
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    h1, h2, h3 {
+      font-family: 'Outfit', sans-serif;
+      font-weight: 800;
+      line-height: 1.1;
+    }
+
+    /* Header / Navbar */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 24px 6%;
+      position: absolute;
+      width: 100%;
+      top: 0;
+      z-index: 10;
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo-mark {
+      width: 42px;
+      height: 42px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 12px;
+      background: var(--brand-green);
+      color: var(--primary);
+      font-size: 22px;
+      font-weight: 850;
+      font-family: 'Outfit', sans-serif;
+      box-shadow: 0 4px 12px rgba(10, 77, 34, 0.15);
+    }
+
+    .logo-text {
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--brand-green);
+      letter-spacing: -0.5px;
+    }
+
+    .nav-btn {
+      padding: 10px 24px;
+      border-radius: var(--radius-md);
+      background: var(--brand-green);
+      color: #ffffff;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 14px;
+      transition: var(--transition);
+      box-shadow: 0 4px 14px rgba(10, 77, 34, 0.2);
+    }
+
+    .nav-btn:hover {
+      background: var(--brand-green-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 18px rgba(10, 77, 34, 0.3);
+    }
+
+    /* Hero Section */
+    .hero {
+      position: relative;
+      padding: 180px 6% 100px;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 60px;
+      background: radial-gradient(circle at 80% 20%, var(--brand-green-light) 0%, transparent 60%);
+    }
+
+    .hero-content {
+      max-width: 580px;
+      z-index: 2;
+    }
+
+    .hero-eyebrow {
+      display: inline-block;
+      padding: 8px 16px;
+      border-radius: 30px;
+      background: rgba(10, 77, 34, 0.08);
+      color: var(--brand-green);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+    }
+
+    .hero h1 {
+      font-size: clamp(38px, 5vw, 62px);
+      color: var(--brand-green);
+      margin-bottom: 24px;
+      letter-spacing: -1px;
+    }
+
+    .hero h1 span {
+      color: var(--primary);
+    }
+
+    .hero-desc {
+      font-size: 18px;
+      color: var(--text-secondary);
+      margin-bottom: 40px;
+      line-height: 1.7;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .cta-btn {
+      padding: 16px 36px;
+      border-radius: var(--radius-md);
+      background: var(--primary);
+      color: var(--brand-green);
+      text-decoration: none;
+      font-weight: 800;
+      font-size: 16px;
+      transition: var(--transition);
+      box-shadow: 0 8px 24px rgba(245, 158, 11, 0.25);
+    }
+
+    .cta-btn:hover {
+      background: var(--primary-dark);
+      color: #ffffff;
+      transform: translateY(-3px);
+      box-shadow: 0 12px 30px rgba(217, 119, 6, 0.35);
+    }
+
+    .secondary-btn {
+      padding: 16px 36px;
+      border-radius: var(--radius-md);
+      background: transparent;
+      color: var(--brand-green);
+      text-decoration: none;
+      font-weight: 750;
+      font-size: 16px;
+      border: 2px solid var(--brand-green);
+      transition: var(--transition);
+    }
+
+    .secondary-btn:hover {
+      background: rgba(10, 77, 34, 0.05);
+      transform: translateY(-2px);
+    }
+
+    /* Hero Visual Card Stack */
+    .hero-visual {
+      flex: 1;
+      position: relative;
+      max-width: 540px;
+      height: 480px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 2;
+    }
+
+    .visual-circle {
+      position: absolute;
+      width: 440px;
+      height: 440px;
+      border-radius: 50%;
+      background: var(--brand-green);
+      opacity: 0.05;
+      z-index: 1;
+      animation: pulse 6s ease-in-out infinite alternate;
+    }
+
+    .visual-card {
+      background: var(--surface);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border);
+      box-shadow: 0 20px 50px rgba(10, 77, 34, 0.08);
+      padding: 28px;
+      position: absolute;
+      transition: var(--transition);
+      z-index: 2;
+    }
+
+    .card-one {
+      width: 320px;
+      transform: rotate(-4deg) translate(-20px, -40px);
+    }
+
+    .card-two {
+      width: 280px;
+      transform: rotate(3deg) translate(80px, 40px);
+    }
+
+    .visual-card:hover {
+      transform: scale(1.05) rotate(0deg) translate(0);
+      z-index: 10;
+    }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+
+    .card-avatar {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: var(--primary-light);
+      color: var(--primary-dark);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 18px;
+    }
+
+    .card-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--brand-green);
+    }
+
+    .card-subtitle {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .card-badge {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 10px;
+      font-weight: 800;
+      background: var(--brand-green-light);
+      color: var(--brand-green);
+      text-transform: uppercase;
+    }
+
+    /* Features Grid */
+    .features-section {
+      padding: 100px 6%;
+      background: var(--surface);
+      text-align: center;
+      border-top: 1px solid var(--border);
+    }
+
+    .features-header {
+      max-width: 600px;
+      margin: 0 auto 60px;
+    }
+
+    .features-header h2 {
+      font-size: 36px;
+      color: var(--brand-green);
+      margin-bottom: 16px;
+    }
+
+    .features-header p {
+      color: var(--text-secondary);
+      font-size: 16px;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 32px;
+    }
+
+    .feature-card {
+      background: var(--background);
+      border-radius: var(--radius-lg);
+      padding: 40px 30px;
+      border: 1px solid var(--border);
+      text-align: left;
+      transition: var(--transition);
+    }
+
+    .feature-card:hover {
+      background: var(--surface);
+      transform: translateY(-5px);
+      box-shadow: 0 16px 36px rgba(10, 77, 34, 0.05);
+      border-color: var(--primary);
+    }
+
+    .feature-icon {
+      width: 56px;
+      height: 56px;
+      border-radius: 16px;
+      background: var(--brand-green-light);
+      color: var(--brand-green);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 26px;
+      margin-bottom: 24px;
+      transition: var(--transition);
+    }
+
+    .feature-card:hover .feature-icon {
+      background: var(--primary);
+      color: var(--brand-green);
+    }
+
+    .feature-card h3 {
+      font-size: 20px;
+      color: var(--brand-green);
+      margin-bottom: 12px;
+    }
+
+    .feature-card p {
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    /* Footer */
+    .footer {
+      padding: 40px 6%;
+      background: var(--brand-green);
+      color: #ffffff;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 20px;
+      border-top: 4px solid var(--primary);
+    }
+
+    .footer p {
+      font-size: 14px;
+      opacity: 0.8;
+    }
+
+    .footer-logo {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .footer-logo-mark {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      background: var(--primary);
+      color: var(--brand-green);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 16px;
+    }
+
+    /* Keyframes */
+    @keyframes pulse {
+      from { transform: scale(1); }
+      to { transform: scale(1.08); }
+    }
+
+    /* Responsive */
+    @media (max-width: 991px) {
+      .hero {
+        flex-direction: column;
+        padding-top: 140px;
+        text-align: center;
+      }
+      .hero-content {
+        margin: 0 auto;
+      }
+      .hero-actions {
+        justify-content: center;
+      }
+      .hero-visual {
+        margin-top: 40px;
+        width: 100%;
+        height: 400px;
+      }
+    }
+  </style>
 </head>
-
 <body>
-  <div id="app"></div>
 
-  <script type="module" src="/src/main.js"></script>
+  <!-- NAVBAR -->
+  <header class="navbar">
+    <div class="logo-container">
+      <div class="logo-mark">T</div>
+      <span class="logo-text">TalenTico</span>
+    </div>
+    <a href="./pages/login.html" class="nav-btn">Iniciar sesión</a>
+  </header>
 
-  <script src="https://unpkg.com/lucide@latest"></script>
-<script>
-  lucide.createIcons();
-</script>
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-content">
+      <span class="hero-eyebrow">TECNOLOGÍA DE SELECCIÓN</span>
+      <h1>Simplifica la gestión de <span>Talento</span></h1>
+      <p class="hero-desc">
+        JobConnect es el panel definitivo para reclutadores de empleabilidad. Controla candidatos, vacantes de empleo, entrevistas de selección y tareas semanales en una sola interfaz premium y fluida.
+      </p>
+      <div class="hero-actions">
+        <a href="./pages/login.html" class="cta-btn">Entrar al Portal</a>
+        <a href="#features" class="secondary-btn">Saber más</a>
+      </div>
+    </div>
+
+    <!-- Visual stacked cards -->
+    <div class="hero-visual">
+      <div class="visual-circle"></div>
+      
+      <div class="visual-card card-one">
+        <div class="card-header">
+          <div class="card-avatar">EM</div>
+          <div>
+            <div class="card-title">Emily Watson</div>
+            <div class="card-subtitle">Senior React Developer</div>
+          </div>
+        </div>
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+          <span class="card-badge">Candidato Activo</span>
+          <span style="font-size: 13px; font-weight: 700; color: var(--primary-dark);">📍 Remoto</span>
+        </div>
+      </div>
+
+      <div class="visual-card card-two">
+        <div class="card-header">
+          <div class="card-avatar" style="background: var(--brand-green-light); color: var(--brand-green);">UX</div>
+          <div>
+            <div class="card-title">Diseño UI/UX</div>
+            <div class="card-subtitle">Google CR Office</div>
+          </div>
+        </div>
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+          <span class="card-badge" style="background: var(--primary-light); color: var(--primary-dark);">Vacante Nueva</span>
+          <span style="font-size: 13px; font-weight: 700; color: var(--brand-green);">🔥 Activa</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section class="features-section" id="features">
+    <div class="features-header">
+      <h2>Diseñado para Reclutadores</h2>
+      <p>Una plataforma moderna y adaptativa que resuelve las necesidades clave de tu departamento de selección.</p>
+    </div>
+
+    <div class="features-grid">
+      
+      <article class="feature-card">
+        <div class="feature-icon">👤</div>
+        <h3>Gestión de Candidatos</h3>
+        <p>Registra y mantén actualizado el listado de candidatos de forma centralizada con estados y modalidades de trabajo.</p>
+      </article>
+
+      <article class="feature-card">
+        <div class="feature-icon">💼</div>
+        <h3>Vacantes Activas</h3>
+        <p>Publica y administra las oportunidades de empleo abiertas, definiendo empresa, locación y postulantes registrados.</p>
+      </article>
+
+      <article class="feature-card">
+        <div class="feature-icon">🏢</div>
+        <h3>Empresas Clientes</h3>
+        <p>Lleva el control de tus clientes corporativos y las contrataciones realizadas para cada cuenta.</p>
+      </article>
+
+      <article class="feature-card">
+        <div class="feature-icon">📝</div>
+        <h3>Postulaciones</h3>
+        <p>Vincula automáticamente a los candidatos con las vacantes activas y realiza seguimiento de sus candidaturas.</p>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-logo">
+      <div class="footer-logo-mark">T</div>
+      <strong style="font-family: 'Outfit', sans-serif; font-size: 18px;">TalenTico</strong>
+    </div>
+    <p>&copy; 2026 TalenTico. Todos los derechos reservados.</p>
+  </footer>
+
 </body>
-
 </html>

@@ -12,28 +12,50 @@ function showMessage(message, type = '') {
 }
 
 function goToDashboard() {
-  window.location.href = '../index.html';
+  window.location.replace('../index.html');
 }
 
 async function loginWithCredentials(username, password) {
-  const response = await fetch('https://dummyjson.com/auth/login', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ username, password, expiresInMins: 60 }),
-  });
-  const data = await response.json();
-  if (!response.ok) throw new Error(data.message || 'Usuario o contraseña incorrectos.');
+  try {
+    const response = await fetch('https://dummyjson.com/auth/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ username, password, expiresInMins: 60 }),
+    });
+    const data = await response.json();
+    if (response.ok) {
+      const token = data.accessToken || data.token;
+      if (token) {
+        localStorage.setItem('token', token);
+        localStorage.setItem('user', JSON.stringify({
+          name: [data.firstName, data.lastName].filter(Boolean).join(' ') || data.username || username,
+          username: data.username || username,
+          email: data.email || '',
+          provider: 'credentials',
+        }));
+        return;
+      }
+    }
+  } catch (_) {}
 
-  const token = data.accessToken || data.token;
-  if (!token) throw new Error('No se recibió un token válido del servidor.');
+  try {
+    const res = await fetch(`http://localhost:3000/users?username=${encodeURIComponent(username)}`);
+    const users = await res.json();
+    if (users.length && users[0].password === password) {
+      const u = users[0];
+      const token = btoa(JSON.stringify({ id: u.id, username: u.username }));
+      localStorage.setItem('token', token);
+      localStorage.setItem('user', JSON.stringify({
+        name: [u.firstName, u.lastName].filter(Boolean).join(' ') || u.username,
+        username: u.username,
+        email: u.email || '',
+        provider: 'credentials',
+      }));
+      return;
+    }
+  } catch (_) {}
 
-  localStorage.setItem('token', token);
-  localStorage.setItem('user', JSON.stringify({
-    name: [data.firstName, data.lastName].filter(Boolean).join(' ') || data.username || username,
-    username: data.username || username,
-    email: data.email || '',
-    provider: 'credentials',
-  }));
+  throw new Error('Usuario o contraseña incorrectos.');
 }
 
 if (loginForm) {

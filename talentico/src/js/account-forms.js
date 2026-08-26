@@ -63,5 +63,74 @@ accountForm.addEventListener('submit', async (event) => {
     return;
   }
 
-  showMessage('Formulario validado. El envío de correo se habilitará al conectar la API de recuperación.', 'success');
+  const emailStep = document.getElementById('email-step');
+  const userInfo = document.getElementById('user-info');
+  const passwordStep = document.getElementById('password-step');
+  const confirmStep = document.getElementById('confirm-step');
+  const submitBtn = document.getElementById('recovery-submit');
+
+  if (emailStep && emailStep.style.display !== 'none') {
+    const identifier = accountForm.elements.email.value.trim();
+    if (!identifier) {
+      showMessage('Ingresa tu correo electrónico o usuario.', 'error');
+      return;
+    }
+    try {
+      let users = await apiFetch(`/users?email=${encodeURIComponent(identifier)}`);
+      if (!users.length) {
+        users = await apiFetch(`/users?username=${encodeURIComponent(identifier)}`);
+      }
+      if (!users.length) {
+        showMessage('No se encontró ninguna cuenta con ese correo o usuario.', 'error');
+        return;
+      }
+      const user = users[0];
+      document.getElementById('found-username').textContent = user.username || user.email;
+      document.getElementById('found-name').textContent = user.firstName ? `${user.firstName} ${user.lastName || ''}` : user.email;
+      emailStep.style.display = 'none';
+      userInfo.style.display = 'block';
+      passwordStep.style.display = 'block';
+      confirmStep.style.display = 'block';
+      submitBtn.textContent = 'Cambiar contraseña';
+      showMessage('', '');
+    } catch (error) {
+      showMessage(error.message || 'No fue posible buscar la cuenta.', 'error');
+    }
+    return;
+  }
+
+  const newPassword = accountForm.elements.newPassword.value;
+  const confirmNew = accountForm.elements.confirmNewPassword.value;
+  if (!newPassword || newPassword.length < 8) {
+    showMessage('La contraseña debe tener al menos 8 caracteres.', 'error');
+    return;
+  }
+  if (newPassword !== confirmNew) {
+    showMessage('Las contraseñas no coinciden.', 'error');
+    return;
+  }
+  try {
+    const identifier = accountForm.elements.email.value.trim();
+    let users = await apiFetch(`/users?email=${encodeURIComponent(identifier)}`);
+    if (!users.length) {
+      users = await apiFetch(`/users?username=${encodeURIComponent(identifier)}`);
+    }
+    if (!users.length) {
+      showMessage('No se encontró la cuenta.', 'error');
+      return;
+    }
+    await apiFetch(`/users/${users[0].id}`, {
+      method: 'PATCH',
+      body: JSON.stringify({ password: newPassword }),
+    });
+    showMessage('Contraseña actualizada correctamente. Ya puedes iniciar sesión.', 'success');
+    accountForm.reset();
+    emailStep.style.display = 'block';
+    userInfo.style.display = 'none';
+    passwordStep.style.display = 'none';
+    confirmStep.style.display = 'none';
+    submitBtn.textContent = 'Enviar instrucciones';
+  } catch (error) {
+    showMessage(error.message || 'No fue posible cambiar la contraseña.', 'error');
+  }
 });

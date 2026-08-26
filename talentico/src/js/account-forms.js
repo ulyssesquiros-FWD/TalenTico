@@ -1,4 +1,4 @@
-import { apiFetch } from '../../js/api.js';
+import { apiFetch } from './api.js';
 
 const accountForm = document.querySelector('.account-form');
 

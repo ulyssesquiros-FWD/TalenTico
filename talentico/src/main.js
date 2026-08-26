@@ -10,7 +10,7 @@ const token = localStorage.getItem('token')
 // Si no existe una sesión, enviar al login.
 // El dashboard nunca se debe mostrar sin autenticación.
 if (!token) {
-  window.location.href = '/pages/login.html'
+  window.location.replace('./pages/login.html');
 } else {
   // ============================================================
   // DASHBOARD
@@ -23,28 +23,27 @@ if (!token) {
       <div class="app-shell">
 
         <!-- SIDEBAR -->
-        <aside class="sidebar">
+        <aside class="sidebar" id="sidebar">
 
           <div class="brand">
-            <div class="brand-icon">T</div>
-
+            <span class="brand-icon" aria-hidden="true">T</span>
             <div class="brand-info">
-              <span class="brand-name">TalenTico</span>
+              <span class="brand-name">TALENTICO</span>
               <span class="brand-subtitle">Gestión de Talento</span>
             </div>
           </div>
 
           <nav class="sidebar-nav">
 
-            <p class="nav-title">MENÚ PRINCIPAL</p>
+            <p class="nav-title">Menú</p>
 
             <button
               class="nav-item active"
               data-section="dashboard"
               type="button"
             >
-              <span class="nav-icon">⌂</span>
-              <span>Dashboard</span>
+              <span class="nav-icon">🏠</span>
+              <span>Inicio</span>
             </button>
 
             <button
@@ -52,7 +51,7 @@ if (!token) {
               data-section="candidatos"
               type="button"
             >
-              <span class="nav-icon">♙</span>
+              <span class="nav-icon">👤</span>
               <span>Candidatos</span>
             </button>
 
@@ -61,7 +60,7 @@ if (!token) {
               data-section="vacantes"
               type="button"
             >
-              <span class="nav-icon">▣</span>
+              <span class="nav-icon">💼</span>
               <span>Vacantes</span>
             </button>
 
@@ -70,7 +69,7 @@ if (!token) {
               data-section="empresas"
               type="button"
             >
-              <span class="nav-icon">▤</span>
+              <span class="nav-icon">🏢</span>
               <span>Empresas</span>
             </button>
 
@@ -79,7 +78,7 @@ if (!token) {
               data-section="postulaciones"
               type="button"
             >
-              <span class="nav-icon">□</span>
+              <span class="nav-icon">📝</span>
               <span>Postulaciones</span>
             </button>
 
@@ -88,7 +87,7 @@ if (!token) {
               data-section="entrevistas"
               type="button"
             >
-              <span class="nav-icon">◷</span>
+              <span class="nav-icon">💬</span>
               <span>Entrevistas</span>
             </button>
 
@@ -97,7 +96,7 @@ if (!token) {
               data-section="tareas"
               type="button"
             >
-              <span class="nav-icon">✓</span>
+              <span class="nav-icon">📋</span>
               <span>Tareas</span>
             </button>
 
@@ -109,7 +108,7 @@ if (!token) {
               class="nav-item logout"
               type="button"
             >
-              <span class="nav-icon">↪</span>
+              <span class="nav-icon">🚪</span>
               <span>Cerrar sesión</span>
             </button>
 

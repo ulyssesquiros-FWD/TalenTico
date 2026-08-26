@@ -5,22 +5,27 @@
 
 :root {
   /* ── Brand ── */
-  --primary: #f9a620;
-  --primary-dark: #e8951a;
-  --primary-light: #fdf0d9;
+  --primary: #F59E0B;        /* Oro/Naranja (Botones y acentos destacados) */
+  --primary-dark: #D97706;   /* Oro/Naranja oscuro para hover */
+  --primary-light: #FEF3C7;  /* Oro/Naranja muy claro para fondos suaves */
+
+  /* ── Brand Green (Verde de marca de las capturas) ── */
+  --brand-green: #0A4D22;
+  --brand-green-dark: #083b1b;
+  --brand-green-light: #e8f5e9;
 
   /* ── Text ── */
-  --text-primary: #1d3b2b;
-  --text-secondary: #566b5e;
-  --text-muted: #8a9a8f;
+  --text-primary: #0D3019;   /* Verde Oscuro Intenso para texto principal */
+  --text-secondary: #4A6B53; /* Verde Grisáceo para texto secundario */
+  --text-muted: #8BA393;     /* Verde muy suave para texto silenciado o subtítulos */
 
   /* ── Surfaces ── */
-  --background: #f5f7f6;
+  --background: #f3f6f5;     /* Gris verdoso muy claro y suave para el fondo */
   --surface: #ffffff;
   --surface-soft: #f8fafc;
 
   /* ── Borders ── */
-  --border: #cfd7d4;
+  --border: #d1dcd6;
 
   /* ── Semantic ── */
   --success: #2d7a4f;
@@ -33,7 +38,7 @@
   --info-light: #dbeafe;
 
   /* ── Auth Visual Panel ── */
-  --visual-bg: #e0f2f7;
+  --visual-bg: #e8f5e9;
 
   /* ── Layout ── */
   --sidebar-width: 260px;

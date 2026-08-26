@@ -7,21 +7,18 @@
   <title>TALENTICO CR | Portal de Empleos</title>
   <link rel="stylesheet" href="../src/style.css" />
   <style>
-    /* Estilos propios de la vista pública utilizando tokens/variables de style.css */
     .portal-body {
       min-height: 100vh;
       background: var(--background);
       color: var(--text-primary);
     }
 
-    /* Navbar Superior Pública */
     .portal-nav {
       display: flex;
       align-items: center;
       justify-content: space-between;
       padding: 16px 34px;
       background: var(--brand-green);
-      border-bottom: 1px solid var(--brand-green-dark, #0b2f17);
       position: sticky;
       top: 0;
       z-index: 100;
@@ -35,7 +32,6 @@
       text-decoration: none;
     }
 
-    /* Hero Section */
     .portal-hero {
       text-align: center;
       padding: 50px 20px 30px;
@@ -49,16 +45,8 @@
       font-weight: 800;
       color: var(--text-primary);
       margin-bottom: 12px;
-      letter-spacing: -0.03em;
     }
 
-    .portal-hero p {
-      font-size: 15px;
-      color: var(--text-secondary);
-      line-height: 1.6;
-    }
-
-    /* Grid de Vacantes */
     .vacantes-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
@@ -68,7 +56,6 @@
       padding: 20px 34px 50px;
     }
 
-    /* Tarjeta de Vacante Interactiva con animación */
     .vacante-card {
       background: var(--surface);
       border: 1px solid var(--border);
@@ -78,32 +65,15 @@
       flex-direction: column;
       justify-content: space-between;
       box-shadow: var(--shadow-sm);
-      transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+      transition: transform var(--transition), box-shadow var(--transition);
       position: relative;
       overflow: hidden;
-      animation: fadeInUp 0.5s ease-out forwards;
-    }
-
-    .vacante-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 4px;
-      background: var(--primary);
-      opacity: 0;
-      transition: opacity var(--transition);
     }
 
     .vacante-card:hover {
       transform: translateY(-4px);
       border-color: var(--primary);
       box-shadow: var(--shadow-md);
-    }
-
-    .vacante-card:hover::before {
-      opacity: 1;
     }
 
     .badge-tag {
@@ -126,26 +96,14 @@
       gap: 8px;
     }
 
-    /* Keyframe Animations */
     @keyframes fadeIn {
       from { opacity: 0; }
       to { opacity: 1; }
-    }
-
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(15px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    @media (max-width: 600px) {
-      .portal-nav { padding: 14px 16px; }
-      .vacantes-grid { padding: 16px; }
     }
   </style>
 </head>
 <body class="portal-body">
 
-  <!-- Navbar Superior Pública -->
   <header class="portal-nav">
     <a href="#" class="portal-brand">
       <div class="brand-icon">T</div>
@@ -159,26 +117,23 @@
     </a>
   </header>
 
-  <!-- Hero Section -->
   <section class="portal-hero">
     <span class="page-eyebrow">OPORTUNIDADES LABORALES</span>
     <h1>Encuentra tu próximo empleo</h1>
     <p>Explora nuestras vacantes disponibles y envía tu postulación de forma rápida y sencilla.</p>
   </section>
 
-  <!-- Mensaje de Feedback -->
   <div style="max-width: 1300px; margin: 0 auto; padding: 0 34px;">
     <div id="feedback-message" class="hidden" style="padding: 14px 18px; border-radius: var(--radius-sm); font-size: 13px; font-weight: 700; margin-bottom: 16px;"></div>
   </div>
 
-  <!-- Contenedor de Vacantes -->
   <main class="vacantes-grid" id="vacantes-container">
     <div style="grid-column: 1/-1; text-align: center; color: var(--text-muted); padding: 40px;">
       Cargando vacantes disponibles...
     </div>
   </main>
 
-  <!-- Ventana Modal de Postulación (Reutiliza clases de style.css) -->
+  <!-- Modal de Postulación Pública -->
   <div id="apply-modal" class="modal-overlay hidden">
     <div class="modal-container">
       
@@ -190,48 +145,40 @@
         <button type="button" class="btn-close" id="btn-close-modal" aria-label="Cerrar modal">✕</button>
       </div>
 
-      <!-- Formulario con EXACTAMENTE los mismos campos que la vista de postulantes -->
       <form id="public-postulacion-form">
-        
+        <input type="hidden" id="post-title" />
+
         <div class="form-group">
-          <label for="post-title">Puesto / Título de la Postulación</label>
-          <input 
-            type="text" 
-            id="post-title" 
-            placeholder="Ej. Postulación a Desarrollador Frontend" 
-            required 
-          />
+          <label for="post-candidato">Nombre Completo</label>
+          <input type="text" id="post-candidato" placeholder="Ej. Alex Cubero Duarte" required />
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+          <div class="form-group">
+            <label for="post-email">Correo Electrónico</label>
+            <input type="email" id="post-email" placeholder="candidato@correo.com" required />
+          </div>
+
+          <div class="form-group">
+            <label for="post-telefono">Teléfono / WhatsApp</label>
+            <input type="tel" id="post-telefono" placeholder="Ej. 8888-8888" required />
+          </div>
         </div>
 
         <div class="form-group">
-          <label for="post-userId">ID de Candidato (User ID)</label>
-          <input 
-            type="number" 
-            id="post-userId" 
-            placeholder="Ej. 5" 
-            required 
-          />
+          <label for="post-linkCv">Enlace a CV / Portafolio / LinkedIn</label>
+          <input type="url" id="post-linkCv" placeholder="https://linkedin.com/in/usuario" required />
         </div>
 
         <div class="form-group">
-          <label for="post-body">Carta de Presentación / Resumen</label>
-          <textarea 
-            id="post-body" 
-            rows="4" 
-            placeholder="Escribe un breve resumen de tu experiencia laboral o motivación..." 
-            required 
-          ></textarea>
+          <label for="post-body">Carta de Presentación / Resumen Profesional</label>
+          <textarea id="post-body" rows="3" placeholder="Resumen de experiencia relevante..." required></textarea>
         </div>
 
         <div class="modal-actions">
-          <button type="button" id="btn-cancel-modal" class="secondary-button">
-            Cancelar
-          </button>
-          <button type="submit" class="primary-button">
-            Confirmar y Enviar
-          </button>
+          <button type="button" id="btn-cancel-modal" class="secondary-button">Cancelar</button>
+          <button type="submit" class="primary-button">Enviar Postulación</button>
         </div>
-
       </form>
 
     </div>

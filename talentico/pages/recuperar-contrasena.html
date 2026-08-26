@@ -17,15 +17,27 @@
         <div class="login-heading">
           <p class="eyebrow">Recupera tu acceso</p>
           <h1 id="recovery-title">¿Olvidaste tu contraseña?</h1>
-          <p>Ingresa tu correo y te enviaremos las instrucciones para restablecerla.</p>
+          <p>Ingresa tu correo electrónico o nombre de usuario para restablecerla.</p>
         </div>
         <form class="account-form" data-future-api="recovery" novalidate>
-          <div class="form-group">
-            <label for="recovery-email">Correo electrónico</label>
-            <input id="recovery-email" name="email" type="email" autocomplete="email" placeholder="correo@ejemplo.com" required />
+          <div class="form-group" id="email-step">
+            <label for="recovery-email">Correo electrónico o usuario</label>
+            <input id="recovery-email" name="email" type="text" autocomplete="username" placeholder="correo@ejemplo.com o tu usuario" required />
+          </div>
+          <div class="form-group" id="user-info" style="display:none;">
+            <p class="user-found"><strong>Usuario encontrado:</strong> <span id="found-username"></span></p>
+            <p class="user-name" id="found-name"></p>
+          </div>
+          <div class="form-group" id="password-step" style="display:none;">
+            <label for="new-password">Nueva contraseña</label>
+            <input id="new-password" name="newPassword" type="password" minlength="8" placeholder="Mínimo 8 caracteres" />
+          </div>
+          <div class="form-group" id="confirm-step" style="display:none;">
+            <label for="confirm-new-password">Confirmar contraseña</label>
+            <input id="confirm-new-password" name="confirmNewPassword" type="password" minlength="8" placeholder="Repite la contraseña" />
           </div>
           <p class="message" role="alert" aria-live="polite"></p>
-          <button type="submit">Enviar instrucciones</button>
+          <button type="submit" id="recovery-submit">Enviar instrucciones</button>
         </form>
         <p class="auth-footer"><a href="login.html">Volver al inicio de sesión</a></p>
       </section>

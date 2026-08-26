@@ -5,6 +5,7 @@
       "name": "Usuario de Google",
       "email": "[EMAIL_ADDRESS]",
       "token": "google-demo-token-talentico",
+<<<<<<< HEAD
       "id": "bPgWS5XCHAQ"
     },
     {
@@ -16,6 +17,10 @@
       "gender": "other",
       "image": "https://dummyjson.com/icon/biancarobleshurtado27@gmail.com/128",
       "id": "LSlcGfBwC58"
+=======
+      "id": "bPgWS5XCHAQ",
+      "password": "12345678"
+>>>>>>> ea67448ab95a06fb2f8a20c41c86aaa7659d4f24
     }
   ],
   "candidatos": [

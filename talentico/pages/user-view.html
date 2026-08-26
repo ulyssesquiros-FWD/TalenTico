@@ -37,7 +37,6 @@
       padding: 50px 20px 30px;
       max-width: 800px;
       margin: 0 auto;
-      animation: fadeIn 0.6s ease-out;
     }
 
     .portal-hero h1 {
@@ -45,6 +44,18 @@
       font-weight: 800;
       color: var(--text-primary);
       margin-bottom: 12px;
+    }
+
+    .user-welcome-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255, 255, 255, 0.18);
+      color: #ffffff;
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 600;
     }
 
     .vacantes-grid {
@@ -65,40 +76,6 @@
       flex-direction: column;
       justify-content: space-between;
       box-shadow: var(--shadow-sm);
-      transition: transform var(--transition), box-shadow var(--transition);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .vacante-card:hover {
-      transform: translateY(-4px);
-      border-color: var(--primary);
-      box-shadow: var(--shadow-md);
-    }
-
-    .badge-tag {
-      display: inline-flex;
-      align-items: center;
-      padding: 4px 10px;
-      border-radius: 999px;
-      font-size: 11px;
-      font-weight: 700;
-      background: var(--primary-light, #fff3e0);
-      color: var(--brand-green);
-    }
-
-    .btn-apply-card {
-      width: 100%;
-      margin-top: 16px;
-      justify-content: center;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
     }
   </style>
 </head>
@@ -112,20 +89,22 @@
         <span class="brand-subtitle">Portal de Empleos</span>
       </div>
     </a>
-    <a href="../index.html" class="secondary-button" style="text-decoration: none; color: #ffffff; background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.2);">
-      Acceso Administrativo
-    </a>
+
+    <div style="display: flex; align-items: center; gap: 14px;">
+      <div class="user-welcome-badge">
+        <span id="user-display-name">Verificando sesión...</span>
+      </div>
+      <button id="btn-logout" class="secondary-button" style="color: #ffffff; background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.2); font-size: 12px; padding: 6px 12px;">
+        Cerrar Sesión
+      </button>
+    </div>
   </header>
 
   <section class="portal-hero">
     <span class="page-eyebrow">OPORTUNIDADES LABORALES</span>
-    <h1>Encuentra tu próximo empleo</h1>
+    <h1 id="hero-welcome-title">Cargando datos...</h1>
     <p>Explora nuestras vacantes disponibles y envía tu postulación de forma rápida y sencilla.</p>
   </section>
-
-  <div style="max-width: 1300px; margin: 0 auto; padding: 0 34px;">
-    <div id="feedback-message" class="hidden" style="padding: 14px 18px; border-radius: var(--radius-sm); font-size: 13px; font-weight: 700; margin-bottom: 16px;"></div>
-  </div>
 
   <main class="vacantes-grid" id="vacantes-container">
     <div style="grid-column: 1/-1; text-align: center; color: var(--text-muted); padding: 40px;">
@@ -133,54 +112,50 @@
     </div>
   </main>
 
-  <!-- Modal de Postulación Pública -->
-  <div id="apply-modal" class="modal-overlay hidden">
-    <div class="modal-container">
+  <!-- Modal / Panel Animado de Postulación -->
+  <div id="modal-postulacion" class="modal-overlay" style="display: none !important;">
+    <div class="modal-content" style="max-width: 480px; width: 90%; max-height: 85vh; overflow-y: auto; background: var(--surface); padding: 18px 22px; border-radius: var(--radius-lg); border: 1px solid var(--border); box-sizing: border-box;">
+      <h2 style="margin-top: 0; margin-bottom: 6px; font-size: 1.25rem;">Postularse a la vacante</h2>
+      <p id="modal-vacante-titulo" style="font-weight: bold; color: var(--brand-green); margin-bottom: 12px; font-size: 0.95rem;"></p>
       
-      <div class="modal-header">
-        <div>
-          <span class="badge-tag" style="margin-bottom: 6px;">Formulario de Candidato</span>
-          <h2 id="modal-vacante-title">Enviar Postulación</h2>
-        </div>
-        <button type="button" class="btn-close" id="btn-close-modal" aria-label="Cerrar modal">✕</button>
-      </div>
-
-      <form id="public-postulacion-form">
-        <input type="hidden" id="post-title" />
-
-        <div class="form-group">
-          <label for="post-candidato">Nombre Completo</label>
-          <input type="text" id="post-candidato" placeholder="Ej. Alex Cubero Duarte" required />
+      <form id="form-postulacion" style="display: flex; flex-direction: column; gap: 10px;">
+        <input type="hidden" id="postula-vacante-id">
+        
+        <div class="form-group" style="margin-bottom: 0;">
+          <label for="post-title" style="font-size: 0.85rem;">Puesto / Título de la Postulación</label>
+          <input type="text" id="post-title" required style="padding: 6px 10px;" />
         </div>
 
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
-          <div class="form-group">
-            <label for="post-email">Correo Electrónico</label>
-            <input type="email" id="post-email" placeholder="candidato@correo.com" required />
-          </div>
-
-          <div class="form-group">
-            <label for="post-telefono">Teléfono / WhatsApp</label>
-            <input type="tel" id="post-telefono" placeholder="Ej. 8888-8888" required />
-          </div>
+        <div class="form-group" style="margin-bottom: 0;">
+          <label for="post-candidato" style="font-size: 0.85rem;">Nombre Completo del Candidato</label>
+          <input type="text" id="post-candidato" required style="padding: 6px 10px;" />
         </div>
 
-        <div class="form-group">
-          <label for="post-linkCv">Enlace a CV / Portafolio / LinkedIn</label>
-          <input type="url" id="post-linkCv" placeholder="https://linkedin.com/in/usuario" required />
+        <div class="form-group" style="margin-bottom: 0;">
+          <label for="post-email" style="font-size: 0.85rem;">Correo Electrónico</label>
+          <input type="email" id="post-email" required style="padding: 6px 10px;" />
         </div>
 
-        <div class="form-group">
-          <label for="post-body">Carta de Presentación / Resumen Profesional</label>
-          <textarea id="post-body" rows="3" placeholder="Resumen de experiencia relevante..." required></textarea>
+        <div class="form-group" style="margin-bottom: 0;">
+          <label for="post-telefono" style="font-size: 0.85rem;">Teléfono / WhatsApp</label>
+          <input type="tel" id="post-telefono" placeholder="Ej. 8888-8888" required style="padding: 6px 10px;" />
         </div>
 
-        <div class="modal-actions">
-          <button type="button" id="btn-cancel-modal" class="secondary-button">Cancelar</button>
-          <button type="submit" class="primary-button">Enviar Postulación</button>
+        <div class="form-group" style="margin-bottom: 0;">
+          <label for="post-linkCv" style="font-size: 0.85rem;">Enlace a CV / Portafolio / LinkedIn</label>
+          <input type="url" id="post-linkCv" placeholder="https://linkedin.com/in/usuario" required style="padding: 6px 10px;" />
+        </div>
+
+        <div class="form-group" style="margin-bottom: 0;">
+          <label for="post-body" style="font-size: 0.85rem;">Carta de Presentación / Experiencia Clave</label>
+          <textarea id="post-body" rows="2" placeholder="Resumen de experiencia, fortalezas y expectativas..." required style="padding: 6px 10px;"></textarea>
+        </div>
+
+        <div class="modal-actions" style="margin-top: 10px; display: flex; gap: 10px; justify-content: flex-end; position: sticky; bottom: 0; background: var(--surface); padding-top: 8px;">
+          <button type="button" id="btn-cancelar-modal" class="secondary-button" style="padding: 6px 14px;">Cancelar</button>
+          <button type="submit" id="btn-confirmar-modal" class="primary-button" style="padding: 6px 14px;">Enviar Postulación</button>
         </div>
       </form>
-
     </div>
   </div>
 

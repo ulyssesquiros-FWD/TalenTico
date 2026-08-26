@@ -1,28 +1,60 @@
 {
   "users": [
     {
-      "provider": "google",
-      "name": "Usuario de Google",
-      "email": "[EMAIL_ADDRESS]",
-      "token": "google-demo-token-talentico",
       "id": "bPgWS5XCHAQ",
-      "password": "12345678"
+      "firstName": "Usuario",
+      "lastName": "Demo",
+      "name": "Usuario Demo",
+      "email": "demo@talentico.cr",
+      "username": "google.demo",
+      "password": "123",
+      "provider": "google",
+      "role": "admin",
+      "gender": "other",
+      "image": "https://dummyjson.com/icon/google.demo/128"
+    },
+    {
+      "id": "usr_candidato_01",
+      "firstName": "Alex",
+      "lastName": "Duarte2",
+      "name": "Alex Duarte",
+      "email": "alexcubero@test.com",
+      "username": "alex.candidate",
+      "password": "123",
+      "provider": "credentials",
+      "role": "candidate",
+      "gender": "male",
+      "image": "https://dummyjson.com/icon/alex.candidate/128"
+    },
+    {
+      "id": "c9ce",
+      "firstName": "alex",
+      "lastName": "d",
+      "name": "alex d",
+      "email": "alexduarte@test.com",
+      "username": "alex.candidate2",
+      "password": "123123123",
+      "provider": "credentials",
+      "role": "candidate",
+      "gender": "other",
+      "image": "https://dummyjson.com/icon/alex.candidate2/128"
     }
   ],
   "candidatos": [
     {
+      "id": "qux0Ir2oyjQ",
       "nombre": "Alex",
-      "apellido": "j",
+      "apellido": "Duarte",
       "email": "alexcubero@test.com",
       "puesto": "Frontend Developer",
       "experiencia": "2 años",
-      "modalidad": "ONSITE",
-      "id": "qux0Ir2oyjQ"
+      "modalidad": "ONSITE"
     }
   ],
   "vacantes": [
     {
-      "titulo": "Senior Fr",
+      "id": "bfCXhLc1iE8",
+      "titulo": "Senior Frontend Developer",
       "empresa": "Oscorp Inc",
       "ubicacion": "San José",
       "modalidad": "Remote",
@@ -31,19 +63,28 @@
       "postulantes": 0,
       "icono": "💼",
       "colorBg": "#e0f2fe",
-      "colorText": "#0284c7",
-      "id": "bfCXhLc1iE8"
+      "colorText": "#0284c7"
     }
   ],
   "todos": [],
   "comments": [],
-  "posts": [],
+  "posts": [
+    {
+      "id": "468d",
+      "title": "Postulación a Senior Fr",
+      "candidatoNombre": "Alex",
+      "candidatoEmail": "acubero@gmail.com",
+      "candidatoTelefono": "6064-2533",
+      "linkCv": "https://linkedin.com",
+      "body": "awd"
+    }
+  ],
   "carts": [
     {
+      "id": "Nxuw2v1144c",
       "userId": 2,
       "totalProducts": 2,
-      "total": 200,
-      "id": "Nxuw2v1144c"
+      "total": 200
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

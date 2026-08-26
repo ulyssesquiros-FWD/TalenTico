@@ -16,7 +16,7 @@
     {
       "id": "usr_candidato_01",
       "firstName": "Alex",
-      "lastName": "Duarte",
+      "lastName": "Duarte2",
       "name": "Alex Duarte",
       "email": "alexcubero@test.com",
       "username": "alex.candidate",
@@ -68,7 +68,17 @@
   ],
   "todos": [],
   "comments": [],
-  "posts": [],
+  "posts": [
+    {
+      "id": "468d",
+      "title": "Postulación a Senior Fr",
+      "candidatoNombre": "Alex",
+      "candidatoEmail": "acubero@gmail.com",
+      "candidatoTelefono": "6064-2533",
+      "linkCv": "https://linkedin.com",
+      "body": "awd"
+    }
+  ],
   "carts": [
     {
       "id": "Nxuw2v1144c",

@@ -21,7 +21,7 @@
   "candidatos": [
     {
       "nombre": "Alex",
-      "apellido": "Duarte",
+      "apellido": "j",
       "email": "alexcubero@test.com",
       "puesto": "Frontend Developer",
       "experiencia": "2 años",
@@ -31,7 +31,7 @@
   ],
   "vacantes": [
     {
-      "titulo": "Senior Front End Dev",
+      "titulo": "Senior Fr",
       "empresa": "Oscorp Inc",
       "ubicacion": "San José",
       "modalidad": "Remote",
@@ -42,6 +42,17 @@
       "colorBg": "#e0f2fe",
       "colorText": "#0284c7",
       "id": "bfCXhLc1iE8"
+    }
+  ],
+  "todos": [],
+  "comments": [],
+  "posts": [],
+  "carts": [
+    {
+      "userId": 2,
+      "totalProducts": 2,
+      "total": 200,
+      "id": "Nxuw2v1144c"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

@@ -16,7 +16,7 @@
       "email": "alexcubero@test.com",
       "puesto": "Frontend Developer",
       "experiencia": "2 años",
-      "modalidad": "ONSITE",
+      "modalidad": "HYBRID",
       "id": "qux0Ir2oyjQ"
     }
   ],
@@ -35,7 +35,14 @@
       "id": "bfCXhLc1iE8"
     }
   ],
-  "todos": [],
+  "todos": [
+    {
+      "id": "b5d4",
+      "todo": "bun",
+      "completed": true,
+      "userId": 1
+    }
+  ],
   "comments": [],
   "posts": [],
   "carts": [
@@ -44,6 +51,12 @@
       "totalProducts": 2,
       "total": 200,
       "id": "Nxuw2v1144c"
+    },
+    {
+      "id": "471b",
+      "userId": 13,
+      "totalProducts": 50,
+      "total": 5000
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

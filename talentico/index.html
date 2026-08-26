@@ -44,6 +44,287 @@
       line-height: 1.5;
     }
 
+    /* Animated background blobs */
+    .animated-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+    .bg-blob {
+      position: absolute;
+      width: clamp(300px, 45vw, 600px);
+      height: clamp(300px, 45vw, 600px);
+      border-radius: 50%;
+      filter: blur(130px);
+      opacity: 0.12;
+      animation: drift 25s infinite alternate ease-in-out;
+    }
+    .blob-1 {
+      background: var(--primary);
+      top: -10%;
+      right: -10%;
+      animation-duration: 22s;
+    }
+    .blob-2 {
+      background: var(--brand-green);
+      bottom: -15%;
+      left: -10%;
+      animation-duration: 30s;
+    }
+    .blob-3 {
+      background: #38bdf8;
+      top: 40%;
+      left: 30%;
+      animation-duration: 18s;
+    }
+    @keyframes drift {
+      0% { transform: translate(0, 0) scale(1); }
+      50% { transform: translate(80px, 60px) scale(1.15); }
+      100% { transform: translate(-40px, 120px) scale(0.95); }
+    }
+
+    h1, h2, h3 {
+      font-family: 'Outfit', sans-serif;
+      font-weight: 800;
+      line-height: 1.1;
+    }
+
+    /* Header / Navbar */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 24px 6%;
+      position: absolute;
+      width: 100%;
+      top: 0;
+      z-index: 10;
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo-mark {
+      width: 42px;
+      height: 42px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 12px;
+      background: var(--brand-green);
+      color: var(--primary);
+      font-size: 22px;
+      font-weight: 850;
+      font-family: 'Outfit', sans-serif;
+      box-shadow: 0 4px 12px rgba(10, 77, 34, 0.15);
+    }
+
+    .logo-text {
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--brand-green);
+      letter-spacing: -0.5px;
+    }
+
+    .nav-btn {
+      padding: 10px 24px;
+      border-radius: var(--radius-md);
+      background: var(--brand-green);
+      color: #ffffff;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 14px;
+      transition: var(--transition);
+      box-shadow: 0 4px 14px rgba(10, 77, 34, 0.2);
+    }
+
+    .nav-btn:hover {
+      background: var(--brand-green-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 18px rgba(10, 77, 34, 0.3);
+    }
+
+    /* Hero Section */
+    .hero {
+      position: relative;
+      padding: 140px 6% 80px;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 60px;
+      background: radial-gradient(circle at 80% 20%, var(--brand-green-light) 0%, transparent 60%);
+    }
+
+    .hero-content {
+      max-width: 580px;
+      z-index: 2;
+    }
+
+    .hero-eyebrow {
+      display: inline-block;
+      padding: 16px 32px;
+      border-radius: 30px;
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.15) 0%, rgba(10, 77, 34, 0.12) 100%);
+      color: var(--brand-green);
+      border: 2px solid var(--primary);
+      font-size: 22px;
+      font-weight: 850;
+      letter-spacing: 0.5px;
+      margin-bottom: 28px;
+      box-shadow: 0 4px 15px rgba(245, 158, 11, 0.15);
+      animation: floatSlogan 3s ease-in-out infinite;
+    }
+
+    @keyframes floatSlogan {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-4px); }
+      100% { transform: translateY(0); }
+    }
+
+    .hero h1 {
+      font-size: clamp(38px, 5vw, 62px);
+      color: var(--brand-green);
+      margin-bottom: 24px;
+      letter-spacing: -1px;
+    }
+
+    .hero h1 span {
+      color: var(--primary);
+    }
+
+    .hero-desc {
+      font-size: 18px;
+      color: var(--text-secondary);
+      margin-bottom: 40px;
+      line-height: 1.7;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .cta-btn {
+      padding: 16px 36px;
+      border-radius: var(--radius-md);
+      background: var(--primary);
+      color: var(--brand-green);
+      text-decoration: none;
+      font-weight: 800;
+      font-size: 16px;
+      transition: var(--transition);
+      box-shadow: 0 8px 24px rgba(245, 158, 11, 0.25);
+    }
+
+    .cta-btn:hover {
+      background: var(--primary-dark);
+      color: #ffffff;
+      transform: translateY(-3px);
+      box-shadow: 0 12px 30px rgba(217, 119, 6, 0.35);
+    }
+
+    .secondary-btn {
+      padding: 16px 36px;
+      border-radius: var(--radius-md);
+      background: transparent;
+      color: var(--brand-green);
+      text-decoration: none;
+      font-weight: 750;
+      font-size: 16px;
+      border: 2px solid var(--brand-green);
+      transition: var(--transition);
+    }
+
+    .secondary-btn:hover {
+      background: rgba(10, 77, 34, 0.05);
+      transform: translateY(-2px);
+    }
+
+    /* Hero Visual Card Stack */
+    .hero-visual {
+      flex: 1;
+      position: relative;
+      max-width: 540px;
+      height: 480px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 2;
+    }
+
+    .visual-circle {
+      position: absolute;
+      width: 440px;
+      height: 440px;
+      border-radius: 50%;
+      background: var(--brand-green);
+      opacity: 0.05;
+      z-index: 1;
+      animation: pulse 6s ease-in-out infinite alternate;
+    }
+
+    .visual-card {
+      background: var(--surface);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border);
+      box-shadow: 0 20px 50px rgba(10, 77, 34, 0.08);
+      padding: 28px;
+      position: absolute;
+      transition: var(--transition);
+      z-index: 2;
+    }
+
+    .card-one {
+      width: 320px;
+      transform: rotate(-4deg) translate(-20px, -40px);
+    }
+
+    .card-two {
+      width: 280px;
+      transform: rotate(3deg) translate(80px, 40px);
+    }
+
+    .visual-card:hover {
+      transform: scale(1.05) rotate(0deg) translate(0);
+      z-index: 10;
+    }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+
+    .card-avatar {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: var(--primary-light);
+      color: var(--primary-dark);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 18px;
+    }
+
+    .card-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--brand-green);
+    }
   <link rel="stylesheet" href="./src/style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
@@ -143,7 +424,7 @@
 
     /* Footer */
     .footer {
-      padding: 40px 6%;
+      padding: 15px 6%;
       background: var(--brand-green);
       color: #ffffff;
       display: flex;
@@ -212,7 +493,7 @@
   <!-- NAVBAR -->
   <header class="navbar">
     <div class="logo-container">
-      <img src="./logo-completo.png" alt="TalenTico Logo" style="height: 380px; object-fit: contain; position: relative; z-index: 5; margin-top: -80px; margin-bottom: -65px;" />
+      <img src="./logo-completo.png" alt="TalenTico Logo" style="height: 240px; object-fit: contain; position: relative; z-index: 5; margin-top: -50px; margin-bottom: -50px;" />
     </div>
     <a href="./pages/login.html" class="nav-btn">Iniciar sesión</a>
   </header>
@@ -303,8 +584,8 @@
 
   <!-- FOOTER -->
   <footer class="footer">
-    <div class="footer-logo" style="width: 100%; display: flex; justify-content: center; margin-bottom: 20px;">
-      <img src="./logo-completo.png" alt="TalenTico Logo" style="height: 460px; object-fit: contain; filter: brightness(0) invert(1);" />
+    <div class="footer-logo">
+      <img src="./logo-completo.png" alt="TalenTico Logo" style="height: 115px; object-fit: contain; filter: brightness(0) invert(1);" />
     </div>
     <p>&copy; 2026 TalenTico. Todos los derechos reservados.</p>
   </footer>

@@ -1,3 +1,5 @@
+import { apiFetch } from './api.js';
+
 const loginForm = document.querySelector('#login-form');
 const usernameInput = document.querySelector('#username');
 const passwordInput = document.querySelector('#password');
@@ -11,49 +13,33 @@ function showMessage(message, type = '') {
   messageElement.className = `message ${type}`.trim();
 }
 
-function goToDashboard() {
-  window.location.replace('../index.html');
+// Redirección condicionada por Rol
+function goToPortal(user) {
+  if (user.role === 'admin' || user.username === 'google.demo') {
+    // Si es admin o demo, va al dashboard principal (index.html en la raíz)
+    window.location.href = `../index.html?userId=${encodeURIComponent(user.id)}`;
+  } else {
+    // Si es candidato/usuario estándar, va a la vista de portal de empleos
+    window.location.href = `user-view.html?userId=${encodeURIComponent(user.id)}`;
+  }
 }
 
-async function loginWithCredentials(username, password) {
-  try {
-    const response = await fetch('https://dummyjson.com/auth/login', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ username, password, expiresInMins: 60 }),
-    });
-    const data = await response.json();
-    if (response.ok) {
-      const token = data.accessToken || data.token;
-      if (token) {
-        localStorage.setItem('token', token);
-        localStorage.setItem('user', JSON.stringify({
-          name: [data.firstName, data.lastName].filter(Boolean).join(' ') || data.username || username,
-          username: data.username || username,
-          email: data.email || '',
-          provider: 'credentials',
-        }));
-        return;
-      }
-    }
-  } catch (_) {}
+async function loginWithCredentials(identifier, password) {
+  // 1. Intentamos buscar por username
+  let users = await apiFetch(`/users?username=${encodeURIComponent(identifier)}`);
 
-  try {
-    const res = await fetch(`http://localhost:3000/users?username=${encodeURIComponent(username)}`);
-    const users = await res.json();
-    if (users.length && users[0].password === password) {
-      const u = users[0];
-      const token = btoa(JSON.stringify({ id: u.id, username: u.username }));
-      localStorage.setItem('token', token);
-      localStorage.setItem('user', JSON.stringify({
-        name: [u.firstName, u.lastName].filter(Boolean).join(' ') || u.username,
-        username: u.username,
-        email: u.email || '',
-        provider: 'credentials',
-      }));
-      return;
+  // 2. Si no encuentra coincidencias, intentamos buscar por email
+  if (!Array.isArray(users) || users.length === 0) {
+    users = await apiFetch(`/users?email=${encodeURIComponent(identifier)}`);
+  }
+
+  // 3. Validamos contraseña
+  if (Array.isArray(users) && users.length > 0) {
+    const user = users[0];
+    if (user.password === password) {
+      return user;
     }
-  } catch (_) {}
+  }
 
   throw new Error('Usuario o contraseña incorrectos.');
 }
@@ -61,8 +47,14 @@ async function loginWithCredentials(username, password) {
 if (loginForm) {
   loginForm.addEventListener('submit', async (event) => {
     event.preventDefault();
-    const username = usernameInput?.value.trim() || '';
-    const password = passwordInput?.value || '';
+
+    // Obtener referencias e insumos actualizados al momento del submit
+    const currentUsernameInput = document.querySelector('#username');
+    const currentPasswordInput = document.querySelector('#password');
+
+    const username = currentUsernameInput?.value.trim() || '';
+    const password = currentPasswordInput?.value || '';
+
     if (!username || !password) {
       showMessage('Completa el usuario y la contraseña.', 'error');
       return;
@@ -71,13 +63,18 @@ if (loginForm) {
     loginButton.disabled = true;
     loginButton.textContent = 'Iniciando sesión...';
     showMessage('');
+
     try {
-      await loginWithCredentials(username, password);
-      passwordInput.value = '';
+      const user = await loginWithCredentials(username, password);
+
+      // Guardar token y usuario
+      localStorage.setItem('token', user.token || 'demo-token-active'); 
+      localStorage.setItem('user', JSON.stringify(user));
+
       showMessage('Login exitoso. Redirigiendo...', 'success');
-      window.setTimeout(goToDashboard, 400);
+      window.setTimeout(() => goToPortal(user), 400);
     } catch (error) {
-      showMessage(error.message || 'No fue posible iniciar sesión. Inténtalo de nuevo.', 'error');
+      showMessage(error.message, 'error');
     } finally {
       loginButton.disabled = false;
       loginButton.textContent = 'Iniciar sesión';
@@ -85,28 +82,29 @@ if (loginForm) {
   });
 }
 
+// 2. Modifica el evento del botón Demo:
 if (googleDemoButton) {
   googleDemoButton.addEventListener('click', async () => {
     googleDemoButton.disabled = true;
     showMessage('');
-    try {
-      const response = await fetch('/db.json');
-      if (!response.ok) throw new Error('No fue posible cargar los datos de demostración.');
-      const data = await response.json();
-      const user = data.users?.find((item) => item.provider === 'google');
-      if (!user?.token) throw new Error('No se encontró un usuario de Google de prueba.');
 
-      localStorage.setItem('token', user.token);
-      localStorage.setItem('user', JSON.stringify({
-        name: user.name,
-        username: user.email,
-        email: user.email,
-        provider: 'google-demo',
-      }));
-      showMessage(`Sesión de demostración iniciada como ${user.name}.`, 'success');
-      window.setTimeout(goToDashboard, 400);
+    try {
+      const users = await apiFetch('/users?provider=google');
+      if (!Array.isArray(users) || !users.length) {
+        throw new Error('No se encontró un usuario de demostración.');
+      }
+
+      const demoUser = users[0];
+
+      // --- AGREGAR ESTAS DOS LÍNEAS ---
+      localStorage.setItem('token', demoUser.token || 'demo-token-google');
+      localStorage.setItem('user', JSON.stringify(demoUser));
+      // --------------------------------
+
+      showMessage(`Sesión iniciada como ${demoUser.name}.`, 'success');
+      window.setTimeout(() => goToPortal(demoUser), 400);
     } catch (error) {
-      showMessage(error.message || 'No fue posible iniciar la sesión de demostración.', 'error');
+      showMessage(error.message || 'Error en la sesión de demostración.', 'error');
     } finally {
       googleDemoButton.disabled = false;
     }

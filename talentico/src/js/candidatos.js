@@ -1,9 +1,9 @@
-import { apiFetch } from '../../js/api.js';
+import { apiFetch } from './api.js';
 import { initializeProtectedPage } from './page-shell.js';
 
 initializeProtectedPage();
 
-const candidatesContainer = document.querySelector('#candidates-container');
+const candidatesTbody = document.querySelector('#candidates-tbody');
 const candidateForm = document.querySelector('#candidate-form');
 const patchForm = document.querySelector('#patch-form');
 
@@ -16,84 +16,50 @@ const btnDiscardModal = document.querySelector('#btn-discard-modal');
 // Estructura en memoria para mantener los candidatos cargados
 let candidatesCache = [];
 
-// Generar HTML de la tarjeta
-// Generar el HTML de una tarjeta individual
-function renderCandidateCard(candidate) {
-  const card = document.createElement('article');
-  card.className = 'candidate-card';
-  card.dataset.id = candidate.id;
+// Generar el HTML de una fila de tabla para el candidato
+function renderCandidateRow(candidate) {
+  const row = document.createElement('tr');
+  row.dataset.id = candidate.id;
 
   const modalidad = candidate.modalidad || 'REMOTE';
   const experienceText = candidate.experiencia || 'Sin experiencia registrada';
-  const defaultAvatar = 'https://dummyjson.com/icon/emilyj/128';
+  const fullName = `${candidate.nombre || ''} ${candidate.apellido || ''}`.trim() || 'Sin nombre';
 
-  // Iconos SVG Limpios y Modernos
-  const iconEdit = `
-    <svg class="action-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
-      <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
-    </svg>`;
-
-  const iconDelete = `
-    <svg class="action-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <polyline points="3 6 5 6 21 6"></polyline>
-      <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
-      <line x1="10" y1="11" x2="10" y2="17"></line>
-      <line x1="14" y1="11" x2="14" y2="17"></line>
-    </svg>`;
-
-  card.innerHTML = `
-    <header class="candidate-card-header">
-        <div class="candidate-profile-info">
-            <img class="candidate-avatar-img"
-                src="${candidate.avatar || defaultAvatar}" 
-                alt="${candidate.nombre || ''} ${candidate.apellido || ''}" />
-            <div>
-                <h3 class="candidate-name">${candidate.nombre || 'Sin nombre'}<br>${candidate.apellido || ''}</h3>
-                <span class="candidate-role">${(candidate.puesto || 'Candidato').toUpperCase()}</span>
-            </div>
-        </div>
-        <div class="candidate-actions">
-            <button type="button" class="btn-icon btn-edit" title="Editar candidato">
-              ${iconEdit}
-            </button>
-            <button type="button" class="btn-icon btn-delete danger" title="Eliminar candidato">
-              ${iconDelete}
-            </button>
-        </div>
-    </header>
-    <div class="candidate-card-body">
-        <p class="candidate-detail"><span class="icon">✉</span> <span class="candidate-email-text">${candidate.email || 'N/A'}</span></p>
-        <p class="candidate-detail"><span class="icon">📈</span> <span class="candidate-exp-text">${experienceText}</span></p>
-    </div>
-    <footer class="candidate-card-footer">
-        <span class="badge badge-success">ACTIVE</span>
-        <span class="badge badge-info">${modalidad}</span>
-    </footer>
+  row.innerHTML = `
+    <td>${candidate.id}</td>
+    <td><strong>${fullName}</strong></td>
+    <td>${candidate.email || 'N/A'}</td>
+    <td>${candidate.puesto || 'N/A'}</td>
+    <td>${experienceText}</td>
+    <td><span class="badge badge-info">${modalidad}</span></td>
+    <td>
+      <button type="button" data-action="edit">Editar</button>
+      <button type="button" data-action="delete">Eliminar</button>
+    </td>
   `;
 
-  return card;
+  return row;
 }
 
 // Cargar Candidatos (GET)
 async function loadCandidates() {
-  if (!candidatesContainer) return;
+  if (!candidatesTbody) return;
 
   try {
     const candidates = await apiFetch('/candidatos');
     candidatesCache = Array.isArray(candidates) ? candidates : [];
-    candidatesContainer.innerHTML = '';
+    candidatesTbody.innerHTML = '';
 
     if (candidatesCache.length > 0) {
       candidatesCache.forEach(candidate => {
-        candidatesContainer.appendChild(renderCandidateCard(candidate));
+        candidatesTbody.appendChild(renderCandidateRow(candidate));
       });
     } else {
-      candidatesContainer.innerHTML = '<p>No hay candidatos registrados.</p>';
+      candidatesTbody.innerHTML = '<tr><td colspan="7">No hay candidatos registrados.</td></tr>';
     }
   } catch (error) {
     console.error('Error al obtener candidatos:', error);
-    candidatesContainer.innerHTML = '<p style="color: var(--danger);">Error al cargar los candidatos.</p>';
+    candidatesTbody.innerHTML = '<tr><td colspan="7" style="color: var(--danger);">Error al cargar los candidatos.</td></tr>';
   }
 }
 
@@ -118,7 +84,8 @@ async function handleCreateCandidate(event) {
     });
 
     candidatesCache.unshift(createdCandidate);
-    candidatesContainer.prepend(renderCandidateCard(createdCandidate));
+    // Recargar tabla para reflejar la fila
+    await loadCandidates();
     candidateForm.reset();
   } catch (error) {
     console.error('Error al registrar candidato:', error);
@@ -126,19 +93,15 @@ async function handleCreateCandidate(event) {
 }
 
 // Eliminar Candidato (DELETE)
-async function handleDeleteCandidate(id, cardElement) {
+async function handleDeleteCandidate(id) {
   const confirmDelete = confirm(`¿Estás seguro de que deseas eliminar al candidato ID #${id}?`);
   if (!confirmDelete) return;
 
   try {
     await apiFetch(`/candidatos/${id}`, { method: 'DELETE' });
 
-    cardElement.remove();
     candidatesCache = candidatesCache.filter(c => String(c.id) !== String(id));
-
-    if (candidatesContainer.children.length === 0) {
-      candidatesContainer.innerHTML = '<p>No hay candidatos registrados.</p>';
-    }
+    await loadCandidates();
   } catch (error) {
     console.error(`Error al eliminar el candidato #${id}:`, error);
   }
@@ -154,12 +117,12 @@ function openEditModal(candidate) {
   document.querySelector('#edit-experiencia').value = candidate.experiencia || '';
   document.querySelector('#edit-modalidad').value = candidate.modalidad || 'REMOTE';
 
-  editModal.classList.add('open');
+  editModal.classList.remove('hidden');
 }
 
 // Cerrar Modal
 function closeEditModal() {
-  editModal.classList.remove('open');
+  editModal.classList.add('hidden');
   editForm.reset();
 }
 
@@ -178,19 +141,15 @@ async function handleUpdateCandidate(event) {
   };
 
   try {
-    const updatedCandidate = await apiFetch(`/candidatos/${id}`, {
+    await apiFetch(`/candidatos/${id}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(updatedData)
     });
 
-    // Actualizar visualmente la tarjeta en el DOM
-    const oldCard = candidatesContainer.querySelector(`[data-id="${id}"]`);
-    if (oldCard) {
-      const newCard = renderCandidateCard(updatedCandidate);
-      candidatesContainer.replaceChild(newCard, oldCard);
-    }
-
+    // Actualizar cache local
+    candidatesCache = candidatesCache.map(c => String(c.id) === String(id) ? { ...c, ...updatedData } : c);
+    await loadCandidates();
     closeEditModal();
   } catch (error) {
     console.error(`Error al actualizar el candidato #${id}:`, error);
@@ -214,11 +173,9 @@ async function handlePatchCandidate(event) {
       body: JSON.stringify({ email: newEmail })
     });
 
-    const cardToUpdate = candidatesContainer.querySelector(`[data-id="${id}"]`);
-    if (cardToUpdate) {
-      const emailText = cardToUpdate.querySelector('.candidate-email-text');
-      if (emailText) emailText.innerText = patchedCandidate.email || newEmail;
-    }
+    // Actualizar cache local
+    candidatesCache = candidatesCache.map(c => String(c.id) === String(id) ? { ...c, email: patchedCandidate.email || newEmail } : c);
+    await loadCandidates();
 
     alert(`Candidato #${id} actualizado con éxito.`);
     patchForm.reset();
@@ -227,28 +184,27 @@ async function handlePatchCandidate(event) {
   }
 }
 
-// Delegation para Editar y Eliminar
-if (candidatesContainer) {
-  candidatesContainer.addEventListener('click', (event) => {
-    const editBtn = event.target.closest('.btn-edit');
-    const deleteBtn = event.target.closest('.btn-delete');
-    const card = event.target.closest('.candidate-card');
+// Delegación para Editar y Eliminar
+if (candidatesTbody) {
+  candidatesTbody.addEventListener('click', (event) => {
+    const row = event.target.closest('tr[data-id]');
+    if (!row) return;
+    const id = row.dataset.id;
+    const action = event.target.dataset.action;
 
-    if (!card) return;
-    const id = card.dataset.id;
-
-    if (editBtn) {
+    if (action === 'edit') {
       const candidate = candidatesCache.find(c => String(c.id) === String(id)) || {
         id,
-        nombre: card.querySelector('.candidate-name').innerText.split('\n')[0] || '',
-        apellido: card.querySelector('.candidate-name').innerText.split('\n')[1] || '',
-        email: card.querySelector('.candidate-email-text').innerText || '',
-        puesto: card.querySelector('.candidate-role').innerText || '',
-        experiencia: card.querySelector('.candidate-exp-text').innerText || ''
+        nombre: '',
+        apellido: '',
+        email: '',
+        puesto: '',
+        experiencia: '',
+        modalidad: 'REMOTE'
       };
       openEditModal(candidate);
-    } else if (deleteBtn) {
-      handleDeleteCandidate(id, card);
+    } else if (action === 'delete') {
+      handleDeleteCandidate(id);
     }
   });
 }

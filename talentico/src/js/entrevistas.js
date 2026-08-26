@@ -1,12 +1,12 @@
-import { apiFetch, DUMMY_JSON_API_URL } from '../../js/api.js';
+import { apiFetch } from './api.js';
 import { initializeProtectedPage } from './page-shell.js';
 
 initializeProtectedPage();
 
 async function obtenerEntrevistas() {
   try {
-    const datos = await apiFetch('/comments', {}, DUMMY_JSON_API_URL);
-    renderizarEntrevistas(datos.comments || []);
+    const datos = await apiFetch('/comments');
+    renderizarEntrevistas(Array.isArray(datos) ? datos : []);
   } catch (error) {
     console.error('Error:', error);
     document.getElementById('lista-entrevistas').innerHTML = `
@@ -38,7 +38,7 @@ function renderizarEntrevistas(lista) {
         <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
           <div style="display: flex; align-items: center; gap: 10px;">
             <span style="color: var(--text-muted); font-size: 12px; font-weight: 700;">#${item.id}</span>
-            <span class="badge badge-info">Post #${item.postId}</span>
+            <span class="badge badge-info">Post #${item.postId || 1}</span>
           </div>
           <div style="display: flex; gap: 6px;">
             <button class="text-button btn-editar" data-id="${item.id}" style="padding: 6px 10px; font-size: 11px;">Editar</button>
@@ -84,13 +84,13 @@ document.getElementById('form-entrevista').addEventListener('submit', async (e) 
       await apiFetch(`/comments/${id}`, {
         method: 'PATCH',
         body: JSON.stringify({ body }),
-      }, DUMMY_JSON_API_URL);
+      });
       alert(`Nota ID ${id} actualizada con éxito`);
     } else {
-      await apiFetch('/comments/add', {
+      await apiFetch('/comments', {
         method: 'POST',
         body: JSON.stringify({ body, postId: 1, userId: 1 }),
-      }, DUMMY_JSON_API_URL);
+      });
       alert('Nota creada con éxito');
     }
 
@@ -107,7 +107,7 @@ async function eliminarEntrevista(id) {
   if (!confirm(`¿Deseas eliminar la nota ID ${id}?`)) return;
 
   try {
-    await apiFetch(`/comments/${id}`, { method: 'DELETE' }, DUMMY_JSON_API_URL);
+    await apiFetch(`/comments/${id}`, { method: 'DELETE' });
     alert(`Nota ID ${id} eliminada con éxito`);
     obtenerEntrevistas();
   } catch (error) {

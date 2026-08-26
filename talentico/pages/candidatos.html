@@ -5,73 +5,75 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="TalenTico - Gestión de Candidatos" />
-    <title>TalenTico | Candidatos</title>
+    <title>TALENTICO CR | Candidatos</title>
+    <link rel="stylesheet" href="../src/style.css" />
     <link rel="stylesheet" href="../src/css/candidatos.css" />
 </head>
 
 <body>
     <div id="app">
         <div class="app-shell">
-            <aside class="sidebar">
+            <!-- Sidebar -->
+            <aside class="sidebar" id="sidebar">
                 <div class="brand">
-                    <div class="brand-icon">T</div>
+                    <span class="brand-icon" aria-hidden="true">T</span>
                     <div class="brand-info">
-                        <span class="brand-name">TalenTico</span>
+                        <span class="brand-name">TALENTICO</span>
                         <span class="brand-subtitle">Gestión de Talento</span>
                     </div>
                 </div>
 
                 <nav class="sidebar-nav">
-                    <p class="nav-title">MENÚ PRINCIPAL</p>
+                    <p class="nav-title">Menú</p>
                     <button class="nav-item" data-section="dashboard">
-                        <span class="nav-icon">⌂</span>
-                        <span>Dashboard</span>
+                        <span class="nav-icon">🏠</span>
+                        <span>Inicio</span>
                     </button>
 
                     <button class="nav-item active" data-section="candidatos">
-                        <span class="nav-icon">♙</span>
+                        <span class="nav-icon">👤</span>
                         <span>Candidatos</span>
                     </button>
 
                     <button class="nav-item" data-section="vacantes">
-                        <span class="nav-icon">▣</span>
+                        <span class="nav-icon">💼</span>
                         <span>Vacantes</span>
                     </button>
 
                     <button class="nav-item" data-section="empresas">
-                        <span class="nav-icon">▤</span>
+                        <span class="nav-icon">🏢</span>
                         <span>Empresas</span>
                     </button>
 
                     <button class="nav-item" data-section="postulaciones">
-                        <span class="nav-icon">□</span>
+                        <span class="nav-icon">📝</span>
                         <span>Postulaciones</span>
                     </button>
 
                     <button class="nav-item" data-section="entrevistas">
-                        <span class="nav-icon">◷</span>
+                        <span class="nav-icon">💬</span>
                         <span>Entrevistas</span>
                     </button>
 
                     <button class="nav-item" data-section="tareas">
-                        <span class="nav-icon">✓</span>
+                        <span class="nav-icon">📋</span>
                         <span>Tareas</span>
                     </button>
                 </nav>
 
                 <div class="sidebar-footer">
                     <button class="nav-item logout">
-                        <span class="nav-icon">&#x21AA;&#xFE0E;</span>
+                        <span class="nav-icon">🚪</span>
                         <span>Cerrar sesión</span>
                     </button>
                 </div>
             </aside>
 
-            <main class="main-content">
+            <div class="main-content">
                 <header class="topbar">
-                    <button class="menu-toggle" id="menu-toggle">☰</button>
+                    <button class="menu-toggle" id="menu-toggle" aria-label="Abrir menú">☰</button>
                     <div class="breadcrumb">
-                        <span>TalenTico</span>
+                        <span>TALENTICO</span>
                         <span>/</span>
                         <strong>Candidatos</strong>
                     </div>
@@ -84,113 +86,115 @@
                     </div>
                 </header>
 
-                <section class="content">
+                <div class="content">
+                    <!-- Page Header -->
                     <div class="page-header">
                         <div>
                             <span class="page-eyebrow">MÓDULO DE RECLUTAMIENTO</span>
                             <h1>Gestión de Candidatos</h1>
-                            <p>
-                                Consumo de API REST. Visualización, creación, edición y eliminación de candidatos.
-                            </p>
+                            <p>Consumo de API REST. Visualización, creación, edición y eliminación de candidatos.</p>
                         </div>
                     </div>
 
-                    <div class="dashboard-grid">
-                        <section class="panel" style="background: transparent; border: none; box-shadow: none;">
-                            <div class="panel-header" style="background: transparent; border: none; padding-left: 0;">
-                                <div>
-                                    <h2>Listado de Candidatos (GET)</h2>
-                                    <p>Registros obtenidos del servidor</p>
-                                </div>
+                    <!-- Form Card -->
+                    <div class="card" style="margin-bottom: 22px; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px;">
+                        <!-- Registrar Candidato -->
+                        <div>
+                            <div class="panel-header" style="border-bottom: 1px solid var(--border); padding-left: 0; padding-right: 0; padding-top: 0; margin-bottom: 16px; min-height: auto;">
+                                <h2>Registrar Candidato (POST)</h2>
                             </div>
-
-                            <div class="candidates-cards-grid" id="candidates-container"></div>
-                        </section>
-
-                        <div style="display: flex; flex-direction: column; gap: 22px;">
-                            <section class="panel">
-                                <div class="panel-header">
-                                    <div>
-                                        <h2>Registrar Candidato (POST)</h2>
-                                        <p>Agregar nuevo candidato al sistema</p>
-                                    </div>
+                            <form id="candidate-form" style="display: flex; flex-direction: column; gap: 12px;">
+                                <div class="form-group" style="margin-bottom: 0;">
+                                    <label for="nombre">Nombre</label>
+                                    <input type="text" id="nombre" placeholder="Ej. Alex" required />
                                 </div>
-
-                                <form id="candidate-form" style="padding: 20px;">
-                                    <div class="form-group">
-                                        <label for="nombre">Nombre</label>
-                                        <input type="text" id="nombre" placeholder="Ej. Alex" required />
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label for="apellido">Apellido</label>
-                                        <input type="text" id="apellido" placeholder="Ej. Cubero" required />
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label for="email">Correo electrónico</label>
-                                        <input type="email" id="email" placeholder="ejemplo@correo.com" required />
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label for="puesto">Puesto de interés</label>
-                                        <input type="text" id="puesto" placeholder="Ej. Frontend Developer" />
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label for="experiencia">Experiencia previa (Opcional)</label>
-                                        <input type="text" id="experiencia" placeholder="Ej. 2 años de experiencia" />
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label for="modalidad">Modalidad de Trabajo</label>
-                                        <select id="modalidad">
-                                            <option value="REMOTE">Remoto</option>
-                                            <option value="ONSITE">Presencial</option>
-                                            <option value="HYBRID">Híbrido</option>
-                                        </select>
-                                    </div>
-
-                                    <button type="submit" class="primary-button" style="width: 100%; margin-top: 8px;">
-                                        Guardar Candidato
-                                    </button>
-                                </form>
-                            </section>
-
-                            <section class="panel">
-                                <div class="panel-header">
-                                    <div>
-                                        <h2>Actualización Rápida (PATCH)</h2>
-                                        <p>Actualizar solo correo/teléfono</p>
-                                    </div>
+                                <div class="form-group" style="margin-bottom: 0;">
+                                    <label for="apellido">Apellido</label>
+                                    <input type="text" id="apellido" placeholder="Ej. Cubero" required />
                                 </div>
+                                <div class="form-group" style="margin-bottom: 0;">
+                                    <label for="email">Correo electrónico</label>
+                                    <input type="email" id="email" placeholder="ejemplo@correo.com" required />
+                                </div>
+                                <div class="form-group" style="margin-bottom: 0;">
+                                    <label for="puesto">Puesto de interés</label>
+                                    <input type="text" id="puesto" placeholder="Ej. Frontend Developer" />
+                                </div>
+                                <div class="form-group" style="margin-bottom: 0;">
+                                    <label for="experiencia">Experiencia previa (Opcional)</label>
+                                    <input type="text" id="experiencia" placeholder="Ej. 2 años de experiencia" />
+                                </div>
+                                <div class="form-group" style="margin-bottom: 0;">
+                                    <label for="modalidad">Modalidad de Trabajo</label>
+                                    <select id="modalidad">
+                                        <option value="REMOTE">Remoto</option>
+                                        <option value="ONSITE">Presencial</option>
+                                        <option value="HYBRID">Híbrido</option>
+                                    </select>
+                                </div>
+                                <button type="submit" class="primary-button" style="margin-top: 8px;">
+                                    Guardar Candidato
+                                </button>
+                            </form>
+                        </div>
 
-                                <form id="patch-form" style="padding: 20px;">
-                                    <div class="form-group">
-                                        <label for="patch-id">ID Candidato</label>
-                                        <input type="number" id="patch-id" value="1" required />
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label for="patch-email">Nuevo Correo</label>
-                                        <input type="email" id="patch-email" placeholder="nuevo@correo.com" required />
-                                    </div>
-
-                                    <button type="submit" class="primary-button"
-                                        style="width: 100%; margin-top: 8px; background: var(--warning);">
-                                        Actualizar Datos
-                                    </button>
-                                </form>
-                            </section>
+                        <!-- Actualización Rápida -->
+                        <div>
+                            <div class="panel-header" style="border-bottom: 1px solid var(--border); padding-left: 0; padding-right: 0; padding-top: 0; margin-bottom: 16px; min-height: auto;">
+                                <h2>Actualización Rápida (PATCH)</h2>
+                            </div>
+                            <form id="patch-form" style="display: flex; flex-direction: column; gap: 12px;">
+                                <div class="form-group" style="margin-bottom: 0;">
+                                    <label for="patch-id">ID Candidato</label>
+                                    <input type="number" id="patch-id" value="1" required />
+                                </div>
+                                <div class="form-group" style="margin-bottom: 0;">
+                                    <label for="patch-email">Nuevo Correo</label>
+                                    <input type="email" id="patch-email" placeholder="nuevo@correo.com" required />
+                                </div>
+                                <button type="submit" class="primary-button" style="margin-top: 8px; background: var(--primary);">
+                                    Actualizar Datos
+                                </button>
+                            </form>
                         </div>
                     </div>
-                </section>
-            </main>
+
+                    <!-- Listado de Candidatos -->
+                    <div class="panel">
+                        <div class="panel-header">
+                            <div>
+                                <h2>Listado de Candidatos (GET)</h2>
+                                <p>Registros obtenidos del servidor</p>
+                            </div>
+                        </div>
+                        <div style="padding: 24px;">
+                            <div class="table-container">
+                                <table class="data-table">
+                                    <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Nombre Completo</th>
+                                            <th>Correo Electrónico</th>
+                                            <th>Puesto</th>
+                                            <th>Experiencia</th>
+                                            <th>Modalidad</th>
+                                            <th>Acciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="candidates-tbody">
+                                        <!-- Carga dinámica -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
     <!-- MODAL DE EDICIÓN DE CANDIDATO -->
-    <div class="modal-overlay" id="edit-modal">
+    <div class="modal-overlay hidden" id="edit-modal">
         <div class="modal-container">
             <div class="modal-header">
                 <h2>Editar Candidato</h2>
@@ -240,18 +244,6 @@
             </form>
         </div>
     </div>
-
-    <script>
-        const menuToggle = document.querySelector('#menu-toggle');
-        const sidebar = document.querySelector('.sidebar');
-
-        if (menuToggle && sidebar) {
-            menuToggle.addEventListener('click', () => {
-                sidebar.classList.toggle('open');
-            });
-        }
-    </script>
-
     <script type="module" src="../src/js/candidatos.js"></script>
 </body>
 

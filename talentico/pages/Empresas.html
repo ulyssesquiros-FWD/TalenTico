@@ -1,125 +1,175 @@
+<!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JobConnect - Gestión de Empresas</title>
-    <!-- Hoja de estilos del sidebar y estilos generales de Empresas -->
-    <link rel="stylesheet" href="../src/css/Empresas.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="TalenTico - Gestión de Empresas Clientes" />
+  <title>TALENTICO CR | Empresas</title>
+  <link rel="stylesheet" href="../src/style.css" />
 </head>
 <body>
+  <div id="app">
+    <div class="app-shell">
 
-    <div class="app-layout">
-        <!-- 1. BARRA LATERAL (SIDEBAR) -->
-        <aside class="sidebar">
-            <div class="sidebar-brand">
-                <span class="brand-icon">💼</span>
-                <h2>JobConnect</h2>
-            </div>
-            <nav class="sidebar-nav">
-                <ul>
-                    <li>
-                        <a href="../index.html">
-                            <span class="nav-icon"></span> Dashboard
-                        </a>
-                    </li>
-                    <li>
-                        <a href="candidatos.html">
-                            <span class="nav-icon"></span> Candidatos
-                        </a>
-                    </li>
-                    <li>
-                        <a href="vacantes.html">
-                            <span class="nav-icon"></span> Vacantes
-                        </a>
-                    </li>
-                    <!-- Marcado como 'active' por estar en la sección Empresas -->
-                    <li class="active">
-                        <a href="Empresas.html">
-                            <span class="nav-icon"></span> Empresas
-                        </a>
-                    </li>
-                    <li>
-                        <a href="Postulaciones.html">
-                            <span class="nav-icon"></span> Postulaciones
-                        </a>
-                    </li>
-                    <li>
-                        <a href="entrevistas.html">
-                            <span class="nav-icon"></span> Entrevistas
-                        </a>
-                    </li>
-                    <li>
-                        <a href="tareas.html">
-                            <span class="nav-icon"></span> Tareas
-                        </a>
-                    </li>
-                </ul>
-            </nav>
-        </aside>
-
-        <!-- 2. CONTENIDO PRINCIPAL A LA DERECHA DEL SIDEBAR -->
-        <main class="main-content">
-            <!-- Encabezado Superior -->
-            <header class="top-header">
-                <h2>Talentico | Empresas Clientes</h2>
-                <div class="user-profile">
-                    <span>Admin</span>
-                    <div class="avatar">A</div>
-                </div>
-            </header>
-
-            <!-- Cuerpo del Formulario y Tabla -->
-            <div class="content-body">
-                <div id="feedback-message" class="hidden"></div>
-
-                <section class="form-section">
-                    <h2 id="form-title">Agregar Nueva Empresa</h2>
-                    <form id="empresa-form">
-                        <input type="hidden" id="empresa-id">
-                        <label for="company-userId">ID de Usuario Cliente:</label>
-                        <input type="number" id="company-userId" placeholder="Ej. 12" required>
-                        
-                        <label for="total-products">Total Contrataciones:</label>
-                        <input type="number" id="total-products" placeholder="Ej. 5" required>
-
-                        <button type="submit" id="btn-submit">Guardar Empresa</button>
-                        <button type="button" id="btn-cancel" class="hidden">Cancelar</button>
-                    </form>
-                </section>
-
-                <section class="table-section">
-                    <h2>Lista de Empresas</h2>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>ID Cart</th>
-                                <th>User ID</th>
-                                <th>Total Productos</th>
-                                <th>Monto Total</th>
-                                <th>Acciones</th>
-                            </tr>
-                        </thead>
-                        <tbody id="empresas-tbody">
-                            <!-- Registros dinámicos -->
-                        </tbody>
-                    </table>
-                </section>
-            </div>
-        </main>
-    </div>
-
-    <!-- Modal de Confirmación de Eliminación -->
-    <div id="delete-modal" class="modal-overlay hidden">
-        <div class="modal-content">
-            <h3>¿Confirmar eliminación?</h3>
-            <p>Esta acción eliminará la empresa seleccionada de la lista. ¿Deseas continuar?</p>
-            <div class="modal-actions">
-                <button id="btn-modal-cancel" class="btn-secondary">Cancelar</button>
-                <button id="btn-modal-confirm" class="btn-danger">Eliminar</button>
-            </div>
+      <!-- Sidebar -->
+      <aside class="sidebar" id="sidebar">
+        <div class="brand">
+          <span class="brand-icon" aria-hidden="true">T</span>
+          <div class="brand-info">
+            <span class="brand-name">TALENTICO</span>
+            <span class="brand-subtitle">Gestión de Talento</span>
+          </div>
         </div>
-    </div>
 
-    <script type="module" src="../src/js/empresas.js"></script>
+        <nav class="sidebar-nav">
+          <p class="nav-title">Menú</p>
+          <button class="nav-item" data-section="dashboard">
+            <span class="nav-icon">🏠</span>
+            <span>Inicio</span>
+          </button>
+
+          <button class="nav-item" data-section="candidatos">
+            <span class="nav-icon">👤</span>
+            <span>Candidatos</span>
+          </button>
+
+          <button class="nav-item" data-section="vacantes">
+            <span class="nav-icon">💼</span>
+            <span>Vacantes</span>
+          </button>
+
+          <button class="nav-item active" data-section="empresas">
+            <span class="nav-icon">🏢</span>
+            <span>Empresas</span>
+          </button>
+
+          <button class="nav-item" data-section="postulaciones">
+            <span class="nav-icon">📝</span>
+            <span>Postulaciones</span>
+          </button>
+
+          <button class="nav-item" data-section="entrevistas">
+            <span class="nav-icon">💬</span>
+            <span>Entrevistas</span>
+          </button>
+
+          <button class="nav-item" data-section="tareas">
+            <span class="nav-icon">📋</span>
+            <span>Tareas</span>
+          </button>
+        </nav>
+
+        <div class="sidebar-footer">
+          <button class="nav-item logout">
+            <span class="nav-icon">🚪</span>
+            <span>Cerrar sesión</span>
+          </button>
+        </div>
+      </aside>
+
+      <!-- Main -->
+      <div class="main-content">
+
+        <!-- Topbar -->
+        <header class="topbar">
+          <button class="menu-toggle" id="menu-toggle" aria-label="Abrir menú">☰</button>
+          <div class="breadcrumb">
+            <span>TALENTICO</span>
+            <span>/</span>
+            <strong>Empresas</strong>
+          </div>
+          <div class="user-area">
+            <div class="user-info">
+              <span class="user-name">Usuario</span>
+              <span class="user-role">Administrador</span>
+            </div>
+            <div class="avatar">U</div>
+          </div>
+        </header>
+
+        <!-- Content -->
+        <div class="content">
+
+          <!-- Page Header -->
+          <div class="page-header">
+            <div>
+              <span class="page-eyebrow">Módulo de Reclutamiento</span>
+              <h1>Gestión de Empresas</h1>
+              <p>Administra las empresas clientes y sus contrataciones.</p>
+            </div>
+          </div>
+
+          <!-- Feedback -->
+          <div id="feedback-message" class="hidden" style="margin-bottom: 16px; padding: 12px 16px; border-radius: 8px; font-size: 13px; font-weight: 600;"></div>
+
+          <!-- Form Card -->
+          <div class="card" style="margin-bottom: 22px;">
+            <div class="panel-header" style="border-bottom: 1px solid var(--border); padding-left: 0; padding-right: 0; padding-top: 0; margin-bottom: 16px; min-height: auto;">
+              <h2 id="form-title">Agregar Nueva Empresa</h2>
+            </div>
+            <form id="empresa-form" style="display: flex; gap: 16px; align-items: flex-end; flex-wrap: wrap;">
+              <input type="hidden" id="empresa-id" />
+              <div class="form-group" style="flex: 1; min-width: 200px; margin-bottom: 0;">
+                <label for="company-userId">ID de Usuario Cliente</label>
+                <input type="number" id="company-userId" placeholder="Ej. 12" required />
+              </div>
+              <div class="form-group" style="flex: 1; min-width: 200px; margin-bottom: 0;">
+                <label for="total-products">Total Contrataciones</label>
+                <input type="number" id="total-products" placeholder="Ej. 5" required />
+              </div>
+              <div style="display: flex; gap: 10px;">
+                <button type="submit" class="primary-button">Guardar Empresa</button>
+                <button type="button" id="btn-cancel" class="secondary-button hidden">Cancelar</button>
+              </div>
+            </form>
+          </div>
+
+          <!-- Tabla de empresas -->
+          <div class="panel">
+            <div class="panel-header">
+              <div>
+                <h2>Lista de Empresas</h2>
+                <p>Registros obtenidos del servidor</p>
+              </div>
+            </div>
+            <div style="padding: 24px;">
+              <div class="table-container">
+                <table class="data-table">
+                  <thead>
+                    <tr>
+                      <th>ID Cart</th>
+                      <th>User ID</th>
+                      <th>Total Productos</th>
+                      <th>Monto Total</th>
+                      <th>Acciones</th>
+                    </tr>
+                  </thead>
+                  <tbody id="empresas-tbody">
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal de Confirmación -->
+  <div id="delete-modal" class="modal-overlay hidden">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>¿Confirmar eliminación?</h2>
+      </div>
+      <p style="color: var(--text-secondary); font-size: 13px;">Esta acción eliminará la empresa seleccionada. ¿Deseas continuar?</p>
+      <div class="modal-actions">
+        <button id="btn-modal-cancel" class="secondary-button">Cancelar</button>
+        <button id="btn-modal-confirm" class="primary-button" style="background: var(--danger);">Eliminar</button>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="../src/js/empresas.js"></script>
 </body>
 </html>

@@ -1,8 +1,7 @@
+import { apiFetch } from './api.js';
 import { initializeProtectedPage } from './page-shell.js';
 
 initializeProtectedPage();
-
-const API_URL = 'http://localhost:3000/vacantes';
 
 // Estado global local
 let localVacancies = [];
@@ -80,16 +79,14 @@ function renderVacancyCard(vacancy) {
   return card;
 }
 
-// GET: Obtener todas las vacantes de JSON Server
+// GET: Obtener todas las vacantes
 async function fetchVacancies() {
   const gridContainer = document.querySelector('.vacancies-cards-grid');
   if (!gridContainer) return;
 
   try {
-    const res = await fetch(API_URL);
-    if (!res.ok) throw new Error('Error al consultar la API');
-
-    localVacancies = await res.json();
+    const data = await apiFetch('/vacantes');
+    localVacancies = Array.isArray(data) ? data : [];
     gridContainer.innerHTML = '';
 
     if (localVacancies.length === 0) {
@@ -102,7 +99,7 @@ async function fetchVacancies() {
     });
   } catch (error) {
     console.error('Error fetching vacancies:', error);
-    gridContainer.innerHTML = '<p style="color: #ef4444;">No se pudo conectar con JSON Server. Verifique que esté en ejecución.</p>';
+    gridContainer.innerHTML = '<p style="color: #ef4444;">No se pudo conectar con el servidor.</p>';
   }
 }
 
@@ -110,7 +107,7 @@ async function fetchVacancies() {
 async function saveVacancy(vacancyData, id = null) {
   try {
     const isEdit = Boolean(id);
-    const url = isEdit ? `${API_URL}/${id}` : API_URL;
+    const endpoint = isEdit ? `/vacantes/${id}` : '/vacantes';
     const method = isEdit ? 'PUT' : 'POST';
 
     let colorBg = '#e0f2fe';
@@ -129,34 +126,27 @@ async function saveVacancy(vacancyData, id = null) {
       colorText
     };
 
-    const res = await fetch(url, {
+    await apiFetch(endpoint, {
       method,
-      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload)
     });
 
-    if (res.ok) {
-      closeDrawer();
-      await fetchVacancies();
-    } else {
-      alert('Error al guardar la vacante');
-    }
+    closeDrawer();
+    await fetchVacancies();
   } catch (error) {
     console.error('Error saving vacancy:', error);
+    alert('Error al guardar la vacante');
   }
 }
 
 // DELETE: Eliminar vacante
 async function deleteVacancy(id) {
   try {
-    const res = await fetch(`${API_URL}/${id}`, { method: 'DELETE' });
-    if (res.ok) {
-      await fetchVacancies();
-    } else {
-      alert('Error al eliminar la vacante');
-    }
+    await apiFetch(`/vacantes/${id}`, { method: 'DELETE' });
+    await fetchVacancies();
   } catch (error) {
     console.error('Error deleting vacancy:', error);
+    alert('Error al eliminar la vacante');
   }
 }
 
@@ -191,7 +181,7 @@ function closeDrawer() {
     drawerOverlay.classList.remove('active');
     setTimeout(() => {
       formVacante.reset();
-    }, 300); // Coincide con la duración de la animación CSS
+    }, 300);
   }
 }
 

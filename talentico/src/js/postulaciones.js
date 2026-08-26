@@ -1,4 +1,4 @@
-import { apiFetch, DUMMY_JSON_API_URL } from '../../js/api.js';
+import { apiFetch } from './api.js';
 import { initializeProtectedPage } from './page-shell.js';
 
 initializeProtectedPage();
@@ -17,6 +17,7 @@ let applicationToDelete = null;
 function showFeedback(message, type = 'success') {
   feedback.textContent = message;
   feedback.className = `feedback ${type}`;
+  feedback.classList.remove('hidden');
   window.setTimeout(() => feedback.classList.add('hidden'), 4000);
 }
 
@@ -40,15 +41,18 @@ function render() {
     row.innerHTML = `
       <td>${application.id}</td><td>${application.userId}</td><td><strong>${application.title}</strong></td>
       <td>${application.reactions?.likes || 0} Likes</td>
-      <td><button type="button" data-action="edit">Editar título</button><button type="button" data-action="delete">Eliminar</button></td>`;
+      <td>
+        <button type="button" data-action="edit">Editar título</button>
+        <button type="button" data-action="delete">Eliminar</button>
+      </td>`;
     tbody.appendChild(row);
   });
 }
 
 async function loadApplications() {
   try {
-    const data = await apiFetch('/posts', {}, DUMMY_JSON_API_URL);
-    applications = data.posts || [];
+    const data = await apiFetch('/posts');
+    applications = Array.isArray(data) ? data : [];
     render();
   } catch (error) {
     showFeedback(`Error al cargar postulaciones: ${error.message}`, 'error');
@@ -64,10 +68,12 @@ form.addEventListener('submit', async (event) => {
     userId: Number(form.elements['post-userId'].value),
   };
   try {
-    const result = await apiFetch(id ? `/posts/${id}` : '/posts/add', {
-      method: id ? 'PATCH' : 'POST',
+    const endpoint = id ? `/posts/${id}` : '/posts';
+    const method = id ? 'PATCH' : 'POST';
+    const result = await apiFetch(endpoint, {
+      method: method,
       body: JSON.stringify(id ? { title: payload.title, body: payload.body } : payload),
-    }, DUMMY_JSON_API_URL);
+    });
     const application = { ...result, ...payload, reactions: result.reactions || { likes: 0 } };
     applications = id ? applications.map((item) => String(item.id) === String(id) ? application : item) : [application, ...applications];
     render();
@@ -101,7 +107,7 @@ cancelButton.addEventListener('click', resetForm);
 modalCancel.addEventListener('click', () => modal.classList.add('hidden'));
 modalConfirm.addEventListener('click', async () => {
   try {
-    await apiFetch(`/posts/${applicationToDelete}`, { method: 'DELETE' }, DUMMY_JSON_API_URL);
+    await apiFetch(`/posts/${applicationToDelete}`, { method: 'DELETE' });
     applications = applications.filter((item) => String(item.id) !== String(applicationToDelete));
     render();
     showFeedback('Postulación eliminada correctamente.');

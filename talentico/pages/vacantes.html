@@ -5,9 +5,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="TalenTico - Gestión de Vacantes" />
-  <title>TalenTico | Vacantes</title>
+  <title>TALENTICO CR | Vacantes</title>
   
-  <!-- Estilos Exclusivos del Módulo Vacantes -->
+  <link rel="stylesheet" href="../src/style.css" />
   <link rel="stylesheet" href="../src/css/vacantes.css" />
 </head>
 
@@ -15,59 +15,57 @@
   <div id="app">
     <div class="app-shell">
 
-      <!-- SIDEBAR BASE TALENTICO -->
-      <aside class="sidebar">
-
+      <!-- Sidebar -->
+      <aside class="sidebar" id="sidebar">
         <div class="brand">
-          <div class="brand-icon">T</div>
+          <span class="brand-icon" aria-hidden="true">T</span>
           <div class="brand-info">
-            <span class="brand-name">TalenTico</span>
+            <span class="brand-name">TALENTICO</span>
             <span class="brand-subtitle">Gestión de Talento</span>
           </div>
         </div>
 
         <nav class="sidebar-nav">
-          <p class="nav-title">MENÚ PRINCIPAL</p>
-
+          <p class="nav-title">Menú</p>
           <button class="nav-item" data-section="dashboard">
-            <span class="nav-icon">⌂</span>
-            <span>Dashboard</span>
+            <span class="nav-icon">🏠</span>
+            <span>Inicio</span>
           </button>
 
           <button class="nav-item" data-section="candidatos">
-            <span class="nav-icon">♙</span>
+            <span class="nav-icon">👤</span>
             <span>Candidatos</span>
           </button>
 
           <button class="nav-item active" data-section="vacantes">
-            <span class="nav-icon">▣</span>
+            <span class="nav-icon">💼</span>
             <span>Vacantes</span>
           </button>
 
           <button class="nav-item" data-section="empresas">
-            <span class="nav-icon">▤</span>
+            <span class="nav-icon">🏢</span>
             <span>Empresas</span>
           </button>
 
           <button class="nav-item" data-section="postulaciones">
-            <span class="nav-icon">□</span>
+            <span class="nav-icon">📝</span>
             <span>Postulaciones</span>
           </button>
 
           <button class="nav-item" data-section="entrevistas">
-            <span class="nav-icon">◷</span>
+            <span class="nav-icon">💬</span>
             <span>Entrevistas</span>
           </button>
 
           <button class="nav-item" data-section="tareas">
-            <span class="nav-icon">✓</span>
+            <span class="nav-icon">📋</span>
             <span>Tareas</span>
           </button>
         </nav>
 
         <div class="sidebar-footer">
           <button class="nav-item logout">
-            <span class="nav-icon">&#x21AA;&#xFE0E;</span>
+            <span class="nav-icon">🚪</span>
             <span>Cerrar sesión</span>
           </button>
         </div>
@@ -79,12 +77,12 @@
 
         <!-- TOPBAR -->
         <header class="topbar">
-          <button class="menu-toggle" id="menu-toggle">
+          <button class="menu-toggle" id="menu-toggle" aria-label="Abrir menú">
             ☰
           </button>
 
           <div class="breadcrumb">
-            <span>TalenTico</span>
+            <span>TALENTICO</span>
             <span>/</span>
             <strong>Vacantes</strong>
           </div>
@@ -208,19 +206,6 @@
     </aside>
   </div>
 
-  <script>
-    // Toggle del menú en pantallas móviles
-    const menuToggle = document.querySelector('#menu-toggle');
-    const sidebar = document.querySelector('.sidebar');
-
-    if (menuToggle && sidebar) {
-      menuToggle.addEventListener('click', () => {
-        sidebar.classList.toggle('open');
-      });
-    }
-  </script>
-
-  <!-- Script de Vacantes -->
   <script type="module" src="../src/js/vacantes.js"></script>
 </body>
 

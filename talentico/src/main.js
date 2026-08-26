@@ -1,5 +1,6 @@
 
 import { initializeProtectedPage } from './js/page-shell.js'
+import { apiFetch } from './js/api.js'
 
 // ============================================================
 // AUTENTICACIÓN
@@ -26,7 +27,7 @@ if (!token) {
         <aside class="sidebar" id="sidebar">
 
           <div class="brand">
-            <span class="brand-icon" aria-hidden="true">T</span>
+            <img src="../logo-icono.png" alt="TalenTico" style="width: 46px; height: 46px; object-fit: contain; margin-right: 10px; border-radius: 10px;" />
             <div class="brand-info">
               <span class="brand-name">TALENTICO</span>
               <span class="brand-subtitle">Gestión de Talento</span>
@@ -192,6 +193,7 @@ if (!token) {
 
               <button
                 class="primary-button"
+                data-section="tareas"
                 type="button"
               >
                 + Nueva actividad
@@ -324,6 +326,7 @@ if (!token) {
 
                   <button
                     class="text-button"
+                    data-section="entrevistas"
                     type="button"
                   >
                     Ver todo
@@ -374,6 +377,7 @@ if (!token) {
 
                   <button
                     class="action-item"
+                    data-section="candidatos"
                     type="button"
                   >
 
@@ -398,6 +402,7 @@ if (!token) {
 
                   <button
                     class="action-item"
+                    data-section="vacantes"
                     type="button"
                   >
 
@@ -422,6 +427,7 @@ if (!token) {
 
                   <button
                     class="action-item"
+                    data-section="empresas"
                     type="button"
                   >
 
@@ -459,6 +465,71 @@ if (!token) {
     initializeProtectedPage()
 
     // ============================================================
+    // CARGAR ESTADÍSTICAS DINÁMICAS Y ACTIVIDAD RECIENTE
+    // ============================================================
+    async function loadStats() {
+      try {
+        const [candidatos, vacantes, empresas, postulaciones] = await Promise.all([
+          apiFetch('/candidatos'),
+          apiFetch('/vacantes'),
+          apiFetch('/carts'),
+          apiFetch('/posts')
+        ]);
+
+        const statValues = document.querySelectorAll('.stat-value');
+        if (statValues.length >= 4) {
+          statValues[0].textContent = Array.isArray(candidatos) ? candidatos.length : 0;
+          statValues[1].textContent = Array.isArray(vacantes) ? vacantes.length : 0;
+          statValues[2].textContent = Array.isArray(empresas) ? empresas.length : 0;
+          statValues[3].textContent = Array.isArray(postulaciones) ? postulaciones.length : 0;
+        }
+
+        // Mostrar actividad reciente
+        const activityContainer = document.querySelector('.panel .empty-state');
+        if (activityContainer && Array.isArray(postulaciones) && postulaciones.length > 0) {
+          const listContainer = document.createElement('div');
+          listContainer.style.padding = '20px';
+          listContainer.style.display = 'flex';
+          listContainer.style.flexDirection = 'column';
+          listContainer.style.gap = '12px';
+
+          postulaciones.slice(0, 3).forEach(post => {
+            const item = document.createElement('div');
+            item.style.display = 'flex';
+            item.style.justifyContent = 'space-between';
+            item.style.alignItems = 'center';
+            item.style.padding = '12px';
+            item.style.background = 'var(--background)';
+            item.style.borderRadius = 'var(--radius-sm)';
+            item.style.border = '1px solid var(--border)';
+
+            item.innerHTML = `
+              <div style="display: flex; align-items: center; gap: 12px;">
+                <span style="font-size: 20px;">📝</span>
+                <div>
+                  <strong style="font-size: 13px; color: var(--text-primary);">${post.title}</strong>
+                  <div style="font-size: 11px; color: var(--text-secondary);">ID Candidato: ${post.userId}</div>
+                </div>
+              </div>
+              <span class="badge badge-success" style="font-size: 10px; background: var(--primary); color: var(--brand-green);">Nuevo</span>
+            `;
+            listContainer.appendChild(item);
+          });
+
+          const panel = activityContainer.closest('.panel');
+          if (panel) {
+            activityContainer.remove();
+            panel.appendChild(listContainer);
+          }
+        }
+      } catch (error) {
+        console.warn('No se pudieron cargar las estadísticas dinámicas:', error);
+      }
+    }
+
+    loadStats();
+
+    // ============================================================
     // MENÚ RESPONSIVE
     // ============================================================
 
@@ -493,7 +564,7 @@ if (!token) {
         localStorage.removeItem('user')
 
         // Regresar al login
-        window.location.href = '/pages/login.html'
+        window.location.href = '../index.html'
 
       })
 

@@ -6,6 +6,16 @@
       "email": "[EMAIL_ADDRESS]",
       "token": "google-demo-token-talentico",
       "id": "bPgWS5XCHAQ"
+    },
+    {
+      "firstName": "Bianca",
+      "lastName": "Robles",
+      "email": "biancarobleshurtado27@gmail.com",
+      "username": "biancarobleshurtado27@gmail.com",
+      "password": "12345678",
+      "gender": "other",
+      "image": "https://dummyjson.com/icon/biancarobleshurtado27@gmail.com/128",
+      "id": "LSlcGfBwC58"
     }
   ],
   "candidatos": [
